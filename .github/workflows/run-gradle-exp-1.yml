@@ -19,4 +19,4 @@ jobs:
       - name: Run Gradle Experiment 1
         run: |
           cd gradle-enterprise-gradle-build-validation
-          ./01-validate-incremental-building.sh -r https://github.com/gradle/gradle-build-scan-quickstart -t build -e "https://ge.solutions-team.gradle.com"
+          ./01-validate-incremental-building.sh -r https://github.com/gradle/gradle-build-scan-quickstart -t build -s https://ge.solutions-team.gradle.com
