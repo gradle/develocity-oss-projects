@@ -4,7 +4,7 @@ The purpose of this repository is to collect references to OSS projects leveragi
 
 ## Usage 
 
-This project is currently in progress and content will be published soon.
+This project is currently in progress and initial content will be published soon.
 
 ## Learn more
 
