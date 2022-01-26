@@ -14,5 +14,5 @@ jobs:
           distribution: 'adopt'
       - name: Download and Extract Build Validation Scripts
         run: curl -s -L -O https://github.com/gradle/gradle-enterprise-build-validation-scripts/releases/download/v1.0/gradle-enterprise-gradle-build-validation-1.0.zip && unzip -q -o gradle-enterprise-gradle-build-validation-1.0.zip
-      - name: Print Java ersion
-        run: java -version
+      - name: Run Experiment 1
+        run: gradle-enterprise-gradle-build-validation/01-validate-incremental-building.sh -r https://github.com/gradle/gradle-build-scan-quickstart -t build
