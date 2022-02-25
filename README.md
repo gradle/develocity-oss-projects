@@ -21,5 +21,6 @@ All content stored in this repository is open-source software released under the
 [ge-build-validation-scripts]: https://github.com/gradle/gradle-enterprise-build-validation-scripts
 [ccud-gradle-plugin]: https://github.com/gradle/common-custom-user-data-gradle-plugin
 [ccud-maven-extension]: https://github.com/gradle/common-custom-user-data-maven-extension
+[android-cache-fix-plugin]: https://github.com/gradle/android-cache-fix-gradle-plugin
 [gradle-enterprise]: https://gradle.com/enterprise
 [apache-license]: https://www.apache.org/licenses/LICENSE-2.0.html
