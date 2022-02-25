@@ -1,5 +1,7 @@
 # Gradle Enterprise OSS Projects
 
+[![Revved up by Gradle Enterprise](https://img.shields.io/badge/Revved%20up%20by-Gradle%20Enterprise-06A0CE?logo=Gradle&labelColor=02303A)](https://ge.solutions-team.gradle.com/scans)
+
 The purpose of this repository is to collect references to OSS projects leveraging Gradle Enterprise or the freely available Build Scan service [scans.gradle.com](http://scans.gradle.com).
 
 ## Usage 
