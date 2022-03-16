@@ -5,98 +5,112 @@
             "repositoryUrl": "https://github.com/androidx/androidx",
             "branch": "androidx-main",
             "task": "'buildOnServer zipTestConfigsWithApks test'",
-            "java-version": "11"
+            "projectDir": "biometric",
+            "setup": "androidx"
         },
         {
             "project": "gradle",
             "repositoryUrl": "https://github.com/gradle/gradle",
             "branch": "master",
             "task": "'compileAll --configuration-cache-problems=warn'",
-            "java-version": "11"
+            "projectDir": ".",
+            "setup": "java-11"
         },
         {
             "project": "grails-core",
             "repositoryUrl": "https://github.com/grails/grails-core",
             "branch": "5.1.x",
             "task": "build",
-            "java-version": "11"
+            "projectDir": ".",
+            "setup": "java-11"
         },
         {
             "project": "hibernate-orm",
             "repositoryUrl": "https://github.com/hibernate/hibernate-orm",
             "branch": "main",
             "task": "check",
-            "java-version": "11"
+            "projectDir": ".",
+            "setup": "java-11"
         },
         {
             "project": "junit5",
             "repositoryUrl": "https://github.com/junit-team/junit5",
             "branch": "main",
             "task": "assemble",
-            "java-version": "17"
+            "projectDir": ".",
+            "setup": "java-17"
         },
         {
             "project": "kotlin",
             "repositoryUrl": "https://github.com/JetBrains/kotlin",
             "branch": "master",
-            "task": "install",
-            "java-version": "11"
+            "task": "'install -Porg.gradle.java.installations.paths=/opt/hostedtoolcache/jdk/6.0.119/x64,/opt/hostedtoolcache/jdk/7.0.332/x64'",
+            "projectDir": ".",
+            "setup": "kotlin"
         },
         {
             "project": "micrometer",
             "repositoryUrl": "https://github.com/micrometer-metrics/micrometer",
             "branch": "main",
             "task": "build",
-            "java-version": "11"
+            "projectDir": ".",
+            "setup": "java-11"
         },
         {
             "project": "micronaut",
             "repositoryUrl": "https://github.com/micronaut-projects/micronaut-core",
             "branch": "3.3.x",
             "task": "'check -x:http-server-netty:test'",
-            "java-version": "11"
+            "projectDir": ".",
+            "setup": "java-11"
         },
         {
             "project": "openrewrite",
             "repositoryUrl": "https://github.com/openrewrite/rewrite-concourse",
             "branch": "main",
             "task": "build",
-            "java-version": "11"
+            "projectDir": ".",
+            "setup": "java-11"
         },
         {
             "project": "opentelemetry",
             "repositoryUrl": "https://github.com/open-telemetry/opentelemetry-java-instrumentation",
             "branch": "main",
             "task": "':smoke-tests:test'",
-            "java-version": "11"
+            "projectDir": ".",
+            "setup": "java-11"
         },
         {
             "project": "ratpack",
             "repositoryUrl": "https://github.com/ratpack/ratpack",
             "branch": "master",
             "task": "'build -x:ratpack-core:test -x:ratpack-exec:test -x:ratpack-site:test'",
-            "java-version": "11"
+            "projectDir": ".",
+            "setup": "java-11"
         },
         {
             "project": "spock",
             "repositoryUrl": "https://github.com/spockframework/spock",
             "branch": "master",
             "task": "'build codeCoverageReport'",
-            "java-version": "11"
+            "projectDir": ".",
+            "setup": "java-11"
         },
         {
             "project": "spring-framework",
             "repositoryUrl": "https://github.com/spring-projects/spring-framework",
             "branch": "main",
             "task": "build",
-            "java-version": "17"
+            "projectDir": ".",
+            "setup": "java-17"
         },
         {
             "project": "testcontainers",
             "repositoryUrl": "https://github.com/testcontainers/testcontainers-java",
             "branch": "master",
             "task": ":mariadb:check",
-            "java-version": "11"
+            "projectDir": ".",
+            "setup": "java-11"
         }
     ]
 }
