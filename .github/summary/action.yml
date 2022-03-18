@@ -1,0 +1,14 @@
+name: Summary
+description: 'Summary'
+
+inputs:
+  experiment-id:
+    description: Experiment identifier
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        cat gradle-enterprise-gradle-build-validation/.data/0${{ inputs.experiment-id }}-*/*/*.receipt
+      shell: bash
