@@ -1,0 +1,25 @@
+name: Androidx setup
+description: 'Androidx setup'
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-java@v1
+      with:
+        java-version: "8"
+    - name: "set tools jar path"
+      run: |
+        echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
+        echo "JAVA_TOOLS_JAR=$JAVA_HOME/lib/tools.jar" >> $GITHUB_ENV
+      shell: bash
+    - uses: actions/setup-java@v1
+      with:
+        java-version: "11"
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
+    - name: "set tools jar path"
+      run: |
+          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
+      shell: bash
+
+
