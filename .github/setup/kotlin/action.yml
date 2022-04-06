@@ -1,5 +1,5 @@
 name: Kotlin setup
-description: 'Kotlin setup'
+description: "Kotlin setup"
 
 runs:
   using: "composite"
@@ -13,4 +13,8 @@ runs:
     - uses: actions/setup-java@v2
       with:
         java-version: 11
-        distribution: 'temurin'
+        distribution: "temurin"
+    - run: |
+        touch settings.gradle
+        gradle -q javaToolchains -Porg.gradle.java.installations.paths=/opt/hostedtoolcache/jdk/6.0.119/x64,/opt/hostedtoolcache/jdk/7.0.332/x64
+      shell: bash

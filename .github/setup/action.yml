@@ -1,5 +1,5 @@
 name: Setup
-description: 'Setup'
+description: "Setup"
 
 inputs:
   setup:
@@ -12,12 +12,12 @@ runs:
     - uses: actions/setup-java@v2
       with:
         java-version: 11
-        distribution: 'temurin'
+        distribution: "temurin"
       if: ${{ inputs.setup == 'java-11' }}
     - uses: actions/setup-java@v2
       with:
         java-version: 17
-        distribution: 'temurin'
+        distribution: "temurin"
       if: ${{ inputs.setup == 'java-17' }}
     - uses: ./.github/setup/kotlin
       if: ${{ inputs.setup == 'kotlin' }}

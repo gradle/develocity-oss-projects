@@ -3,7 +3,7 @@ name: Run experiments
 on:
   schedule:
     # Every Sunday at 7.00
-    - cron: '0 7 * * 0'
+    - cron: "0 7 * * 0"
 
   workflow_dispatch:
     inputs:
@@ -37,11 +37,13 @@ on:
         required: true
 
 env:
+  # Default to ALL for scheduled runs
   EXPERIMENT_PROJECT: ${{ github.event.inputs.project || 'ALL' }}
   EXPERIMENT_ID: ${{ github.event.inputs.exp || 'ALL' }}
   GRADLE_ENTERPRISE_URL: https://ge.solutions-team.gradle.com
 
 jobs:
+  # Load job input parameters
   matrix:
     runs-on: ubuntu-latest
     outputs:
