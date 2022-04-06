@@ -86,10 +86,6 @@ jobs:
           projectDir: ${{ matrix.projectDir }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
         if: (env.EXPERIMENT_ID == 'ALL' || env.EXPERIMENT_ID == 'exp1')
-      - uses: ./.github/summary
-        with:
-          experiment-id:  1
-        if: (env.EXPERIMENT_ID == 'ALL' || env.EXPERIMENT_ID == 'exp1')
       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/composite/exp2@v1.0.2
         with:
           repositoryUrl: ${{ matrix.repositoryUrl }}
@@ -97,10 +93,6 @@ jobs:
           task: ${{ matrix.task }}
           projectDir: ${{ matrix.projectDir }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
-        if: (env.EXPERIMENT_ID == 'ALL' || env.EXPERIMENT_ID == 'exp2')
-      - uses: ./.github/summary
-        with:
-          experiment-id:  2
         if: (env.EXPERIMENT_ID == 'ALL' || env.EXPERIMENT_ID == 'exp2')
       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/composite/exp3@v1.0.2
         with:
@@ -110,7 +102,6 @@ jobs:
           projectDir: ${{ matrix.projectDir }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
         if: (env.EXPERIMENT_ID == 'ALL' || env.EXPERIMENT_ID == 'exp3')
-      - uses: ./.github/summary
-        with:
-          experiment-id:  3
-        if: (env.EXPERIMENT_ID == 'ALL' || env.EXPERIMENT_ID == 'exp3')
+      - name: Print Summary
+        run: |
+          find gradle-enterprise-gradle-build-validation/.data -name "*.receipt" -print0 | sort -z | xargs -r0 cat
