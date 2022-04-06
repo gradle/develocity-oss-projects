@@ -69,16 +69,15 @@ jobs:
   experiments:
     needs: matrix
     runs-on: ubuntu-latest
-    env:
-      GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
     strategy:
       matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
+      fail-fast: false
       max-parallel: 4
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/setup
         with:
-          setup:  ${{ matrix.setup }}
+          setup: ${{ matrix.setup }}
       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/composite/getLatest@v1.0.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
