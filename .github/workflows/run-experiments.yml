@@ -52,9 +52,9 @@ jobs:
         id: data-load
         run: |
           if [ "${{ env.EXPERIMENT_PROJECT }}" = "ALL" ]; then
-            matrix=`cat ./.github/projects.json`
+            matrix=`cat data/projects.json`
           else
-            matrix=`cat .github/projects.json | jq 'del(.include[] | select(.project != "${{ env.EXPERIMENT_PROJECT }}"))'`
+            matrix=`cat data/projects.json | jq 'del(.include[] | select(.project != "${{ env.EXPERIMENT_PROJECT }}"))'`
           fi
 
           # the following lines are required to handle multiline variable
