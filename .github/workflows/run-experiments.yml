@@ -80,6 +80,8 @@ jobs:
         with:
           setup:  ${{ matrix.setup }}
       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/composite/getLatest@v1.0.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/composite/exp1@v1.0.2
         with:
           repositoryUrl: ${{ matrix.repositoryUrl }}
