@@ -23,3 +23,8 @@ runs:
       if: ${{ inputs.setup == 'kotlin' }}
     - uses: ./.github/setup/androidx
       if: ${{ inputs.setup == 'androidx' }}
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+      with:
+        gradle-home-cache-excludes: |
+          caches/build-cache-1
