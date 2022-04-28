@@ -1,4 +1,4 @@
-name: java-ordered-properties
+name: micronaut
 
 on:
   schedule:
@@ -10,8 +10,10 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}"
-  GIT_REPO: "https://github.com/etiennestuder/java-ordered-properties"
-  TASKS: "build"
+  GIT_REPO: "https://github.com/micronaut-projects/micronaut-core"
+  GIT_BRANCH: "3.3.x"
+  TASKS: "check"
+  ARGS: "-x:http-server-netty:test"
 
 jobs:
 
@@ -31,7 +33,9 @@ jobs:
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@v1.0.2
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
 
   experiment-2:
@@ -50,7 +54,9 @@ jobs:
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@v1.0.2
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
 
   experiment-3:
@@ -69,5 +75,7 @@ jobs:
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@v1.0.2
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}

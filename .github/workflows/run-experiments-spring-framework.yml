@@ -1,4 +1,4 @@
-name: java-ordered-properties
+name: spring-framework
 
 on:
   schedule:
@@ -10,7 +10,7 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}"
-  GIT_REPO: "https://github.com/etiennestuder/java-ordered-properties"
+  GIT_REPO: "https://github.com/spring-projects/spring-framework"
   TASKS: "build"
 
 jobs:
@@ -18,10 +18,10 @@ jobs:
   experiment-1:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          java-version: 11
+          java-version: 17
           distribution: "temurin"
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@v1.0.2
@@ -37,10 +37,10 @@ jobs:
   experiment-2:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          java-version: 11
+          java-version: 17
           distribution: "temurin"
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@v1.0.2
@@ -56,10 +56,10 @@ jobs:
   experiment-3:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          java-version: 11
+          java-version: 17
           distribution: "temurin"
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@v1.0.2

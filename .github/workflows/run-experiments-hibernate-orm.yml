@@ -1,4 +1,4 @@
-name: java-ordered-properties
+name: hibernate-orm
 
 on:
   schedule:
@@ -10,8 +10,8 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}"
-  GIT_REPO: "https://github.com/etiennestuder/java-ordered-properties"
-  TASKS: "build"
+  GIT_REPO: "https://github.com/hibernate/hibernate-orm"
+  TASKS: "check"
 
 jobs:
 

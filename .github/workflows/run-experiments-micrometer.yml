@@ -1,4 +1,4 @@
-name: java-ordered-properties
+name: micrometer
 
 on:
   schedule:
@@ -10,7 +10,7 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}"
-  GIT_REPO: "https://github.com/etiennestuder/java-ordered-properties"
+  GIT_REPO: "https://github.com/micrometer-metrics/micrometer"
   TASKS: "build"
 
 jobs:
