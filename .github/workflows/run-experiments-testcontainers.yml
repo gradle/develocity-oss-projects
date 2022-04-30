@@ -9,7 +9,7 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}"
+  GE_SOLUTIONS_ACCESS_TOKEN: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
   GIT_REPO: "https://github.com/testcontainers/testcontainers-java"
   TASKS: ":mariadb:check"
 
