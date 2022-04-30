@@ -9,7 +9,7 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GE_SOLUTIONS_ACCESS_TOKEN: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
+  GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
   GIT_REPO: "https://github.com/micronaut-projects/micronaut-core"
   GIT_BRANCH: "3.3.x"
   TASKS: "check"
