@@ -1,4 +1,4 @@
-name: java-ordered-properties
+name: gradle
 
 on:
   schedule:
@@ -10,8 +10,9 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GE_SOLUTIONS_ACCESS_TOKEN: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
-  GIT_REPO: "https://github.com/etiennestuder/java-ordered-properties"
-  TASKS: "build"
+  GIT_REPO: "https://github.com/gradle/gradle"
+  TASKS: "compileAll"
+  ARGS: "--configuration-cache-problems=warn"
 
 jobs:
 
@@ -32,6 +33,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
 
   experiment-2:
@@ -51,6 +53,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
 
   experiment-3:
@@ -70,4 +73,5 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
