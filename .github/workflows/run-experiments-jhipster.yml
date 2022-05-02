@@ -1,4 +1,4 @@
-name: Hibernate ORM
+name: JHipster
 
 on:
   schedule:
@@ -10,10 +10,11 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
-  GIT_REPO: "https://github.com/hibernate/hibernate-orm"
-  TASKS: "check"
+  GIT_REPO: "https://github.com/jhipster/jhipster-sample-app-gradle"
+  TASKS: "test integrationTest -x webapp -x webapp_test"
 
 jobs:
+
   experiment-1:
     runs-on: ubuntu-latest
     steps:
@@ -32,6 +33,7 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          args: ${{ env.ARGS }}
 
   experiment-2:
     runs-on: ubuntu-latest

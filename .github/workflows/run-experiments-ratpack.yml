@@ -1,4 +1,4 @@
-name: Hibernate ORM
+name: Ratpack
 
 on:
   schedule:
@@ -10,10 +10,12 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
-  GIT_REPO: "https://github.com/hibernate/hibernate-orm"
-  TASKS: "check"
+  GIT_REPO: "https://github.com/ratpack/ratpack"
+  TASKS: "build"
+  ARGS: "-x:ratpack-core:test -x:ratpack-exec:test -x:ratpack-site:test"
 
 jobs:
+
   experiment-1:
     runs-on: ubuntu-latest
     steps:
@@ -31,6 +33,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
 
   experiment-2:
@@ -50,6 +53,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
 
   experiment-3:
@@ -69,4 +73,5 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}

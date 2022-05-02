@@ -1,4 +1,4 @@
-name: Hibernate ORM
+name: Detekt
 
 on:
   schedule:
@@ -10,17 +10,18 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
-  GIT_REPO: "https://github.com/hibernate/hibernate-orm"
-  TASKS: "check"
+  GIT_REPO: "https://github.com/detekt/detekt"
+  TASKS: "build -x detekt"
 
 jobs:
+
   experiment-1:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          java-version: 11
+          java-version: 17
           distribution: "temurin"
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@28c499e8ecc1fad65ba23644bbcb44667e2a8a31
@@ -32,14 +33,15 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          args: ${{ env.ARGS }}
 
   experiment-2:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          java-version: 11
+          java-version: 17
           distribution: "temurin"
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@28c499e8ecc1fad65ba23644bbcb44667e2a8a31
@@ -55,10 +57,10 @@ jobs:
   experiment-3:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          java-version: 11
+          java-version: 17
           distribution: "temurin"
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@28c499e8ecc1fad65ba23644bbcb44667e2a8a31

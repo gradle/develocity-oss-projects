@@ -1,4 +1,4 @@
-name: Hibernate ORM
+name: Gradle wrapper updgrade plugin
 
 on:
   schedule:
@@ -10,10 +10,11 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
-  GIT_REPO: "https://github.com/hibernate/hibernate-orm"
-  TASKS: "check"
+  GIT_REPO: "https://github.com/gradle/wrapper-upgrade-gradle-plugin"
+  TASKS: "build -x signArchives -x test"
 
 jobs:
+
   experiment-1:
     runs-on: ubuntu-latest
     steps:

@@ -1,4 +1,4 @@
-name: Hibernate ORM
+name: Spock
 
 on:
   schedule:
@@ -10,10 +10,11 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
-  GIT_REPO: "https://github.com/hibernate/hibernate-orm"
-  TASKS: "check"
+  GIT_REPO: "https://github.com/spockframework/spock"
+  TASKS: "build codeCoverageReport"
 
 jobs:
+
   experiment-1:
     runs-on: ubuntu-latest
     steps:
@@ -68,5 +69,5 @@ jobs:
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@28c499e8ecc1fad65ba23644bbcb44667e2a8a31
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          tasks: ${{ env.TASKS }}
+          tasks: "build codeCoverageReport"
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
