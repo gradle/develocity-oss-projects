@@ -1,4 +1,4 @@
-name: micrometer
+name: Micrometer
 
 on:
   schedule:
@@ -14,7 +14,6 @@ env:
   TASKS: "build"
 
 jobs:
-
   experiment-1:
     runs-on: ubuntu-latest
     steps:

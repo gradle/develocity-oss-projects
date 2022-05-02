@@ -1,4 +1,4 @@
-name: gradle
+name: Gradle
 
 on:
   schedule:
@@ -15,7 +15,6 @@ env:
   ARGS: "--configuration-cache-problems=warn"
 
 jobs:
-
   experiment-1:
     runs-on: ubuntu-latest
     steps:

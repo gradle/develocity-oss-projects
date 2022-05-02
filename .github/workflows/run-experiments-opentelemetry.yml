@@ -1,4 +1,4 @@
-name: opentelemetry
+name: OpenTelemetry
 
 on:
   schedule:
@@ -14,7 +14,6 @@ env:
   TASKS: ":smoke-tests:test"
 
 jobs:
-
   experiment-1:
     runs-on: ubuntu-latest
     steps:

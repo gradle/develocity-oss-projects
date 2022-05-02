@@ -1,4 +1,4 @@
-name: testcontainers
+name: Testcontainers
 
 on:
   schedule:
@@ -14,7 +14,6 @@ env:
   TASKS: ":mariadb:check"
 
 jobs:
-
   experiment-1:
     runs-on: ubuntu-latest
     steps:

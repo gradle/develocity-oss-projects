@@ -1,4 +1,4 @@
-name: junit5
+name: JUnit5
 
 on:
   schedule:
@@ -14,7 +14,6 @@ env:
   TASKS: "assemble"
 
 jobs:
-
   experiment-1:
     runs-on: ubuntu-latest
     steps:
