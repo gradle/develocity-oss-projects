@@ -23,11 +23,11 @@ jobs:
           java-version: 17
           distribution: "temurin"
       - name: Download latest version of the validation scripts
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@v1.0.2
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@96380c143d44df48b2a6f28d063c33ce448b5477
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@v1.0.2
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@96380c143d44df48b2a6f28d063c33ce448b5477
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
@@ -42,11 +42,11 @@ jobs:
           java-version: 17
           distribution: "temurin"
       - name: Download latest version of the validation scripts
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@v1.0.2
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@96380c143d44df48b2a6f28d063c33ce448b5477
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 2
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@v1.0.2
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@96380c143d44df48b2a6f28d063c33ce448b5477
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
@@ -61,11 +61,11 @@ jobs:
           java-version: 17
           distribution: "temurin"
       - name: Download latest version of the validation scripts
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@v1.0.2
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@96380c143d44df48b2a6f28d063c33ce448b5477
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 3
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@v1.0.2
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@96380c143d44df48b2a6f28d063c33ce448b5477
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
