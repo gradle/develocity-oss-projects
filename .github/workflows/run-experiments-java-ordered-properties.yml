@@ -27,7 +27,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@5ab18f57283ce88317831b54816f5fc300ad9125
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@06456baccaf803e87419d32d6a815dd2bd325b73
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
@@ -46,7 +46,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 2
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@a6aaefb2ec214611aed76e80e43be00d99a6aa5b
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@06456baccaf803e87419d32d6a815dd2bd325b73
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
@@ -65,7 +65,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 3
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@a6aaefb2ec214611aed76e80e43be00d99a6aa5b
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@06456baccaf803e87419d32d6a815dd2bd325b73
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
