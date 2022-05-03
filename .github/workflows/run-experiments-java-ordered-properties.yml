@@ -27,7 +27,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@b89e1173e745da758978d5c196ffab18b0464659
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@34ab3749f7d8ccc626adec990466e6e96edea12b
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
