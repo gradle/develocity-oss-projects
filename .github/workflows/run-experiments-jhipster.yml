@@ -33,7 +33,6 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
-          args: ${{ env.ARGS }}
 
   experiment-2:
     runs-on: ubuntu-latest
