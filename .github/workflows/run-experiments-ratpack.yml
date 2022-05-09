@@ -15,7 +15,6 @@ env:
   ARGS: "-x:ratpack-core:test -x:ratpack-exec:test -x:ratpack-site:test"
 
 jobs:
-
   experiment-1:
     runs-on: ubuntu-latest
     steps:

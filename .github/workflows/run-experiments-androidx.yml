@@ -15,7 +15,6 @@ env:
   PROJECT_DIR: "biometric"
 
 jobs:
-
   experiment-1:
     runs-on: ubuntu-latest
     steps:

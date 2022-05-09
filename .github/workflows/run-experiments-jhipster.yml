@@ -14,7 +14,6 @@ env:
   TASKS: "test integrationTest -x webapp -x webapp_test"
 
 jobs:
-
   experiment-1:
     runs-on: ubuntu-latest
     steps:

@@ -16,7 +16,6 @@ env:
   ARGS: "-Porg.gradle.java.installations.paths=/opt/hostedtoolcache/jdk/6.0.119/x64,/opt/hostedtoolcache/jdk/7.0.342/x64 -Pkotlin.test.maxParallelForks=4"
 
 jobs:
-
   experiment-1:
     runs-on: ubuntu-latest
     steps:
