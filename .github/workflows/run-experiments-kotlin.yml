@@ -1,0 +1,111 @@
+name: Kotlin
+
+on:
+  schedule:
+    # Every Sunday at 9.00am
+    - cron: "0 9 * * 0"
+
+  workflow_dispatch:
+
+env:
+  GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
+  GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
+  GIT_REPO: "https://github.com/jprinet/kotlin"
+  GIT_BRANCH: "chore/add_ge_3_8_1"
+  TASKS: "install"
+  ARGS: "-Porg.gradle.java.installations.paths=/opt/hostedtoolcache/jdk/6.0.119/x64,/opt/hostedtoolcache/jdk/7.0.342/x64 -Pkotlin.test.maxParallelForks=4"
+
+jobs:
+
+  experiment-1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK 6
+        uses: actions/setup-java@v1
+        with:
+          java-version: 6
+      - name: Set up JDK 7
+        uses: actions/setup-java@v1
+        with:
+          java-version: 7
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+          distribution: "temurin"
+      - name: Display toolchain
+        run: |
+          touch settings.gradle
+          ls -la /opt/hostedtoolcache/jdk
+          gradle -q javaToolchains -Porg.gradle.java.installations.paths=/opt/hostedtoolcache/jdk/6.0.119/x64,/opt/hostedtoolcache/jdk/7.0.342/x64
+        shell: bash
+      - name: Download latest version of the validation scripts
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@28c499e8ecc1fad65ba23644bbcb44667e2a8a31
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run experiment 1
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@28c499e8ecc1fad65ba23644bbcb44667e2a8a31
+        with:
+          gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
+          tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
+          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+
+  experiment-2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK 6
+        uses: actions/setup-java@v1
+        with:
+          java-version: 6
+      - name: Set up JDK 7
+        uses: actions/setup-java@v1
+        with:
+          java-version: 7
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+          distribution: "temurin"
+      - name: Download latest version of the validation scripts
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@28c499e8ecc1fad65ba23644bbcb44667e2a8a31
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run experiment 2
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@28c499e8ecc1fad65ba23644bbcb44667e2a8a31
+        with:
+          gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
+          tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
+          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+
+  experiment-3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK 6
+        uses: actions/setup-java@v1
+        with:
+          java-version: 6
+      - name: Set up JDK 7
+        uses: actions/setup-java@v1
+        with:
+          java-version: 7
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+          distribution: "temurin"
+      - name: Download latest version of the validation scripts
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@28c499e8ecc1fad65ba23644bbcb44667e2a8a31
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run experiment 3
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@28c499e8ecc1fad65ba23644bbcb44667e2a8a31
+        with:
+          gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
+          tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
+          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
