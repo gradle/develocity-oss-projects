@@ -70,11 +70,11 @@ jobs:
               </activeProfiles>
             </settings>' > ~/.m2/settings.xml
       - name: Download latest version of the validation scripts
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/download@28c499e8ecc1fad65ba23644bbcb44667e2a8a31
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/download@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@28c499e8ecc1fad65ba23644bbcb44667e2a8a31
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
         with:
           gitRepo: ${{ env.GIT_REPO }}
           goals: ${{ env.GOALS }}
@@ -135,11 +135,11 @@ jobs:
               </activeProfiles>
             </settings>' > ~/.m2/settings.xml
       - name: Download latest version of the validation scripts
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/download@28c499e8ecc1fad65ba23644bbcb44667e2a8a31
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/download@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 2
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@28c499e8ecc1fad65ba23644bbcb44667e2a8a31
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
         with:
           gitRepo: ${{ env.GIT_REPO }}
           goals: ${{ env.GOALS }}
