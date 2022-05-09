@@ -70,3 +70,31 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+
+  configuration-cache-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: "etiennestuder/java-ordered-properties"
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+          distribution: "temurin"
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-disabled: true
+      - name: Execute Gradle build
+        id: gradle-build
+        run: |
+          # Need to run both builds within same job id to avoid
+          # Calculating task graph as configuration cache cannot be reused because environment variable 'GITHUB_ACTION' has changed.
+          ./gradlew --configuration-cache build 2>&1 | tee -a /tmp/gradle-build.log
+          echo ::set-output name=configCacheStored::$(grep "Configuration cache entry stored" /tmp/gradle-build.log | wc -l)
+          ./gradlew --configuration-cache build 2>&1 | tee -a /tmp/gradle-build.log
+          echo ::set-output name=configCacheReused::$(grep "Configuration cache entry reused" /tmp/gradle-build.log | wc -l)
+      - name: Fail if configuration cache was not reused
+        run: exit 1
+        if: steps.gradle-build.outputs.configCacheStored != '1' || steps.gradle-build.outputs.configCacheReused != '1'
