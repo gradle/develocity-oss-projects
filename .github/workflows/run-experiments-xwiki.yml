@@ -10,8 +10,9 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
-  GIT_REPO: "https://github.com/xwiki/xwiki-platform"
+  GIT_REPO: "https://github.com/xwiki/xwiki-commons"
   GOALS: "install"
+  ARGS: "-B"
 
 jobs:
   experiment-1:
@@ -77,6 +78,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           goals: ${{ env.GOALS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
 
   experiment-2:
@@ -142,4 +144,5 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           goals: ${{ env.GOALS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
