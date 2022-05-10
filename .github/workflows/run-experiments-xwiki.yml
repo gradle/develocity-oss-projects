@@ -14,7 +14,6 @@ env:
   GOALS: "install"
 
 jobs:
-
   experiment-1:
     runs-on: ubuntu-latest
     steps:
@@ -74,7 +73,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-1@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
         with:
           gitRepo: ${{ env.GIT_REPO }}
           goals: ${{ env.GOALS }}
