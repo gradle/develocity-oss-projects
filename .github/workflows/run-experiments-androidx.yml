@@ -15,7 +15,15 @@ env:
   PROJECT_DIR: "biometric"
 
 jobs:
-  experiment-1:
+  Experiment:
+
+    strategy:
+      matrix:
+        include:
+          - experimentId: 1
+          - experimentId: 2
+          - experimentId: 3
+
     runs-on: ubuntu-latest
     steps:
       - name: Set up JDK 8
@@ -44,28 +52,7 @@ jobs:
           tasks: ${{ env.TASKS }}
           projectDir: ${{ env.PROJECT_DIR }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
-
-  experiment-2:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up JDK 8
-        uses: actions/setup-java@v1
-        with:
-          java-version: "8"
-      - name: Set tools jar path
-        run: |
-          echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
-          echo "JAVA_TOOLS_JAR=$JAVA_HOME/lib/tools.jar" >> $GITHUB_ENV
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: "11"
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
-      - name: Download latest version of the validation scripts
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+        if: matrix.experimentId == 1
       - name: Run experiment 2
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
         with:
@@ -73,28 +60,7 @@ jobs:
           tasks: ${{ env.TASKS }}
           projectDir: ${{ env.PROJECT_DIR }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
-
-  experiment-3:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up JDK 8
-        uses: actions/setup-java@v1
-        with:
-          java-version: "8"
-      - name: Set tools jar path
-        run: |
-          echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
-          echo "JAVA_TOOLS_JAR=$JAVA_HOME/lib/tools.jar" >> $GITHUB_ENV
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: "11"
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
-      - name: Download latest version of the validation scripts
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+        if: matrix.experimentId == 2
       - name: Run experiment 3
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
         with:
@@ -102,3 +68,4 @@ jobs:
           tasks: ${{ env.TASKS }}
           projectDir: ${{ env.PROJECT_DIR }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+        if: matrix.experimentId == 3
