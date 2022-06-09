@@ -11,7 +11,7 @@ env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
   GIT_REPO: "https://github.com/open-telemetry/opentelemetry-java-instrumentation"
-  TASKS: ":smoke-tests:test"
+  TASKS: "assemble"
 
 jobs:
   Experiment:

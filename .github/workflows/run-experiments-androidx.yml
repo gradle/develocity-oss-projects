@@ -10,9 +10,10 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
-  GIT_REPO: "https://github.com/androidx/androidx"
+  GIT_REPO: "https://github.com/jprinet/androidx"
   TASKS: "buildOnServer zipTestConfigsWithApks test"
   PROJECT_DIR: "biometric"
+  ARGS: "-x ktlint"
 
 jobs:
   Experiment:
@@ -50,6 +51,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           projectDir: ${{ env.PROJECT_DIR }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
         if: matrix.experimentId == 1
@@ -58,6 +60,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           projectDir: ${{ env.PROJECT_DIR }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
         if: matrix.experimentId == 2
@@ -66,6 +69,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           projectDir: ${{ env.PROJECT_DIR }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
         if: matrix.experimentId == 3
