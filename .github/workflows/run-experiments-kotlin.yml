@@ -10,8 +10,8 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
-  GIT_REPO: "https://github.com/jprinet/kotlin"
-  GIT_BRANCH: "chore/add_ge_3_8_1"
+  GIT_REPO: "https://github.com/gradle/kotlin"
+  GIT_BRANCH: "solutions/no_verification_metadata"
   TASKS: "install"
   ARGS: "-Porg.gradle.java.installations.paths=/opt/hostedtoolcache/jdk/6.0.119/x64,/opt/hostedtoolcache/jdk/7.0.342/x64 -Pkotlin.test.maxParallelForks=4"
 
