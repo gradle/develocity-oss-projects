@@ -1,17 +1,17 @@
-name: OpenTelemetry
+name: Spock
 
 on:
   schedule:
-    # Every Sunday at 3.00pm
-    - cron: "0 15 * * 0"
+    # Every Sunday at 9.00am
+    - cron: "0 9 * * 0"
 
   workflow_dispatch:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
-  GIT_REPO: "https://github.com/open-telemetry/opentelemetry-java-instrumentation"
-  TASKS: "assemble"
+  GIT_REPO: "https://github.com/spockframework/spock"
+  TASKS: "build codeCoverageReport"
 
 jobs:
   Experiment:
@@ -52,6 +52,6 @@ jobs:
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          tasks: ${{ env.TASKS }}
+          tasks: "build codeCoverageReport"
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
         if: matrix.experimentId == 3

@@ -1,16 +1,16 @@
-name: OpenTelemetry
+name: Ratpack
 
 on:
   schedule:
-    # Every Sunday at 3.00pm
-    - cron: "0 15 * * 0"
+    # Every Sunday at 9.00am
+    - cron: "0 9 * * 0"
 
   workflow_dispatch:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
-  GIT_REPO: "https://github.com/open-telemetry/opentelemetry-java-instrumentation"
+  GIT_REPO: "https://github.com/ratpack/ratpack"
   TASKS: "assemble"
 
 jobs:
