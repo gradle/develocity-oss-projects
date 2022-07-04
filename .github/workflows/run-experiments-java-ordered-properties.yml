@@ -14,7 +14,7 @@ env:
   TASKS: "build"
 
 jobs:
-  Experiment:
+  build_cache:
 
     strategy:
       matrix:
@@ -23,6 +23,7 @@ jobs:
           - experimentId: 2
           - experimentId: 3
 
+    name: "Experiment"
     runs-on: ubuntu-latest
     steps:
       - name: Set up JDK 11
@@ -52,11 +53,13 @@ jobs:
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          tasks: ${{ env.TASKS }}          
+          tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
         if: matrix.experimentId == 3
 
-  configuration-cache-check:
+  config_cache:
+
+    name: "Experiment (Config Cache)"
     runs-on: ubuntu-latest
     steps:
       - name: Check out project
@@ -81,6 +84,6 @@ jobs:
           echo ::set-output name=configCacheStored::$(grep "Configuration cache entry stored" /tmp/gradle-build.log | wc -l)
           ./gradlew --configuration-cache build 2>&1 | tee -a /tmp/gradle-build.log
           echo ::set-output name=configCacheReused::$(grep "Configuration cache entry reused" /tmp/gradle-build.log | wc -l)
-      - name: Fail if Gradle Configuration Cache was not reused
+      - name: Verify Gradle Configuration Cache was reused
         run: exit 1
         if: steps.gradle-build.outputs.configCacheStored != '1' || steps.gradle-build.outputs.configCacheReused != '1'
