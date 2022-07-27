@@ -1,4 +1,4 @@
-name: AndroidX
+name: AndroidX biometric
 
 on:
   schedule:

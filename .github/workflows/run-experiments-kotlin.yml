@@ -13,7 +13,7 @@ env:
   GIT_REPO: "https://github.com/gradle/kotlin"
   GIT_BRANCH: "solutions/no_verification_metadata"
   TASKS: "install"
-  ARGS: "-Porg.gradle.java.installations.paths=/opt/hostedtoolcache/jdk/6.0.119/x64,/opt/hostedtoolcache/jdk/7.0.342/x64 -Pkotlin.test.maxParallelForks=4"
+  ARGS: "-Porg.gradle.java.installations.paths=/opt/hostedtoolcache/jdk/6.X/x64,/opt/hostedtoolcache/jdk/7.X/x64 -Pkotlin.test.maxParallelForks=4"
 
 jobs:
   Experiment:
@@ -40,11 +40,16 @@ jobs:
         with:
           java-version: 11
           distribution: "temurin"
+      - name: Add aliases to JAVA_HOME
+        run: |
+          ln -s /opt/hostedtoolcache/jdk/6.* /opt/hostedtoolcache/jdk/6.X
+          ln -s /opt/hostedtoolcache/jdk/7.* /opt/hostedtoolcache/jdk/7.X
+        shell: bash
       - name: Display toolchain
         run: |
           touch settings.gradle
           ls -la /opt/hostedtoolcache/jdk
-          gradle -q javaToolchains -Porg.gradle.java.installations.paths=/opt/hostedtoolcache/jdk/6.0.119/x64,/opt/hostedtoolcache/jdk/7.0.342/x64
+          gradle -q javaToolchains ${{ env.ARGS }}
         shell: bash
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
