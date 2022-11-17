@@ -33,11 +33,11 @@ jobs:
           java-version: 11
           distribution: "temurin"
       - name: Download latest version of the validation scripts
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         with:
           gitRepo: ${{ env.GIT_REPO }}
           gitBranch: ${{ env.GIT_BRANCH }}
@@ -46,7 +46,7 @@ jobs:
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
         with:
           gitRepo: ${{ env.GIT_REPO }}
           gitBranch: ${{ env.GIT_BRANCH }}
@@ -55,7 +55,7 @@ jobs:
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
         if: matrix.experimentId == 2
       - name: Run experiment 3
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@3fb6a3c2c6f2c0836894754b6b8fcef72148c02f
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
         with:
           gitRepo: ${{ env.GIT_REPO }}
           gitBranch: ${{ env.GIT_BRANCH }}
