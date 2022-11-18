@@ -12,7 +12,30 @@
 
 [![Revved up by Gradle Enterprise](https://img.shields.io/badge/Revved%20up%20by-Gradle%20Enterprise-06A0CE?logo=Gradle&labelColor=02303A)](https://ge.solutions-team.gradle.com/scans)
 
-The purpose of this repository is to collect references to OSS projects leveraging Gradle Enterprise or the freely available Build Scan service [scans.gradle.com](http://scans.gradle.com).
+Gradle is sponsoring free licenses and hosting of Gradle Enterprise, build optimization assistance, and developer productivity consulting for various impactful OSS projects.
+
+The following OSS projects currently benefit from enhanced developer productivity by Gradle Enterprise:
+
+- [AndroidX](https://ge.grails.org)
+- [Caffeine](https://caffeine.gradle-enterprise.cloud)
+- [Detekt](https://ge.detekt.dev)
+- [Flank](https://flank.gradle-enterprise.cloud)
+- [Gradle](https://ge.gradle.org)
+- [Grails](https://ge.grails.org)
+- [Hibernate](https://ge.hibernate.org)
+- [JHipster](https://ge.jhipster.tech)
+- [Junit](https://ge.junit.org)
+- [Kotlin](https://ge.jetbrains.com)
+- [Micrometer](https://ge.micrometer.io)
+- [Micronaut](https://ge.micronaut.io)
+- [Nokee](https://ge.nokee.dev)
+- [OpenRewrite](https://ge.openrewrite.org)
+- [OpenTelemetry](https://ge.opentelemetry.io)
+- [Ratpack](https://ge.ratpack.io)
+- [Spock](https://ge.spockframework.org)
+- [Spring](https://ge.spring.io)
+- [Testcontainers](https://ge.testcontainers.org)
+- [XWiki](https://ge.xwiki.org)
 
 ## Usage 
 
