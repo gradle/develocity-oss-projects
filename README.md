@@ -14,6 +14,28 @@
 
 The purpose of this repository is to collect references to OSS projects leveraging Gradle Enterprise or the freely available Build Scan service [scans.gradle.com](http://scans.gradle.com).
 
+Here is the list of projects:
+- [AndroidX](https://ge.grails.org)
+- [Caffeine](https://caffeine.gradle-enterprise.cloud)
+- [Detekt](https://ge.detekt.dev)
+- [Gradle](https://ge.gradle.org)
+- [Grails](https://ge.grails.org)
+- [Hibernate](https://ge.hibernate.org)
+- [JHipster](https://ge.jhipster.tech)
+- [Junit](https://ge.junit.org)
+- [Kotlin](https://ge.jetbrains.com)
+- [Micrometer](https://ge.micrometer.io)
+- [Micronaut](https://ge.micronaut.io)
+- [Openrewrite](https://ge.openrewrite.org)
+- [Opentelemetry](https://ge.opentelemetry.io)
+- [OrderedProperties](https://github.com/etiennestuder/java-ordered-properties)
+- [Ratpack](https://ge.ratpack.io)
+- [Spock](https://ge.spockframework.org)
+- [Spring](https://ge.spring.io)
+- [Testcontainers](https://ge.testcontainers.org)
+- [WrapperUpgrade](https://github.com/gradle/wrapper-upgrade-gradle-plugin)
+- [XWiki](https://ge.xwiki.org)
+
 ## Usage 
 
 This project is currently in progress and initial content will be published soon.
