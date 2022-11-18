@@ -37,13 +37,9 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Testcontainers](https://ge.testcontainers.org)
 - [XWiki](https://ge.xwiki.org)
 
-## Usage 
-
-This project is currently in progress and initial content will be published soon.
-
 ## Learn more
 
-Visit our website to learn more about [Gradle Enterprise][gradle-enterprise].
+Visit our website to learn more about [Gradle Enterprise][gradle-enterprise] and the [Gradle Enterprise supported OSS projects](https://gradle.com/enterprise-customers/oss-projects/).
 
 ## License
 
