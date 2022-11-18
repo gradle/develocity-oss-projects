@@ -9,7 +9,6 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
   GIT_REPO: "https://github.com/xwiki/xwiki-commons"
   GOALS: "install"
   ARGS: "-B"
@@ -82,6 +81,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-1@actions-stable
+        env:
+          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           goals: ${{ env.GOALS }}
@@ -90,6 +91,8 @@ jobs:
         if: matrix.experimentId == 1
       - name: Run experiment 2
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@actions-stable
+        env:
+          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           goals: ${{ env.GOALS }}
