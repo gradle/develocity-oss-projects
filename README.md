@@ -39,7 +39,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 
 ## Learn more
 
-Visit our website to learn more about [Gradle Enterprise][gradle-enterprise] and the [Gradle Enterprise supported OSS projects](https://gradle.com/enterprise-customers/oss-projects/).
+Visit our website to learn more about [Gradle Enterprise][gradle-enterprise] and the [OSS projects using Gradle Enterprise](https://gradle.com/enterprise-customers/oss-projects/).
 
 ## License
 
