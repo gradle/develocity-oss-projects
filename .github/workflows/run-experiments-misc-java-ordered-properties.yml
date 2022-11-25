@@ -88,9 +88,9 @@ jobs:
           # Need to run both builds within same job id to avoid calculating task graph as
           # configuration cache cannot be reused when environment variable 'GITHUB_ACTION' has changed
           ./gradlew --configuration-cache build 2>&1 | tee -a /tmp/run-1.log
-          echo ::set-output name=configCacheStored::$(grep "Configuration cache entry stored" /tmp/run-1.log | wc -l)
+          echo "configCacheStored=$(grep 'Configuration cache entry stored' /tmp/run-1.log | wc -l)" >> $GITHUB_OUTPUT
           ./gradlew --configuration-cache build 2>&1 | tee -a /tmp/run-2.log
-          echo ::set-output name=configCacheReused::$(grep "Configuration cache entry reused" /tmp/run-2.log | wc -l)
+          echo "configCacheReused=$(grep 'Configuration cache entry reused' /tmp/run-2.log | wc -l)" >> $GITHUB_OUTPUT
       - name: Verify Gradle Configuration Cache was reused
         run: exit 1
         if: steps.run.outputs.configCacheStored != '1' || steps.run.outputs.configCacheReused != '1'
