@@ -88,6 +88,7 @@ jobs:
           goals: ${{ env.GOALS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          failIfNotFullyCacheable: true
         if: matrix.experimentId == 1
       - name: Run experiment 2
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@actions-stable
@@ -98,4 +99,5 @@ jobs:
           goals: ${{ env.GOALS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          failIfNotFullyCacheable: true
         if: matrix.experimentId == 2

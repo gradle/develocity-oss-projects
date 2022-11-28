@@ -75,6 +75,7 @@ jobs:
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
       - name: Run experiment 3
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
@@ -86,4 +87,5 @@ jobs:
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          failIfNotFullyCacheable: true
         if: matrix.experimentId == 3
