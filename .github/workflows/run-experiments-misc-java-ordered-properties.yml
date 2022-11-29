@@ -79,8 +79,8 @@ jobs:
         with:
           repository: "etiennestuder/java-ordered-properties"
       - name: Run experiment
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/check-configuration-cache-compatibility@actions-stable
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-config-cache@actions-stable
         env:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
-          gradleArgs: ${{ env.TASKS }}
+          tasks: ${{ env.TASKS }}
