@@ -10,7 +10,7 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/open-telemetry/opentelemetry-java-instrumentation"
-  TASKS: "assemble"
+  TASKS: "assemble -x javadoc"
 
 jobs:
   Experiment:
