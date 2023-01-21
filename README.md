@@ -16,7 +16,7 @@ Gradle is sponsoring free licenses and hosting of Gradle Enterprise, build optim
 
 The following OSS projects currently benefit from enhanced developer productivity by Gradle Enterprise:
 
-- [AndroidX](https://ge.grails.org)
+- [AndroidX](https://ge.androidx.dev)
 - [Caffeine](https://caffeine.gradle-enterprise.cloud)
 - [Detekt](https://ge.detekt.dev)
 - [Flank](https://flank.gradle-enterprise.cloud)
