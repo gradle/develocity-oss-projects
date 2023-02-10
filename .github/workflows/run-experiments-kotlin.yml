@@ -42,8 +42,9 @@ jobs:
           distribution: "temurin"
       - name: Add aliases to JAVA_HOME
         run: |
-          ln -s /opt/hostedtoolcache/jdk/6.* /opt/hostedtoolcache/jdk/6.X
-          ln -s /opt/hostedtoolcache/jdk/7.* /opt/hostedtoolcache/jdk/7.X
+          mkdir -p /opt/hostedtoolcache/jdk
+          ln -s /opt/hostedtoolcache/Java_Zulu_jdk/6.* /opt/hostedtoolcache/jdk/6.X
+          ln -s /opt/hostedtoolcache/Java_Zulu_jdk/7.* /opt/hostedtoolcache/jdk/7.X
         shell: bash
       - name: Display toolchain
         run: |
