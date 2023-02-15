@@ -9,8 +9,7 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/gradle/kotlin"
-  GIT_BRANCH: "solutions/no_verification_metadata"
+  GIT_REPO: "https://github.com/JetBrains/kotlin"
   TASKS: "install"
   ARGS: "-Porg.gradle.java.installations.paths=/opt/hostedtoolcache/jdk/6.X/x64,/opt/hostedtoolcache/jdk/7.X/x64 -Pkotlin.test.maxParallelForks=4"
 
@@ -50,6 +49,12 @@ jobs:
           ls -la /opt/hostedtoolcache/jdk
           gradle -q javaToolchains ${{ env.ARGS }}
         shell: bash
+      - name: Create Git hook to disable Gradle verification metadata
+        run: |
+          mkdir ~/git-hooks
+          echo -e "#!/bin/bash\nrm -f gradle/verification-metadata.xml\n" > ~/git-hooks/post-checkout
+          chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
@@ -60,7 +65,6 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
@@ -71,7 +75,6 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
@@ -83,7 +86,6 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
