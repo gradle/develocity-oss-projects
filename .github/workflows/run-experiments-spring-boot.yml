@@ -10,7 +10,7 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/spring-projects/spring-boot"
-  TASKS: "systemTest"
+  TASKS: "assemble"
 
 jobs:
   Experiment:
