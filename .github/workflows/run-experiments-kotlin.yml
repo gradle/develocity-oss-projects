@@ -11,7 +11,7 @@ env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/JetBrains/kotlin"
   TASKS: "install"
-  ARGS: "-Porg.gradle.java.installations.paths=/opt/hostedtoolcache/jdk/6.X/x64,/opt/hostedtoolcache/jdk/7.X/x64 -Pkotlin.test.maxParallelForks=4"
+  ARGS: "-Pkotlin.test.maxParallelForks=4"
 
 jobs:
   Experiment:
@@ -26,27 +26,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up JDK 6
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
           java-version: 6
+          distribution: "zulu"
       - name: Set up JDK 7
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
           java-version: 7
+          distribution: "zulu"
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
           java-version: 11
           distribution: "temurin"
-      - name: Add aliases to JAVA_HOME
-        run: |
-          ln -s /opt/hostedtoolcache/jdk/6.* /opt/hostedtoolcache/jdk/6.X
-          ln -s /opt/hostedtoolcache/jdk/7.* /opt/hostedtoolcache/jdk/7.X
-        shell: bash
       - name: Display toolchain
         run: |
           touch settings.gradle
-          ls -la /opt/hostedtoolcache/jdk
           gradle -q javaToolchains ${{ env.ARGS }}
         shell: bash
       - name: Create Git hook to disable Gradle verification metadata
