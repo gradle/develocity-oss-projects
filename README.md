@@ -19,7 +19,6 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [AndroidX](https://ge.androidx.dev)
 - [Caffeine](https://caffeine.gradle-enterprise.cloud)
 - [Detekt](https://ge.detekt.dev)
-- [Flank](https://flank.gradle-enterprise.cloud)
 - [Gradle](https://ge.gradle.org)
 - [Grails](https://ge.grails.org)
 - [Hibernate](https://ge.hibernate.org)
