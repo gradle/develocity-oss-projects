@@ -56,6 +56,9 @@ jobs:
           echo -e "#!/bin/bash\nrm -f gradle/verification-metadata.xml\n" > ~/git-hooks/post-checkout
           chmod +x ~/git-hooks/post-checkout
           git config --global core.hooksPath ~/git-hooks
+      - name: Adjust git hook to temporarily disable caching for kotlin-dom-api-compat:compileKotlinJs (KT-56690)
+        run: |
+          echo -e 'echo "\ntasks.withType<org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile>().configureEach { outputs.doNotCacheIf(\"https://youtrack.jetbrains.com/issue/KT-56690\") { true } }" >> libraries/kotlin-dom-api-compat/build.gradle.kts\n' >> ~/git-hooks/post-checkout
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
