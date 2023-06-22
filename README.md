@@ -18,6 +18,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 
 - [AndroidX](https://ge.androidx.dev)
 - [Apollo](https://ge.apollographql.com)
+- [Armeria](https://ge.armeria.dev)
 - [Caffeine](https://caffeine.gradle-enterprise.cloud)
 - [Detekt](https://ge.detekt.dev)
 - [Gradle](https://ge.gradle.org)
