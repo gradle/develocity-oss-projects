@@ -4,8 +4,6 @@ on:
   schedule:
     # Every Sunday at 9.00am
     - cron: "0 9 * * 0"
-  pull_request:
-    types: [ opened ]
   workflow_dispatch:
 
 env:
