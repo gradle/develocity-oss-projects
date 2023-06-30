@@ -20,6 +20,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Apollo](https://ge.apollographql.com)
 - [Armeria](https://ge.armeria.dev)
 - [Caffeine](https://caffeine.gradle-enterprise.cloud)
+- [Calcite](https://ge.apache.org)
 - [Detekt](https://ge.detekt.dev)
 - [Gradle](https://ge.gradle.org)
 - [Grails](https://ge.grails.org)
