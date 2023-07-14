@@ -28,6 +28,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Kotlin](https://ge.jetbrains.com)
 - [Micrometer](https://ge.micrometer.io)
 - [Micronaut](https://ge.micronaut.io)
+- [Microstream](https://ge.microstream.one)
 - [Nokee](https://ge.nokee.dev)
 - [OpenAPI](https://ge.openapi-generator.tech)
 - [OpenRewrite](https://ge.openrewrite.org)
