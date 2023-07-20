@@ -11,7 +11,7 @@ env:
   GIT_REPO: "https://github.com/cdsap/apollo-kotlin"
   TASKS: ":intellij-plugin:instrumentCode"
   BRANCH: "tylerbertrand/instrument-code-cv"
-  ARGS: "-x :intellij-plugin:test"
+  ARGS: "-x :intellij-plugin:test -Dorg.gradle.caching.debug=true"
 
 jobs:
   Experiment:
