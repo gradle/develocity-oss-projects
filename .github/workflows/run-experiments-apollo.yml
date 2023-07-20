@@ -8,7 +8,7 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/tylerbertrand/apollo-kotlin"
+  GIT_REPO: "https://github.com/cdsap/apollo-kotlin"
   TASKS: ":intellij-plugin:instrumentCode"
   BRANCH: "tylerbertrand/instrument-code-cv"
   ARGS: "-x :intellij-plugin:test"
