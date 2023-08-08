@@ -32,7 +32,6 @@ jobs:
       - name: Add git hook to temporarily disable caching for :intellij-plugin:instrumentCode
         run: |
           mkdir ~/git-hooks
-          echo -e 'echo "\ntasks.withType<org.jetbrains.intellij.tasks.InstrumentCodeTask>().configureEach { outputs.doNotCacheIf(\"https://github.com/JetBrains/gradle-intellij-plugin/issues/1426\") { true } }" >> intellij-plugin/build.gradle.kts\n' >> ~/git-hooks/post-checkout
           echo -e 'echo "\ntasks.withType<org.jetbrains.intellij.tasks.BuildPluginTask>().configureEach { outputs.doNotCacheIf(\"buildPlugin should not be cacheable as it is a Zip task\") { true } }" >> intellij-plugin/build.gradle.kts\n' >> ~/git-hooks/post-checkout
           echo -e 'echo "\nsubprojects { tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach { outputs.doNotCacheIf(\"https://github.com/Kotlin/dokka/issues/2978\") { true } } }" >> build.gradle.kts\n' >> ~/git-hooks/post-checkout
           chmod +x ~/git-hooks/post-checkout
