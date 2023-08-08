@@ -1,0 +1,11 @@
+name: Apache Beam
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Experiment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello World
+        run: echo "Hello World"
