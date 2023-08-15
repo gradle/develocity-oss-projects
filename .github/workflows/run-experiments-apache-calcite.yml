@@ -1,9 +1,9 @@
-name: Calcite
+name: Apache - Calcite
 
 on:
   schedule:
-    # Every Sunday at 9.30am
-    - cron: "30 9 * * 0"
+    # Every Sunday at 9.00am
+    - cron: "0 9 * * 0"
 
   workflow_dispatch:
 
