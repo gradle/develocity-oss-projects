@@ -10,7 +10,7 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/lucene"
-  TASKS: "check -Dtests.seed=3466BEBDD5AA01A0 -Pvalidation.git.failOnModified=false -Dtests.verbose=true"
+  TASKS: "check -Ptests.seed=3466BEBDD5AA01A0 -Pvalidation.git.failOnModified=false -Ptests.haltonfailure=false"
 
 jobs:
   Experiment:
