@@ -10,7 +10,7 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/solr"
-  TASKS: "check integrationTests"
+  TASKS: "check integrationTests -Ptests.seed=3466BEBDD5AA01A0 -Pvalidation.git.failOnModified=false -Ptests.haltonfailure=false"
 
 jobs:
   Experiment:
@@ -41,6 +41,7 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          enableGradleEnterprise: true
         if: matrix.experimentId == 1
       - name: Run experiment 2
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
@@ -50,6 +51,7 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          enableGradleEnterprise: true
           failIfNotFullyCacheable: true # Require no issues to be found
         if: matrix.experimentId == 2
       - name: Run experiment 3
@@ -60,5 +62,6 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          enableGradleEnterprise: true
           failIfNotFullyCacheable: true # Require no issues to be found
         if: matrix.experimentId == 3
