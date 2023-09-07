@@ -39,6 +39,11 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Remove Maven Settings
+        # Beam uses the [gradle-maven-settings-plugin](https://github.com/mark-vieira/gradle-maven-settings-plugin/)
+        # to read repo authentication from Maven settings and use it in their Gradle build. It seems that plugin does not
+        # [support encrypted credentials](https://github.com/mark-vieira/gradle-maven-settings-plugin/issues/15),
+        # but this is what GitHub Actions provides by default. Deleting `settings.xml` is what Beam do in their own CI
+        # builds on GitHub Actions: https://github.com/apache/beam/blob/ca0345b8acc7dd5ebc0506d48faa6474fe0b3ca0/.github/workflows/java_tests.yml#L89
         run: rm $HOME/.m2/settings.xml
       - name: Ignore Test Failures
         run: |
