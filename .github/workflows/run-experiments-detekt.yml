@@ -10,7 +10,7 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/detekt/detekt"
-  TASKS: "build -x detekt -PenablePTS=false"
+  TASKS: "build -x detekt -x :detekt-gradle-plugin:functionalTest -PenablePTS=false"
 
 jobs:
   Experiment:
