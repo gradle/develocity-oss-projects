@@ -11,7 +11,7 @@ env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/micronaut-projects/micronaut-core"
   TASKS: "check"
-  ARGS: "-x :http-client:test -x :inject:test"
+  ARGS: "-x :http-client:test -x :inject:test -x japiCmp"
 
 jobs:
   Experiment:
