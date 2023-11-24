@@ -11,7 +11,7 @@ env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/androidx/androidx"
   TASKS: "buildOnServer zipTestConfigsWithApks test"
-  PROJECT_DIR: "biometric"
+  PROJECT_DIR: "playground-projects/biometric-playground"
   ARGS: "-x ktlint -Dorg.gradle.dependency.verification=off"
 
 jobs:
