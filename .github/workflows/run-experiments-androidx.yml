@@ -46,6 +46,17 @@ jobs:
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+      # MergeResources and DataBindingGenBaseClassesTask are not cache relocatable when resourceDirsOutsideRootProjectDir is not empty
+      # https://cs.android.com/android-studio/platform/tools/base/+/mirror-goog-studio-main:build-system/gradle-core/src/main/java/com/android/build/gradle/tasks/MergeResources.kt;l=164?q=MergeResources
+      # This is the case here as androidx/biometric project has its root dir set to androidx/playground-projects/biometric-playground
+      - name: Adjust git hook to temporarily disable caching for MergeResources and DataBindingGenBaseClassesTask on biometric:integration-tests
+        run: |
+          mkdir ~/git-hooks
+          echo -e 'echo "\nproject.getTasks().withType(com.android.build.gradle.tasks.MergeResources).configureEach { outputs.doNotCacheIf(\"MergeResources is not cache relocatable when resourceDirsOutsideRootProjectDir is not empty\") { true } }" >> biometric/integration-tests/testapp/build.gradle\n' > ~/git-hooks/post-checkout
+          echo -e 'echo "\nproject.getTasks().withType(com.android.build.gradle.internal.tasks.databinding.DataBindingGenBaseClassesTask).configureEach { outputs.doNotCacheIf(\"DataBindingGenBaseClassesTask is not cache relocatable when resourceDirsOutsideRootProjectDir is not empty\") { true } }" >> biometric/integration-tests/testapp/build.gradle\n' >> ~/git-hooks/post-checkout
+          chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
+        if: matrix.experimentId == 3
       - name: Run experiment 1
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
