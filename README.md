@@ -25,7 +25,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Grails](https://ge.grails.org)
 - [Hibernate](https://ge.hibernate.org)
 - [JHipster](https://ge.jhipster.tech)
-- [Junit](https://ge.junit.org)
+- [JUnit](https://ge.junit.org)
 - [Kotlin](https://ge.jetbrains.com)
 - [Micrometer](https://ge.micrometer.io)
 - [Micronaut](https://ge.micronaut.io)
