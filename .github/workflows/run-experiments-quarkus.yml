@@ -1,0 +1,55 @@
+name: Quarkus
+
+on:
+  workflow_dispatch:
+
+env:
+  GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
+  GIT_REPO: "https://github.com/quarkusio/quarkus"
+  GOALS: "install"
+  ARGS: "-B -Dquickly -T2C"
+
+jobs:
+  Experiment:
+
+    strategy:
+      matrix:
+        include:
+          - experimentId: 1
+          - experimentId: 2
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Maven Action
+        uses: s4u/setup-maven-action@v1.11.0
+        with:
+          checkout-fetch-depth: 0
+          java-version: 17
+          java-distribution: temurin
+          maven-version: 3.9.3
+      - name: Download latest version of the validation scripts
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/download@actions-stable
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run experiment 1
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-1@actions-stable
+        env:
+          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
+        with:
+          gitRepo: ${{ env.GIT_REPO }}
+          goals: ${{ env.GOALS }}
+          args: ${{ env.ARGS }}
+          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          failIfNotFullyCacheable: false
+        if: matrix.experimentId == 1
+      - name: Run experiment 2
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@actions-stable
+        env:
+          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
+        with:
+          gitRepo: ${{ env.GIT_REPO }}
+          goals: ${{ env.GOALS }}
+          args: ${{ env.ARGS }}
+          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          failIfNotFullyCacheable: false
+        if: matrix.experimentId == 2
