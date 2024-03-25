@@ -11,7 +11,7 @@ env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/micronaut-projects/micronaut-kotlin"
   TASKS: "check"
-  ARGS: "-DpredictiveTestSelection=false"
+  ARGS: "-DpredictiveTestSelection=false -x japiCmp"
 
 jobs:
   Experiment:

@@ -11,7 +11,8 @@ env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/micronaut-projects/micronaut-data"
   TASKS: "check"
-  ARGS: "-DpredictiveTestSelection=false"
+  ARGS: "-DpredictiveTestSelection=false -x japiCmp"
+  TESTCONTAINERS_RYUK_DISABLED: true
 
 jobs:
   Experiment:
@@ -25,6 +26,13 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
+      # https://github.com/actions/virtual-environments/issues/709
+      - name: "🗑 Free disk space"
+        run: |
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          sudo apt-get clean
+          df -h
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
