@@ -4,6 +4,7 @@
 > - _[Develocity Open Source Projects][develocity-oss-projects] (this repository)_
 > - _[Common Custom User Data Maven Extension][ccud-maven-extension]_
 > - _[Common Custom User Data Gradle Plugin][ccud-gradle-plugin]_
+> - _[Common Custom User Data sbt Plugin][ccud-sbt-plugin]_ 
 > - _[Android Cache Fix Gradle Plugin][android-cache-fix-plugin]_
 
 # Develocity OSS Projects
@@ -53,6 +54,7 @@ All content stored in this repository is open-source software released under the
 [develocity-oss-projects]: https://github.com/gradle/develocity-oss-projects
 [ccud-gradle-plugin]: https://github.com/gradle/common-custom-user-data-gradle-plugin
 [ccud-maven-extension]: https://github.com/gradle/common-custom-user-data-maven-extension
+[ccud-sbt-plugin]: https://github.com/gradle/common-custom-user-data-sbt-plugin-plugin
 [android-cache-fix-plugin]: https://github.com/gradle/android-cache-fix-gradle-plugin
 [develocity]: https://gradle.com/develocity
 [apache-license]: https://www.apache.org/licenses/LICENSE-2.0.html
