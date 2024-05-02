@@ -29,9 +29,6 @@ inputs:
   enableGradleEnterprise:
     description: "Enables Gradle Enterprise on a project not already connected"
     required: false
-  debug:
-    description: "Enable debug logging for experiment 1 of the build validation scripts"
-    required: false
 outputs:
   buildScanFirstBuild:
     description: "First build scan url"
@@ -84,8 +81,8 @@ runs:
           ARG_GE_ENABLE="${{ inputs.enableGradleEnterprise }}"
         fi
         ARG_DEBUG=""
-        if [ "${{ inputs.debug }}" == "true" ]; then
-          ARG_DEBUG="${{ inputs.debug }}"
+        if [ "${{ runner.debug }}" == "1" ]; then
+          ARG_DEBUG="${{ runner.debug }}"
         fi
 
         # Navigate into the folder containing the validation scripts

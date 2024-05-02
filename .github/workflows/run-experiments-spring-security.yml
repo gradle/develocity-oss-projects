@@ -11,6 +11,8 @@ env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/spring-projects/spring-security"
   TASKS: "build"
+  ACTIONS_STEP_DEBUG: "true"
+  ACTIONS_RUNNER_DEBUG: "true"
 
 jobs:
   Experiment:
@@ -43,7 +45,6 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
-          debug: true
         if: matrix.experimentId == 1
       - name: Run experiment 2
         uses: ./.github/actions/experiment-2-debug
@@ -54,7 +55,6 @@ jobs:
           tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
           failIfNotFullyCacheable: true
-          debug: true
         if: matrix.experimentId == 2
       - name: Run experiment 3
         uses: ./.github/actions/experiment-3-debug
@@ -65,5 +65,4 @@ jobs:
           tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
           failIfNotFullyCacheable: true
-          debug: true
         if: matrix.experimentId == 3
