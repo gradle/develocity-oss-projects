@@ -13,6 +13,7 @@ env:
   TASKS: "build"
   ACTIONS_STEP_DEBUG: "true"
   ACTIONS_RUNNER_DEBUG: "true"
+  RUNNER_DEBUG: "1"
 
 jobs:
   Experiment:
