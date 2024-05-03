@@ -11,9 +11,6 @@ env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/spring-projects/spring-security"
   TASKS: "build"
-  ACTIONS_STEP_DEBUG: "true"
-  ACTIONS_RUNNER_DEBUG: "true"
-  RUNNER_DEBUG: "1"
 
 jobs:
   Experiment:
