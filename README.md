@@ -34,6 +34,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Nokee](https://ge.nokee.dev)
 - [OpenAPI](https://ge.openapi-generator.tech)
 - [OpenRewrite](https://ge.openrewrite.org)
+- [Quarkus](https://ge.quarkus.io)
 - [Ratpack](https://ge.ratpack.io)
 - [Spock](https://ge.spockframework.org)
 - [Spring](https://ge.spring.io)
