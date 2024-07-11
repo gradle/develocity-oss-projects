@@ -22,12 +22,7 @@ jobs:
           - experimentId: 2
           - experimentId: 3
 
-    runs-on:
-      # This `runs-on` configuration utilize larger GitHub Actions hosted runners. This build does not successfully
-      # complete on the default runners.
-      # Using this label incurs extra costs, so please do not copy/paste this configuration.
-      labels: ubuntu-latest-4core
-      group: gradle-enterprise-oss-projects
+    runs-on: ubuntu-latest
     steps:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
