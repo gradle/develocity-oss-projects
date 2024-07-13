@@ -1,4 +1,4 @@
-name: WrapperUpgrade
+name: Misc - Wrapper Upgrade Gradle Plugin
 
 on:
   schedule:
