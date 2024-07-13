@@ -14,7 +14,6 @@ env:
 
 jobs:
   Experiment:
-
     strategy:
       fail-fast: false
       matrix:
@@ -22,7 +21,6 @@ jobs:
           - experimentId: 1
           - experimentId: 2
           - experimentId: 3
-
     runs-on: macos-latest
     steps:
       - name: Set up JDK 17
