@@ -1,4 +1,4 @@
-name: JHipster
+name: JHipster Sample
 
 on:
   schedule:
