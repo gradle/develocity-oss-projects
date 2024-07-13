@@ -16,6 +16,7 @@ jobs:
   build_cache:
 
     strategy:
+      fail-fast: false
       matrix:
         include:
           - experimentId: 1

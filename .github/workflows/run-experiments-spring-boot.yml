@@ -16,6 +16,7 @@ jobs:
   Experiment:
 
     strategy:
+      fail-fast: false
       matrix:
         include:
           - experimentId: 1
