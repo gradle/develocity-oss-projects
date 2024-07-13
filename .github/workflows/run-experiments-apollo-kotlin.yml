@@ -1,4 +1,4 @@
-name: Apollo
+name: Apollo Kotlin
 
 on:
   schedule:
