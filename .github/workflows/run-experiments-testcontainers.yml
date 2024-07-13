@@ -1,4 +1,4 @@
-name: Testcontainers
+name: Testcontainers Java
 
 on:
   schedule:
