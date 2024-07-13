@@ -1,4 +1,4 @@
-name: Microstream
+name: MicroStream
 
 on:
   schedule:
