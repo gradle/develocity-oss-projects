@@ -1,4 +1,4 @@
-name: OrderedProperties
+name: Misc - Java Ordered Properties
 
 on:
   schedule:
@@ -12,8 +12,7 @@ env:
   TASKS: "build"
 
 jobs:
-  build_cache:
-
+  Experiment:
     strategy:
       fail-fast: false
       matrix:
@@ -62,8 +61,7 @@ jobs:
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 3
 
-  config_cache:
-
+  ExperimentConfigurationCaching:
     name: "Experiment (Configuration Caching)"
     runs-on: ubuntu-latest
     steps:
