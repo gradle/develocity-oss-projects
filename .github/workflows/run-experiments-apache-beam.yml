@@ -1,4 +1,4 @@
-name: Apache - Beam
+name: Apache Beam
 
 on:
   schedule:

@@ -1,4 +1,4 @@
-name: Apache - JMeter
+name: Apache JMeter
 
 on:
   schedule:

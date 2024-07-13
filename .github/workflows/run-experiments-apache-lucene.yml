@@ -1,4 +1,4 @@
-name: Apache - Lucene
+name: Apache Lucene
 
 on:
   schedule:

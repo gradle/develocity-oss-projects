@@ -1,4 +1,4 @@
-name: Apache - Groovy
+name: Apache Groovy
 
 on:
   schedule:

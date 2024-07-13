@@ -1,4 +1,4 @@
-name: Apache - Calcite
+name: Apache Calcite
 
 on:
   schedule:

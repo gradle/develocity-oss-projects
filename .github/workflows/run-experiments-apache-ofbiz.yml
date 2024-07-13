@@ -1,4 +1,4 @@
-name: Apache - OFBiz
+name: Apache OFBiz
 
 on:
   schedule:

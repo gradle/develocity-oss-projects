@@ -1,4 +1,4 @@
-name: Apache - Solr
+name: Apache Solr
 
 on:
   schedule:

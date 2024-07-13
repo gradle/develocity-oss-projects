@@ -1,4 +1,4 @@
-name: Apache - James
+name: Apache James
 
 on:
   schedule:

@@ -1,4 +1,4 @@
-name: Apache - Kafka
+name: Apache Kafka
 
 on:
   schedule:
