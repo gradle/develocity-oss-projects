@@ -1,20 +1,19 @@
-name: OpenRewrite Concourse
+name: Apollo Kotlin
 
 on:
   schedule:
     # Every Sunday at 9.00am
     - cron: "0 9 * * 0"
-
   workflow_dispatch:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/openrewrite/rewrite-concourse"
+  GIT_REPO: "https://github.com/apollographql/apollo-kotlin"
   TASKS: "build"
+  ARGS: "-x :intellij-plugin:test"
 
 jobs:
   Experiment:
-
     strategy:
       fail-fast: false
       matrix:
@@ -22,18 +21,25 @@ jobs:
           - experimentId: 1
           - experimentId: 2
           - experimentId: 3
-
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: 11
+          java-version: 17
           distribution: "temurin"
+      - name: Add git hook to temporarily disable caching for :intellij-plugin:instrumentCode
+        run: |
+          mkdir ~/git-hooks
+          echo -e 'echo "\ntasks.withType<org.jetbrains.intellij.tasks.BuildPluginTask>().configureEach { outputs.doNotCacheIf(\"buildPlugin should not be cacheable as it is a Zip task\") { true } }" >> intellij-plugin/build.gradle.kts\n' >> ~/git-hooks/post-checkout
+          chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Increase timeout when retrieving build scans
+        run: echo 'connect.timeout=PT90S' >> gradle-enterprise-gradle-build-validation/network.settings && echo 'read.timeout=PT90S' >> gradle-enterprise-gradle-build-validation/network.settings
       - name: Run experiment 1
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
@@ -41,6 +47,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
@@ -50,6 +57,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
@@ -60,6 +68,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 3

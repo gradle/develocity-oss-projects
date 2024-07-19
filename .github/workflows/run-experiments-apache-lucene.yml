@@ -1,10 +1,9 @@
-name: Apache - Lucene
+name: Apache Lucene
 
 on:
   schedule:
     # Every Sunday at 9.00am
     - cron: "0 9 * * 0"
-
   workflow_dispatch:
 
 env:
@@ -14,7 +13,6 @@ env:
 
 jobs:
   Experiment:
-
     strategy:
       fail-fast: false
       matrix:
@@ -22,7 +20,6 @@ jobs:
           - experimentId: 1
           - experimentId: 2
           - experimentId: 3
-
     runs-on: ubuntu-latest
     steps:
       - name: Set up JDK 17
