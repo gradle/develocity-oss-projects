@@ -11,7 +11,7 @@ env:
   GIT_REPO: "https://github.com/androidx/androidx"
   TASKS: "buildOnServer zipTestConfigsWithApks test"
   PROJECT_DIR: "playground-projects/biometric-playground"
-  ARGS: "-x ktlint -Dorg.gradle.dependency.verification=off"
+  ARGS: "-x lint -Dorg.gradle.dependency.verification=off"
 
 jobs:
   Experiment:
