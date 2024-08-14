@@ -10,6 +10,7 @@ env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/james-project"
   GOALS: "verify"
+  ARGS: "-Dsurefire.rerunFailingTestsCount=2"
 
 jobs:
   Experiment:
@@ -37,6 +38,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           goals: ${{ env.GOALS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 1
@@ -47,6 +49,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           goals: ${{ env.GOALS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
