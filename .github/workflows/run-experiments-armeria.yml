@@ -9,7 +9,7 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/line/armeria"
-  TASKS: "build -Pretry=true -PfailOnPassedAfterRetry=false -PnoLint -PflakyTests=false -PbuildJdkVersion=21 -PtestJavaVersion=21 -PpreferShadedTests=false"
+  TASKS: "build --no-daemon --max-workers=2 --parallel -PbuildJdkVersion=21 -Pretry=true -PfailOnPassedAfterRetry=false -PnoLint -PflakyTests=false"
 
 jobs:
   Experiment:
@@ -18,8 +18,8 @@ jobs:
       matrix:
         include:
           - experimentId: 1
-#          - experimentId: 2
-#          - experimentId: 3
+          - experimentId: 2
+          - experimentId: 3
     runs-on: ubuntu-latest
     steps:
       - name: Set up JDK 21
