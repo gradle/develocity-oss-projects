@@ -1,9 +1,7 @@
 name: Apache Samza
 
 on:
-  schedule:
-    # Every Sunday at 9.00am
-    - cron: "0 9 * * 0"
+  # Scheduled execution disabled while build is broken - see https://github.com/apache/samza/pull/1703
   workflow_dispatch:
 
 env:
