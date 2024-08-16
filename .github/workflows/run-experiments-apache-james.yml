@@ -10,7 +10,7 @@ env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/james-project"
   GOALS: "verify"
-  ARGS: "-T 1C -B -Dmaven.test.failure.ignore=true"
+  ARGS: "-B -Dmaven.test.failure.ignore=true"
 
 jobs:
   Experiment:
