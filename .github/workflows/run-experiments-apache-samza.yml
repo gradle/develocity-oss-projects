@@ -27,12 +27,10 @@ jobs:
         with:
           java-version: 8
           distribution: "temurin"
-      - name: Add git hook to exclude flaky test classes
+      - name: Add git hook to enable test retry
         run: |
           mkdir ~/git-hooks
-          echo -e 'echo "\nproject(\":samza-core_\$scalaSuffix\") { test { filter { excludeTestsMatching \"org.apache.samza.container.TestRunLoop\"} } }" >> build.gradle\n' >> ~/git-hooks/post-checkout
-          echo -e 'echo "\nproject(\":samza-kafka_\$scalaSuffix\") { test { filter { excludeTestsMatching \"org.apache.samza.system.kafka.TestKafkaSystemAdminJava\" excludeTestsMatching \"org.apache.samza.system.kafka.TestKafkaSystemFactoryJava\" } } }" >> build.gradle\n' >> ~/git-hooks/post-checkout
-          echo -e 'echo "\nproject(\":samza-test_\$scalaSuffix\") { test { filter { excludeTestsMatching \"org.apache.samza.storage.kv.BlobStoreStateBackendIntegrationTest\" } } }" >> build.gradle\n' >> ~/git-hooks/post-checkout
+          echo -e 'echo "\nallprojects { tasks.withType(Test).configureEach { retry { maxRetries = 3 } } }" >> build.gradle\n' >> ~/git-hooks/post-checkout
           chmod +x ~/git-hooks/post-checkout
           git config --global core.hooksPath ~/git-hooks
       - name: Download latest version of the validation scripts
