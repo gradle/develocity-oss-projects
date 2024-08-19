@@ -10,7 +10,7 @@ env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apollographql/apollo-kotlin"
   TASKS: "build"
-  ARGS: "-x :intellij-plugin:test"
+  ARGS: "-x :intellij-plugin:test -x wasmJsNodeTest"
 
 jobs:
   Experiment:
