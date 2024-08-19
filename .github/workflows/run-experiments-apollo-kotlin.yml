@@ -28,12 +28,6 @@ jobs:
         with:
           java-version: 17
           distribution: "temurin"
-      - name: Add git hook to temporarily disable caching for :intellij-plugin:instrumentCode
-        run: |
-          mkdir ~/git-hooks
-          echo -e 'echo "\ntasks.withType<org.jetbrains.intellij.tasks.BuildPluginTask>().configureEach { outputs.doNotCacheIf(\"buildPlugin should not be cacheable as it is a Zip task\") { true } }" >> intellij-plugin/build.gradle.kts\n' >> ~/git-hooks/post-checkout
-          chmod +x ~/git-hooks/post-checkout
-          git config --global core.hooksPath ~/git-hooks
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
