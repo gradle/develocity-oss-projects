@@ -21,6 +21,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Apollo Kotlin](https://ge.apollographql.com)
 - [Armeria](https://ge.armeria.dev)
 - [Caffeine](https://caffeine.gradle-enterprise.cloud)
+- [Commonhaus Foundation](https://develocity.commonhaus.dev)
 - [Detekt](https://ge.detekt.dev)
 - [Gradle](https://ge.gradle.org)
 - [Grails](https://ge.grails.org)
