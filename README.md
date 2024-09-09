@@ -36,6 +36,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [OpenRewrite](https://ge.openrewrite.org)
 - [Quarkus](https://ge.quarkus.io)
 - [Ratpack](https://ge.ratpack.io)
+- [Scala3](https://develocity.scala-lang.org)
 - [Spock](https://ge.spockframework.org)
 - [Spring](https://ge.spring.io)
 - [Testcontainers](https://ge.testcontainers.org)
