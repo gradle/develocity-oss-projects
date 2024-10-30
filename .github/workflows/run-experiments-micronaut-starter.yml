@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
+  DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/micronaut-projects/micronaut-starter"
   TASKS: "check"
   ARGS: "-DpredictiveTestSelection=false -x test-aws:test -x test-buildtool:test -x test-cli:test -x test-cloud:test -x test-core:test -x test-features:test"
@@ -35,32 +35,32 @@ jobs:
       - name: Run experiment 1
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
-          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
         env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
-          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: false
         if: matrix.experimentId == 2
       - name: Run experiment 3
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
         env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
-          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: false
         if: matrix.experimentId == 3

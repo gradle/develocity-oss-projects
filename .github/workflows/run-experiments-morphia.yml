@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
+  DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/MorphiaOrg/morphia"
   GOALS: "install"
 
@@ -37,7 +37,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           goals: ${{ env.GOALS }}
-          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 1
       - name: Run experiment 2
@@ -47,6 +47,6 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           goals: ${{ env.GOALS }}
-          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
