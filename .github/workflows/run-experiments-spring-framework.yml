@@ -33,11 +33,11 @@ jobs:
           java-version: 17
           distribution: "temurin"
       - name: Download latest version of the validation scripts
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
+        uses: erichaagdev/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
+        uses: erichaagdev/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@main
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
@@ -46,7 +46,7 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
+        uses: erichaagdev/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@main
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
@@ -56,7 +56,7 @@ jobs:
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
       - name: Run experiment 3
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
+        uses: erichaagdev/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@main
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
