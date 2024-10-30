@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
+  DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/geode"
   TASKS: "test integrationTest"
 
@@ -40,29 +40,29 @@ jobs:
       - name: Run experiment 1
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
-          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
         env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
-          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
       - name: Run experiment 3
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
         env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
-          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 3
