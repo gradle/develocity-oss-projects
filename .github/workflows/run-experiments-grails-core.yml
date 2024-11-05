@@ -29,9 +29,10 @@ jobs:
           java-version: 11
           distribution: "temurin"
       - name: Download latest version of the validation scripts
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@erichaagdev/add-download-version
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          version: development-latest
       - name: Run experiment 1
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:

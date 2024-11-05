@@ -76,9 +76,10 @@ jobs:
               </activeProfiles>
             </settings>' > ~/.m2/settings.xml
       - name: Download latest version of the validation scripts
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/download@actions-stable
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/download@erichaagdev/add-download-version
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          version: development-latest
       - name: Run experiment 1
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-1@actions-stable
         env:
