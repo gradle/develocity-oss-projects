@@ -34,6 +34,7 @@ jobs:
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
+          downloadDevelopmentRelease: true
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Remove Maven Settings
         # Beam uses the [gradle-maven-settings-plugin](https://github.com/mark-vieira/gradle-maven-settings-plugin/)

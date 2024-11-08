@@ -30,6 +30,7 @@ jobs:
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
+          downloadDevelopmentRelease: true
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
