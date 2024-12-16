@@ -76,11 +76,11 @@ jobs:
               </activeProfiles>
             </settings>' > ~/.m2/settings.xml
       - name: Download latest version of the validation scripts
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/download@actions-stable
+        uses: gradle/develocity-build-validation-scripts/.github/actions/maven/download@actions-stable
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-1@actions-stable
+        uses: gradle/develocity-build-validation-scripts/.github/actions/maven/experiment-1@actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
@@ -91,7 +91,7 @@ jobs:
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 1
       - name: Run experiment 2
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@actions-stable
+        uses: gradle/develocity-build-validation-scripts/.github/actions/maven/experiment-2@actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
