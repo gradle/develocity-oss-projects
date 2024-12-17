@@ -51,7 +51,7 @@ Visit our website to learn more about [Develocity][develocity] and how [OSS proj
 All content stored in this repository is open-source software released under the [Apache 2.0 License][apache-license]. Different licenses might apply to the projects and tools being referenced from the content of this repository.
 
 [develocity-build-config-samples]: https://github.com/gradle/develocity-build-config-samples
-[develocity-build-validation-scripts]: https://github.com/gradle/gradle-enterprise-build-validation-scripts
+[develocity-build-validation-scripts]: https://github.com/gradle/develocity-build-validation-scripts
 [develocity-oss-projects]: https://github.com/gradle/develocity-oss-projects
 [ccud-gradle-plugin]: https://github.com/gradle/common-custom-user-data-gradle-plugin
 [ccud-maven-extension]: https://github.com/gradle/common-custom-user-data-maven-extension
