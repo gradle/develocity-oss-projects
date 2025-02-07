@@ -10,6 +10,7 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/spring-projects/spring-authorization-server"
   TASKS: "build"
+  ACTIONS_RUNNER_DEBUG: true
 
 jobs:
   Experiment:
@@ -32,6 +33,10 @@ jobs:
         with:
           downloadDevelopmentRelease: true
           token: ${{ secrets.GITHUB_TOKEN }}
+      - working-directory: develocity-gradle-build-validation
+        run: |
+          sed -i 's/#connect.timeout=PT5S/connect.timeout=PT60S/g' network.settings
+          sed -i 's/#read.timeout=PT30S/read.timeout=PT60S/g' network.settings
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
