@@ -1,4 +1,4 @@
-name: OpenRewrite Concourse
+name: OpenRewrite
 
 on:
   schedule:
@@ -8,7 +8,7 @@ on:
 
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/openrewrite/rewrite-concourse"
+  GIT_REPO: "https://github.com/openrewrite/rewrite"
   TASKS: "build"
 
 jobs:
