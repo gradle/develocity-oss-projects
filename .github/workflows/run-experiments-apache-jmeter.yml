@@ -10,6 +10,7 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/jmeter"
   TASKS: "build -x distTar -x distTarSource -x distTarSha512 -x distTarSourceSha512"
+  READ_TIMEOUT: "PT30S"
 
 jobs:
   Experiment:
@@ -32,6 +33,8 @@ jobs:
         with:
           downloadDevelopmentRelease: true
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Increase API calls timeout
+        run: echo "read.timeout=$READ_TIMEOUT" | tee -a network.settings
       - name: Ignore Test Failures
         run: |
           mkdir ~/git-hooks
