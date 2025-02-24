@@ -11,6 +11,7 @@ env:
   GIT_REPO: "https://github.com/apache/calcite"
   TASKS: "build"
   GRADLE_OPTS: -Dorg.gradle.jvmargs="-Xmx1024m" -XX:MaxMetaspaceSize="512m" # This was seen in one of their CI jobs
+  READ_TIMEOUT: "PT30S"
 
 jobs:
   Experiment:
@@ -33,6 +34,8 @@ jobs:
         with:
           downloadDevelopmentRelease: true
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Increase API calls timeout
+        run: echo "read.timeout=$READ_TIMEOUT" | tee -a develocity-gradle-build-validation/network.settings
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:

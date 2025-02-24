@@ -10,6 +10,7 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apereo/cas"
   TASKS: "build testCAS testLogout testGroovy testTickets -x check"
+  READ_TIMEOUT: "PT30S"
 
 jobs:
   Experiment:
@@ -31,6 +32,8 @@ jobs:
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Increase API calls timeout
+        run: echo "read.timeout=$READ_TIMEOUT" | tee -a develocity-gradle-build-validation/network.settings
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
