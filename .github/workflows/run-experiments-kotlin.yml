@@ -12,6 +12,9 @@ env:
   TASKS: "install"
   ARGS: "-Pkotlin.test.maxParallelForks=4 -Dorg.gradle.dependency.verification=off"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

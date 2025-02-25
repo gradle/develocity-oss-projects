@@ -11,6 +11,9 @@ env:
   GIT_REPO: "https://github.com/detekt/detekt"
   TASKS: "build -x detekt -x :detekt-gradle-plugin:functionalTest -x :detekt-gradle-plugin:functionalTestMinSupportedGradle -PenablePTS=false"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

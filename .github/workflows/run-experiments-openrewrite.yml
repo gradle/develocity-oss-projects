@@ -11,6 +11,9 @@ env:
   GIT_REPO: "https://github.com/openrewrite/rewrite"
   TASKS: "build"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

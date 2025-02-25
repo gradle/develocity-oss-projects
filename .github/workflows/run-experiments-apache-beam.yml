@@ -11,6 +11,9 @@ env:
   GIT_REPO: "https://github.com/apache/beam"
   TASKS: ":javaPreCommit -PdisableSpotlessCheck=true -PdisableCheckStyle=true -x jmhTest"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

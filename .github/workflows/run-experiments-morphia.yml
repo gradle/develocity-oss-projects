@@ -11,6 +11,9 @@ env:
   GIT_REPO: "https://github.com/MorphiaOrg/morphia"
   GOALS: "install"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

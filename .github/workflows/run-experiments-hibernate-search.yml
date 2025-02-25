@@ -12,6 +12,9 @@ env:
   GOALS: "install"
   ARGS: "-B -Pjqassistant -Pci-build -DskipITs"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

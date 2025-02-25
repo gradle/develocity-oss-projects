@@ -11,6 +11,9 @@ env:
   GIT_REPO: "https://github.com/apache/lucene"
   TASKS: "check -Ptests.seed=3466BEBDD5AA01A0 -Pvalidation.git.failOnModified=false -Ptests.haltonfailure=false -Ptests.neverUpToDate=false"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

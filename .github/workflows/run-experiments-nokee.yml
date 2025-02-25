@@ -12,6 +12,9 @@ env:
   GIT_OPTIONS: "--recursive"
   TASKS: "quickTest -x functionalTestLinuxLatestGlobalAvailable"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

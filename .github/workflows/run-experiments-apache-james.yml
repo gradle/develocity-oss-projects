@@ -12,6 +12,9 @@ env:
   GOALS: "verify"
   ARGS: "-B -Dmaven.test.failure.ignore=true"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

@@ -11,6 +11,9 @@ env:
   GIT_REPO: "https://github.com/spring-projects/spring-amqp"
   TASKS: "build"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

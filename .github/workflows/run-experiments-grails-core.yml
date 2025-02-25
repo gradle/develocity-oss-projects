@@ -11,6 +11,9 @@ env:
   GIT_REPO: "https://github.com/grails/grails-core"
   TASKS: "build -x integrationTest"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

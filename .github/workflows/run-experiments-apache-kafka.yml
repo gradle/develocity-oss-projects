@@ -11,6 +11,9 @@ env:
   GIT_REPO: "https://github.com/apache/kafka"
   TASKS: "test"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

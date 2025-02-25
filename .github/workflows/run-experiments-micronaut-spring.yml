@@ -12,6 +12,9 @@ env:
   TASKS: "check"
   ARGS: "-DpredictiveTestSelection=false"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

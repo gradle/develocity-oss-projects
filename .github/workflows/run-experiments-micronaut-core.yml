@@ -12,6 +12,9 @@ env:
   TASKS: "check"
   ARGS: "-x japiCmp -DpredictiveTestSelection=false --warn"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

@@ -11,6 +11,9 @@ env:
   GIT_REPO: "https://github.com/hibernate/hibernate-orm"
   TASKS: "check"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

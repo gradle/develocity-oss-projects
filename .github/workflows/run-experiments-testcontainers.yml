@@ -11,6 +11,9 @@ env:
   GIT_REPO: "https://github.com/testcontainers/testcontainers-java"
   TASKS: ":mariadb:check"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

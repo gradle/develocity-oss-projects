@@ -12,6 +12,9 @@ env:
   GOALS: "install"
   ARGS: "-B"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

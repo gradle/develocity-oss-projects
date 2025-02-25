@@ -12,6 +12,9 @@ env:
   TASKS: "build"
   GRADLE_OPTS: -Dorg.gradle.jvmargs="-Xmx1024m" -XX:MaxMetaspaceSize="512m" # This was seen in one of their CI jobs
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

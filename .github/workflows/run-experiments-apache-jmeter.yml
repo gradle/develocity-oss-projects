@@ -11,6 +11,9 @@ env:
   GIT_REPO: "https://github.com/apache/jmeter"
   TASKS: "build -x distTar -x distTarSource -x distTarSha512 -x distTarSourceSha512"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

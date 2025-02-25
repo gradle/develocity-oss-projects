@@ -11,6 +11,9 @@ env:
   GIT_REPO: "https://github.com/line/armeria"
   TASKS: "build --no-daemon --max-workers=2 --parallel -PbuildJdkVersion=21 -Pretry=true -PfailOnPassedAfterRetry=false -PnoLint -PflakyTests=false"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

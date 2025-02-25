@@ -11,6 +11,9 @@ env:
   GIT_REPO: "https://github.com/ben-manes/caffeine"
   TASKS: "caffeine:junitTest"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:

@@ -13,6 +13,9 @@ env:
   PROJECT_DIR: "playground-projects/biometric-playground"
   ARGS: "-x lint -Dorg.gradle.dependency.verification=off"
 
+concurrency:
+  group: experiments
+
 jobs:
   Experiment:
     strategy:
