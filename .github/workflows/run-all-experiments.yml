@@ -14,14 +14,14 @@ jobs:
   spring-authorization-server:
     concurrency:
       group: all-experiments
-    uses: .github/workflows/run-experiments-spring-authorization-server.yml
+    uses: ./.github/workflows/run-experiments-spring-authorization-server.yml
 
   apache-beam:
     concurrency:
       group: all-experiments
-    uses: .github/workflows/run-experiments-apache-beam.yml
+    uses: ./.github/workflows/run-experiments-apache-beam.yml
 
   apache-calcite:
     concurrency:
       group: all-experiments
-    uses: .github/workflows/run-experiments-apache-calcite.yml
+    uses: ./.github/workflows/run-experiments-apache-calcite.yml
