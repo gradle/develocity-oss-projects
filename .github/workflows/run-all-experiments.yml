@@ -3,7 +3,7 @@ name: Run All Experiments
 on:
   push:
     branches:
-      - gf/fix-timeout-errors-concurrency-many
+      - gf/fix-timeout-errors-concurrency-one
   workflow_dispatch:
   schedule:
     # Every Saturday at 09:00
