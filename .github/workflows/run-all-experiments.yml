@@ -12,262 +12,314 @@ on:
 jobs:
 
   androidx:
+    uses: ./.github/workflows/run-experiments-androidx.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-androidx.yml
 
   apache-beam:
+    uses: ./.github/workflows/run-experiments-apache-beam.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-apache-beam.yml
 
   apache-calcite:
+    uses: ./.github/workflows/run-experiments-apache-calcite.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-apache-calcite.yml
 
   apache-geode:
+    uses: ./.github/workflows/run-experiments-apache-geode.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-apache-geode.yml
 
   apache-groovy:
+    uses: ./.github/workflows/run-experiments-apache-groovy.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-apache-groovy.yml
 
   apache-james:
+    uses: ./.github/workflows/run-experiments-apache-james.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-apache-james.yml
 
   apache-jmeter:
+    uses: ./.github/workflows/run-experiments-apache-jmeter.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-apache-jmeter.yml
 
   apache-kafka:
+    uses: ./.github/workflows/run-experiments-apache-kafka.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-apache-kafka.yml
 
   apache-lucene:
+    uses: ./.github/workflows/run-experiments-apache-lucene.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-apache-lucene.yml
 
   apache-ofbiz:
+    uses: ./.github/workflows/run-experiments-apache-ofbiz.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-apache-ofbiz.yml
 
   apache-openwhisk:
+    uses: ./.github/workflows/run-experiments-apache-openwhisk.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-apache-openwhisk.yml
 
   apache-samza:
+    uses: ./.github/workflows/run-experiments-apache-samza.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-apache-samza.yml
 
   apache-solr:
+    uses: ./.github/workflows/run-experiments-apache-solr.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-apache-solr.yml
 
   apereo-cas:
+    uses: ./.github/workflows/run-experiments-apereo-cas.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-apereo-cas.yml
 
   apollo-kotlin:
+    uses: ./.github/workflows/run-experiments-apollo-kotlin.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-apollo-kotlin.yml
 
   armeria:
+    uses: ./.github/workflows/run-experiments-armeria.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-armeria.yml
 
   caffeine:
+    uses: ./.github/workflows/run-experiments-caffeine.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-caffeine.yml
 
   detekt:
+    uses: ./.github/workflows/run-experiments-detekt.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-detekt.yml
 
   gradle:
+    uses: ./.github/workflows/run-experiments-gradle.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-gradle.yml
 
   grails-core:
+    uses: ./.github/workflows/run-experiments-grails-core.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-grails-core.yml
 
   hibernate-orm:
+    uses: ./.github/workflows/run-experiments-hibernate-orm.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-hibernate-orm.yml
 
   hibernate-search:
+    uses: ./.github/workflows/run-experiments-hibernate-search.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-hibernate-search.yml
 
   java-ordered-properties:
+    uses: ./.github/workflows/run-experiments-java-ordered-properties.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-java-ordered-properties.yml
 
   jhipster-sample:
+    uses: ./.github/workflows/run-experiments-jhipster-sample.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-jhipster-sample.yml
 
   junit5:
+    uses: ./.github/workflows/run-experiments-junit5.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-junit5.yml
 
   kotlin:
+    uses: ./.github/workflows/run-experiments-kotlin.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-kotlin.yml
 
   micrometer:
+    uses: ./.github/workflows/run-experiments-micrometer.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-micrometer.yml
 
   micronaut-aws:
+    uses: ./.github/workflows/run-experiments-micronaut-aws.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-micronaut-aws.yml
 
   micronaut-core:
+    uses: ./.github/workflows/run-experiments-micronaut-core.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-micronaut-core.yml
 
   micronaut-data:
+    uses: ./.github/workflows/run-experiments-micronaut-data.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-micronaut-data.yml
 
   micronaut-kafka:
+    uses: ./.github/workflows/run-experiments-micronaut-kafka.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-micronaut-kafka.yml
 
   micronaut-kotlin:
+    uses: ./.github/workflows/run-experiments-micronaut-kotlin.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-micronaut-kotlin.yml
 
   micronaut-security:
+    uses: ./.github/workflows/run-experiments-micronaut-security.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-micronaut-security.yml
 
   micronaut-spring:
+    uses: ./.github/workflows/run-experiments-micronaut-spring.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-micronaut-spring.yml
 
   micronaut-starter:
+    uses: ./.github/workflows/run-experiments-micronaut-starter.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-micronaut-starter.yml
 
   microstream:
+    uses: ./.github/workflows/run-experiments-microstream.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-microstream.yml
 
   morphia:
+    uses: ./.github/workflows/run-experiments-morphia.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-morphia.yml
 
   nokee:
+    uses: ./.github/workflows/run-experiments-nokee.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-nokee.yml
 
   openapi-generator:
+    uses: ./.github/workflows/run-experiments-openapi-generator.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-openapi-generator.yml
 
   openrewrite:
+    uses: ./.github/workflows/run-experiments-openrewrite.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-openrewrite.yml
 
   quarkus:
+    uses: ./.github/workflows/run-experiments-quarkus.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-quarkus.yml
 
   ratpack:
+    uses: ./.github/workflows/run-experiments-ratpack.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-ratpack.yml
 
   spock:
+    uses: ./.github/workflows/run-experiments-spock.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-spock.yml
 
   spring-amqp:
+    uses: ./.github/workflows/run-experiments-spring-amqp.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-spring-amqp.yml
 
   spring-authorization-server:
+    uses: ./.github/workflows/run-experiments-spring-authorization-server.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-spring-authorization-server.yml
 
   spring-boot:
+    uses: ./.github/workflows/run-experiments-spring-boot.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-spring-boot.yml
 
   spring-framework:
+    uses: ./.github/workflows/run-experiments-spring-framework.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-spring-framework.yml
 
   spring-kafka:
+    uses: ./.github/workflows/run-experiments-spring-kafka.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-spring-kafka.yml
 
   spring-security:
+    uses: ./.github/workflows/run-experiments-spring-security.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-spring-security.yml
 
   testcontainers:
+    uses: ./.github/workflows/run-experiments-testcontainers.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-testcontainers.yml
 
   wrapper-upgrade-gradle-plugin:
+    uses: ./.github/workflows/run-experiments-wrapper-upgrade-gradle-plugin.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-wrapper-upgrade-gradle-plugin.yml
 
   xwiki:
+    uses: ./.github/workflows/run-experiments-xwiki.yml
+    secrets: inherit
     concurrency:
       group: ${{ github.ref }}
-    uses: ./.github/workflows/run-experiments-xwiki.yml
 
