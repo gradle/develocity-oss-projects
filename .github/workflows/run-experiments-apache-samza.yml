@@ -11,6 +11,7 @@ env:
 
 concurrency:
   group: experiments
+  cancel-in-progress: false
 
 jobs:
   Experiment:
