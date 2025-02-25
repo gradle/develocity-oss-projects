@@ -1,6 +1,7 @@
 name: Quarkus
 
 on:
+  workflow_call:
   schedule:
     # Every Sunday at 6.00pm
     - cron: "0 18 * * 0"

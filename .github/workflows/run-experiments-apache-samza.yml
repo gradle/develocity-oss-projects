@@ -1,6 +1,7 @@
 name: Apache Samza
 
 on:
+  workflow_call:
   # Scheduled execution disabled while build is broken - see https://github.com/apache/samza/pull/1703
   workflow_dispatch:
 
