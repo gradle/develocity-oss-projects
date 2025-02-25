@@ -2,7 +2,6 @@ name: Micronaut Kafka
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 1 * * 5"
   workflow_dispatch:
 

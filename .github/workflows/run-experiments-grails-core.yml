@@ -2,7 +2,6 @@ name: Grails Core
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 17 * * 4"
   workflow_dispatch:
 

@@ -2,7 +2,6 @@ name: Spring Kafka
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 3 * * 5"
   workflow_dispatch:
 

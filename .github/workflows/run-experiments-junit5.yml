@@ -2,7 +2,6 @@ name: JUnit5
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 10 * * 5"
   workflow_dispatch:
 

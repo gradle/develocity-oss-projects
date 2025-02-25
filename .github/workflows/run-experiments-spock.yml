@@ -2,7 +2,6 @@ name: Spock
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 15 * * 5"
   workflow_dispatch:
 

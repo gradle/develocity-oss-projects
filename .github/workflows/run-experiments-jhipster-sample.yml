@@ -2,7 +2,6 @@ name: JHipster Sample
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 6 * * 4"
   workflow_dispatch:
 

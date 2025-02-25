@@ -2,7 +2,6 @@ name: Apache Beam
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 4 * * 6"
   workflow_dispatch:
 

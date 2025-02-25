@@ -2,7 +2,6 @@ name: OpenAPI Generator
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 7 * * 5"
   workflow_dispatch:
 

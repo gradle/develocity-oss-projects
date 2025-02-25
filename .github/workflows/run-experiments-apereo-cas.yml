@@ -2,7 +2,6 @@ name: Apereo CAS
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 7 * * 4"
   workflow_dispatch:
 

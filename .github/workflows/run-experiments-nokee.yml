@@ -2,7 +2,6 @@ name: Nokee
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 8 * * 5"
   workflow_dispatch:
 

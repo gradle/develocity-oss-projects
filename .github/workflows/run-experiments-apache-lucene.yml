@@ -2,7 +2,6 @@ name: Apache Lucene
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 22 * * 4"
   workflow_dispatch:
 

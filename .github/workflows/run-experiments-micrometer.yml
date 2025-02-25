@@ -2,7 +2,6 @@ name: Micrometer
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 22 * * 5"
   workflow_dispatch:
 

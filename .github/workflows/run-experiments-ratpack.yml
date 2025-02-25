@@ -2,7 +2,6 @@ name: Ratpack
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 14 * * 5"
   workflow_dispatch:
 

@@ -2,7 +2,6 @@ name: Apache Geode
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 3 * * 6"
   workflow_dispatch:
 

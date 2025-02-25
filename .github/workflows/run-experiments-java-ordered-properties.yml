@@ -2,7 +2,6 @@ name: Java Ordered Properties
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 11 * * 4"
   workflow_dispatch:
 

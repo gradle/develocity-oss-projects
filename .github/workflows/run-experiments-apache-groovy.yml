@@ -2,7 +2,6 @@ name: Apache Groovy
 
 on:
   schedule:
-    # Every Sunday at 9.00am
     - cron: "0 11 * * 5"
   workflow_dispatch:
 
