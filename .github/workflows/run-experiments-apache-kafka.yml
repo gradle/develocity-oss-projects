@@ -11,10 +11,6 @@ env:
   GIT_REPO: "https://github.com/apache/kafka"
   TASKS: "test"
 
-concurrency:
-  group: experiments
-  cancel-in-progress: false
-
 jobs:
   Experiment:
     strategy:

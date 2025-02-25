@@ -11,10 +11,6 @@ env:
   GIT_REPO: "https://github.com/apereo/cas"
   TASKS: "build testCAS testLogout testGroovy testTickets -x check"
 
-concurrency:
-  group: experiments
-  cancel-in-progress: false
-
 jobs:
   Experiment:
     strategy:

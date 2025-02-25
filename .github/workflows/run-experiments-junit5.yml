@@ -11,10 +11,6 @@ env:
   GIT_REPO: "https://github.com/junit-team/junit5"
   TASKS: "build -Pjunit.develocity.predictiveTestSelection.enabled=false"
 
-concurrency:
-  group: experiments
-  cancel-in-progress: false
-
 jobs:
   Experiment:
     strategy:

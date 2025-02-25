@@ -11,10 +11,6 @@ env:
   GIT_REPO: "https://github.com/gradle/wrapper-upgrade-gradle-plugin"
   TASKS: "build -x signPluginMavenPublication -x test"
 
-concurrency:
-  group: experiments
-  cancel-in-progress: false
-
 jobs:
   Experiment:
     strategy:

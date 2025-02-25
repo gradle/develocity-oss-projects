@@ -1,0 +1,27 @@
+name: Run All Experiments
+
+on:
+  push:
+    branches:
+      - gf/fix-timeout-errors-concurrency-many
+  workflow_dispatch:
+  schedule:
+    # Every Saturday at 09:00
+    - cron: "0 9 * * 6"
+
+jobs:
+
+  spring-authorization-server:
+    concurrency:
+      group: all-experiments
+    uses: .github/workflows/run-experiments-spring-authorization-server.yml
+
+  apache-beam:
+    concurrency:
+      group: all-experiments
+    uses: .github/workflows/run-experiments-apache-beam.yml
+
+  apache-calcite:
+    concurrency:
+      group: all-experiments
+    uses: .github/workflows/run-experiments-apache-calcite.yml

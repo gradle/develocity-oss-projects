@@ -11,10 +11,6 @@ env:
   GIT_REPO: "https://github.com/microstream-one/microstream"
   GOALS: "package"
 
-concurrency:
-  group: experiments
-  cancel-in-progress: false
-
 jobs:
   Experiment:
     strategy:

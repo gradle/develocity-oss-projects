@@ -11,10 +11,6 @@ env:
   GIT_REPO: "https://github.com/apache/openwhisk"
   TASKS: ":tests:testCoverageLean :tests:reportCoverage :tests:testSwaggerCodegen"
 
-concurrency:
-  group: experiments
-  cancel-in-progress: false
-
 jobs:
   Experiment:
     strategy:

@@ -11,10 +11,6 @@ env:
   GIT_REPO: "https://github.com/spockframework/spock"
   TASKS: "build codeCoverageReport"
 
-concurrency:
-  group: experiments
-  cancel-in-progress: false
-
 jobs:
   Experiment:
     strategy:

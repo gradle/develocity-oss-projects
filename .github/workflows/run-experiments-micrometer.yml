@@ -11,10 +11,6 @@ env:
   GIT_REPO: "https://github.com/micrometer-metrics/micrometer"
   TASKS: "assemble"
 
-concurrency:
-  group: experiments
-  cancel-in-progress: false
-
 jobs:
   Experiment:
     strategy:

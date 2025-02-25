@@ -11,10 +11,6 @@ env:
   GIT_REPO: "https://github.com/ratpack/ratpack"
   TASKS: "assemble"
 
-concurrency:
-  group: experiments
-  cancel-in-progress: false
-
 jobs:
   Experiment:
     strategy:

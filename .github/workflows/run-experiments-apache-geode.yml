@@ -11,10 +11,6 @@ env:
   GIT_REPO: "https://github.com/apache/geode"
   TASKS: "test integrationTest"
 
-concurrency:
-  group: experiments
-  cancel-in-progress: false
-
 jobs:
   Experiment:
     strategy:

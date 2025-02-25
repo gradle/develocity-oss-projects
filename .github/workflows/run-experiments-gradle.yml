@@ -12,10 +12,6 @@ env:
   TASKS: "compileAll"
   ARGS: "--configuration-cache-problems=warn"
 
-concurrency:
-  group: experiments
-  cancel-in-progress: false
-
 jobs:
   Experiment:
     strategy:

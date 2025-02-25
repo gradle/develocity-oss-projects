@@ -11,10 +11,6 @@ env:
   GIT_REPO: "https://github.com/apache/ofbiz-framework"
   TASKS: "build"
 
-concurrency:
-  group: experiments
-  cancel-in-progress: false
-
 jobs:
   Experiment:
     strategy:

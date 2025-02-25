@@ -11,10 +11,6 @@ env:
   GIT_REPO: "https://github.com/hibernate/hibernate-orm"
   TASKS: "check"
 
-concurrency:
-  group: experiments
-  cancel-in-progress: false
-
 jobs:
   Experiment:
     strategy:
