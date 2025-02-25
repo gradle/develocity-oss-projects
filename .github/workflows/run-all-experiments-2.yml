@@ -1,0 +1,132 @@
+name: Run all experiments (group 2)
+
+on:
+  push:
+    branches:
+      - gf/fix-timeout-errors-concurrency-one
+  workflow_dispatch:
+  schedule:
+    # Every Saturday at 21:00
+    - cron: "0 21 * * 6"
+
+jobs:
+
+  hibernate-orm:
+    uses: ./.github/workflows/run-experiments-hibernate-orm.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  hibernate-search:
+    uses: ./.github/workflows/run-experiments-hibernate-search.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  java-ordered-properties:
+    uses: ./.github/workflows/run-experiments-java-ordered-properties.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  jhipster-sample:
+    uses: ./.github/workflows/run-experiments-jhipster-sample.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  junit5:
+    uses: ./.github/workflows/run-experiments-junit5.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  kotlin:
+    uses: ./.github/workflows/run-experiments-kotlin.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  micrometer:
+    uses: ./.github/workflows/run-experiments-micrometer.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  micronaut-aws:
+    uses: ./.github/workflows/run-experiments-micronaut-aws.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  micronaut-core:
+    uses: ./.github/workflows/run-experiments-micronaut-core.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  micronaut-data:
+    uses: ./.github/workflows/run-experiments-micronaut-data.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  micronaut-kafka:
+    uses: ./.github/workflows/run-experiments-micronaut-kafka.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  micronaut-kotlin:
+    uses: ./.github/workflows/run-experiments-micronaut-kotlin.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  micronaut-security:
+    uses: ./.github/workflows/run-experiments-micronaut-security.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  micronaut-spring:
+    uses: ./.github/workflows/run-experiments-micronaut-spring.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  micronaut-starter:
+    uses: ./.github/workflows/run-experiments-micronaut-starter.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  microstream:
+    uses: ./.github/workflows/run-experiments-microstream.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  morphia:
+    uses: ./.github/workflows/run-experiments-morphia.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  openapi-generator:
+    uses: ./.github/workflows/run-experiments-openapi-generator.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  openrewrite:
+    uses: ./.github/workflows/run-experiments-openrewrite.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  quarkus:
+    uses: ./.github/workflows/run-experiments-quarkus.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}

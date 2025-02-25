@@ -1,0 +1,133 @@
+name: Run all experiments (group 1)
+
+on:
+  push:
+    branches:
+      - gf/fix-timeout-errors-concurrency-one
+  workflow_dispatch:
+  schedule:
+    # Every Saturday at 09:00
+    - cron: "0 9 * * 6"
+
+jobs:
+
+  androidx:
+    uses: ./.github/workflows/run-experiments-androidx.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  apache-beam:
+    uses: ./.github/workflows/run-experiments-apache-beam.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  apache-calcite:
+    uses: ./.github/workflows/run-experiments-apache-calcite.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  apache-geode:
+    uses: ./.github/workflows/run-experiments-apache-geode.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  apache-groovy:
+    uses: ./.github/workflows/run-experiments-apache-groovy.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  apache-james:
+    uses: ./.github/workflows/run-experiments-apache-james.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  apache-jmeter:
+    uses: ./.github/workflows/run-experiments-apache-jmeter.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  apache-kafka:
+    uses: ./.github/workflows/run-experiments-apache-kafka.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  apache-lucene:
+    uses: ./.github/workflows/run-experiments-apache-lucene.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  apache-ofbiz:
+    uses: ./.github/workflows/run-experiments-apache-ofbiz.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  apache-openwhisk:
+    uses: ./.github/workflows/run-experiments-apache-openwhisk.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  apache-samza:
+    uses: ./.github/workflows/run-experiments-apache-samza.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  apache-solr:
+    uses: ./.github/workflows/run-experiments-apache-solr.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  apereo-cas:
+    uses: ./.github/workflows/run-experiments-apereo-cas.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  apollo-kotlin:
+    uses: ./.github/workflows/run-experiments-apollo-kotlin.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  armeria:
+    uses: ./.github/workflows/run-experiments-armeria.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  caffeine:
+    uses: ./.github/workflows/run-experiments-caffeine.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  detekt:
+    uses: ./.github/workflows/run-experiments-detekt.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  gradle:
+    uses: ./.github/workflows/run-experiments-gradle.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  grails-core:
+    uses: ./.github/workflows/run-experiments-grails-core.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+

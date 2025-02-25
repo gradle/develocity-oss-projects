@@ -1,0 +1,78 @@
+name: Run all experiments (group 3)
+
+on:
+  push:
+    branches:
+      - gf/fix-timeout-errors-concurrency-one
+  workflow_dispatch:
+  schedule:
+    # Every Sunday at 09:00
+    - cron: "0 9 * * 0"
+
+jobs:
+
+  ratpack:
+    uses: ./.github/workflows/run-experiments-ratpack.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  spock:
+    uses: ./.github/workflows/run-experiments-spock.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  spring-amqp:
+    uses: ./.github/workflows/run-experiments-spring-amqp.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  spring-authorization-server:
+    uses: ./.github/workflows/run-experiments-spring-authorization-server.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  spring-boot:
+    uses: ./.github/workflows/run-experiments-spring-boot.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  spring-framework:
+    uses: ./.github/workflows/run-experiments-spring-framework.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  spring-kafka:
+    uses: ./.github/workflows/run-experiments-spring-kafka.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  spring-security:
+    uses: ./.github/workflows/run-experiments-spring-security.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  testcontainers:
+    uses: ./.github/workflows/run-experiments-testcontainers.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  wrapper-upgrade-gradle-plugin:
+    uses: ./.github/workflows/run-experiments-wrapper-upgrade-gradle-plugin.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
+
+  xwiki:
+    uses: ./.github/workflows/run-experiments-xwiki.yml
+    secrets: inherit
+    concurrency:
+      group: ${{ github.ref }}
