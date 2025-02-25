@@ -3,7 +3,7 @@ name: XWiki Commons
 on:
   schedule:
     # Every Sunday at 9.00am
-    - cron: "0 9 * * 0"
+    - cron: "0 17 * * 5"
   workflow_dispatch:
 
 env:
