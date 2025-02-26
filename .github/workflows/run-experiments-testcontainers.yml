@@ -2,8 +2,7 @@ name: Testcontainers Java
 
 on:
   schedule:
-    # Every Sunday at 9.00am
-    - cron: "0 9 * * 0"
+    - cron: "0 5 * * 5"
   workflow_dispatch:
 
 env:
