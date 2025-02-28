@@ -24,7 +24,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 21
+          java-version: 23
           distribution: "temurin"
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
