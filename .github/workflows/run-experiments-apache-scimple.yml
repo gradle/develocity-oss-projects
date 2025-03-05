@@ -8,7 +8,7 @@ on:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/directory-scimple"
-  TASKS: "verify"
+  GOALS: "verify"
 
 jobs:
   Experiment:
