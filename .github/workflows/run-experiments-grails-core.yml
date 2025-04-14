@@ -8,7 +8,7 @@ on:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/grails/grails-core"
-  TASKS: "build -x integrationTest"
+  TASKS: "build"
 
 jobs:
   Experiment:
