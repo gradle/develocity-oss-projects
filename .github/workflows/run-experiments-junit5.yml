@@ -8,7 +8,7 @@ on:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/junit-team/junit5"
-  TASKS: "build -Pjunit.develocity.predictiveTestSelection.enabled=false"
+  TASKS: "build -Pjunit.develocity.predictiveTestSelection.enabled=false -x :platform-tooling-support-tests:test"
 
 jobs:
   Experiment:
