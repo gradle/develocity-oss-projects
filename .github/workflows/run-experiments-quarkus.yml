@@ -10,7 +10,7 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/quarkusio/quarkus"
   GOALS: "install"
-  ARGS: "-B -Dquickly -T2C"
+  ARGS: "-B -Dquickly -T0.5C"
 
 jobs:
   Experiment:
