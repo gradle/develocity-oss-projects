@@ -10,7 +10,7 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/quarkusio/quarkus"
   GOALS: "install"
-  ARGS: "-B -Dquickly -T2C"
+  ARGS: "-B -Dquickly -T0.5C"
 
 jobs:
   Experiment:
@@ -28,7 +28,7 @@ jobs:
           checkout-fetch-depth: 0
           java-version: 17
           java-distribution: temurin
-          maven-version: 3.9.3
+          maven-version: 3.9.9
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/maven/download@actions-stable
         with:
