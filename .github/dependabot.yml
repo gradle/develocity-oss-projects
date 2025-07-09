@@ -5,3 +5,6 @@ updates:
     schedule:
       interval: "daily"
       time: "02:00"
+    ignore:
+      # develocity-build-validation-scripts do not have semantic versioning
+      - dependency-name: "*develocity-build-validation-scripts*"
