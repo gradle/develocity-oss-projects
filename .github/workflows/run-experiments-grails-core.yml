@@ -7,7 +7,7 @@ on:
 
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/grails/grails-core"
+  GIT_REPO: "https://github.com/apache/grails-core"
   TASKS: "build"
 
 jobs:
