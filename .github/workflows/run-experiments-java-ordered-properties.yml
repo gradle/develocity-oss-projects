@@ -70,7 +70,7 @@ jobs:
           java-version: 11
           distribution: "temurin"
       - name: Check out project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: "etiennestuder/java-ordered-properties"
       - name: Run experiment
