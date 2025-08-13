@@ -28,7 +28,6 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [JHipster](https://ge.jhipster.tech)
 - [JUnit](https://ge.junit.org)
 - [Kotlin](https://ge.jetbrains.com)
-- [MicroStream](https://ge.microstream.one)
 - [Micrometer](https://ge.micrometer.io)
 - [Micronaut](https://ge.micronaut.io)
 - [Nokee](https://ge.nokee.dev)
