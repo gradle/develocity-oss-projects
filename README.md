@@ -25,7 +25,6 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Detekt](https://ge.detekt.dev)
 - [Gradle](https://ge.gradle.org)
 - [Grails](https://ge.grails.org)
-- [JHipster](https://ge.jhipster.tech)
 - [JUnit](https://ge.junit.org)
 - [Kotlin](https://ge.jetbrains.com)
 - [Micrometer](https://ge.micrometer.io)
