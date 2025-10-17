@@ -32,6 +32,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Nokee](https://ge.nokee.dev)
 - [OpenAPI Generator](https://ge.openapi-generator.tech)
 - [OpenRewrite](https://ge.openrewrite.org)
+- [OpenTelemetry](https://develocity.opentelemetry.io)
 - [Quarkus](https://ge.quarkus.io)
 - [Ratpack](https://ge.ratpack.io)
 - [Scala3](https://develocity.scala-lang.org)
