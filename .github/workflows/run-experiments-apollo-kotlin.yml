@@ -8,8 +8,7 @@ on:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apollographql/apollo-kotlin"
-  TASKS: "ciTestsGradle"
-  ARGS: "--no-configuration-cache"
+  TASKS: "build -x :apollo-gradle-plugin:test"
 
 jobs:
   Experiment:
