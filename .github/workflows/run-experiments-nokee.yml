@@ -41,6 +41,7 @@ jobs:
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           gitOptions: ${{ env.GIT_OPTIONS }}
@@ -51,6 +52,7 @@ jobs:
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           gitOptions: ${{ env.GIT_OPTIONS }}
@@ -62,6 +64,7 @@ jobs:
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           gitOptions: ${{ env.GIT_OPTIONS }}
