@@ -42,6 +42,7 @@ jobs:
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
+          downloadDevelopmentRelease: true
           token: ${{ secrets.GITHUB_TOKEN }}
       # MergeResources and DataBindingGenBaseClassesTask are not cache relocatable when resourceDirsOutsideRootProjectDir is not empty
       # https://cs.android.com/android-studio/platform/tools/base/+/mirror-goog-studio-main:build-system/gradle-core/src/main/java/com/android/build/gradle/tasks/MergeResources.kt;l=164?q=MergeResources
