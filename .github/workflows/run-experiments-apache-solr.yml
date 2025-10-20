@@ -30,6 +30,7 @@ jobs:
         run: |
           mkdir ~/git-hooks
           echo -e 'echo "\nallprojects { pluginManager.withPlugin(\"com.diffplug.spotless\") { tasks.withType(com.diffplug.gradle.spotless.SpotlessTaskImpl).configureEach { outputs.doNotCacheIf(\"SpotlessTaskImpl is not cacheable if custom formatter steps are used\") { true } } } }" >> build.gradle\n' >> ~/git-hooks/post-checkout
+          echo -e 'echo "\nallprojects { tasks.named { it == "validateJarChecksums" }.configureEach { enabled = false } }" >> build.gradle\n' >> ~/git-hooks/post-checkout
           chmod +x ~/git-hooks/post-checkout
           git config --global core.hooksPath ~/git-hooks
       - name: Download latest version of the validation scripts
@@ -45,7 +46,6 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
-          enableGradleEnterprise: true
         if: matrix.experimentId == 1
       - name: Run experiment 2
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
@@ -55,7 +55,6 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
-          enableGradleEnterprise: true
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
       - name: Run experiment 3
@@ -66,6 +65,5 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
-          enableGradleEnterprise: true
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 3
