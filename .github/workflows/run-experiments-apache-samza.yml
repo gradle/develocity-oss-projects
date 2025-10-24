@@ -4,6 +4,9 @@ on:
   # Scheduled execution disabled while build is broken - see https://github.com/apache/samza/pull/1703
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/samza"
