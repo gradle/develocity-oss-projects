@@ -5,6 +5,9 @@ on:
     - cron: "0 15 * * 4"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/ofbiz-framework"
