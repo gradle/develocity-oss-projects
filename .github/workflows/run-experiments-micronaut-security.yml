@@ -61,6 +61,6 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
-          develocityUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: false
         if: matrix.experimentId == 3
