@@ -38,6 +38,8 @@ jobs:
         with:
           downloadDevelopmentRelease: true
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Configure validation scripts network settings
+        uses: ./.github/actions/configure-validation-scripts-network-settings
       - name: Remove Maven Settings
         # Beam uses the [gradle-maven-settings-plugin](https://github.com/mark-vieira/gradle-maven-settings-plugin/)
         # to read repo authentication from Maven settings and use it in their Gradle build. It seems that plugin does not

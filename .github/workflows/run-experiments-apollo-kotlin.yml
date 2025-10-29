@@ -34,8 +34,8 @@ jobs:
         with:
           downloadDevelopmentRelease: true
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Increase timeout when retrieving build scans
-        run: echo 'connect.timeout=PT90S' >> develocity-gradle-build-validation/network.settings && echo 'read.timeout=PT90S' >> develocity-gradle-build-validation/network.settings
+      - name: Configure validation scripts network settings
+        uses: ./.github/actions/configure-validation-scripts-network-settings
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
