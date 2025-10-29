@@ -11,7 +11,7 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/ben-manes/caffeine"
-  TASKS: "caffeine:junitTest"
+  TASKS: "assemble"
 
 jobs:
   Experiment:
