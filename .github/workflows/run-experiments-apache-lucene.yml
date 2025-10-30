@@ -27,7 +27,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
-          java-version: 23
+          java-version: 25
           distribution: "temurin"
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
@@ -42,7 +42,7 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
-          enableGradleEnterprise: true
+          enableDevelocity: true
         if: matrix.experimentId == 1
       - name: Run experiment 2
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
@@ -52,7 +52,7 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
-          enableGradleEnterprise: true
+          enableDevelocity: true
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
       - name: Run experiment 3
@@ -63,6 +63,6 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
-          enableGradleEnterprise: true
+          enableDevelocity: true
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 3

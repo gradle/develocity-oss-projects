@@ -11,7 +11,7 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/testcontainers/testcontainers-java"
-  TASKS: ":mariadb:check"
+  TASKS: ":testcontainers:check"
 
 jobs:
   Experiment:
