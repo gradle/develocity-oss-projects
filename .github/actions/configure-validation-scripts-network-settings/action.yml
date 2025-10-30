@@ -1,0 +1,31 @@
+name: Configure validation scripts networks settings
+description: "Configures network settings of the Develocity Build Validation Scripts"
+
+inputs:
+  connectTimeout:
+    description: "Configures the connect.timeout property in network.settings"
+    default: "PT10S"
+    required: false
+  readTimeout:
+    description: "Configures the read.timeout property in network.settings"
+    default: "PT30S"
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Configure validation scripts network settings
+      env:
+        CONNECT_TIMEOUT: ${{ inputs.connectTimeout }}
+        READ_TIMEOUT: ${{ inputs.readTimeout }}
+      run: |
+        if [ -f develocity-gradle-build-validation/network.settings ]; then
+          echo "connect.timeout=${CONNECT_TIMEOUT}" >> develocity-gradle-build-validation/network.settings
+          echo "read.timeout=${READ_TIMEOUT}" >> develocity-gradle-build-validation/network.settings
+        fi
+        
+        if [ -f develocity-maven-build-validation/network.settings ]; then
+          echo "connect.timeout=${CONNECT_TIMEOUT}" >> develocity-maven-build-validation/network.settings
+          echo "read.timeout=${READ_TIMEOUT}" >> develocity-maven-build-validation/network.settings
+        fi
+      shell: bash
