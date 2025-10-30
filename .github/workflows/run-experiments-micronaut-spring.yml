@@ -12,7 +12,9 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/micronaut-projects/micronaut-spring"
   TASKS: "check"
-  ARGS: "-DpredictiveTestSelection=false"
+  # Excludes:
+  # - :test-suite:test - https://ge.micronaut.io/scans/failures?failures.failureClassification=verification&failures.failureMessage=Execution%20failed%20for%20task%20%27:test-suite:test%27.%0A%3E%20Test%20process%20encountered%20an%20unexpected%20problem.%0A%20%20%20%3E%20Could%20not%20start%20Gradle%20Test%20Executor%20*%20Failed%20to%20load%20JUnit%20Platform.%20%20Please%20ensure%20that%20all%20JUnit%20Platform%20dependencies%20are%20available%20on%20the%20test%27s%20runtime%20classpath%2C%20including%20the%20JUnit%20Platform%20launcher.&search.rootProjectNames=spring-parent&search.timeZoneId=America%2FChicago
+  ARGS: "-x :test-suite:test"
 
 jobs:
   Experiment:

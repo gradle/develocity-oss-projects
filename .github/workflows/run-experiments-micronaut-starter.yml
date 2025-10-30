@@ -11,8 +11,7 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/micronaut-projects/micronaut-starter"
-  TASKS: "check"
-  ARGS: "-DpredictiveTestSelection=false -x test-aws:test -x test-buildtool:test -x test-cli:test -x test-cloud:test -x test-core:test -x test-features:test"
+  TASKS: "assemble :micronaut-cli:nativeCompile"
 
 jobs:
   Experiment:
@@ -29,7 +28,7 @@ jobs:
         uses: actions/setup-java@v5
         with:
           java-version: 21
-          distribution: "temurin"
+          distribution: "graalvm"
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
