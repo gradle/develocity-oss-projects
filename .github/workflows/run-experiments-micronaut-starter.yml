@@ -11,8 +11,7 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/micronaut-projects/micronaut-starter"
-  TASKS: "check"
-  ARGS: "-x test-aws:test -x test-buildtool:test -x test-cli:test -x test-cloud:test -x test-core:test -x test-features:test"
+  TASKS: "assemble :micronaut-cli:nativeCompile"
 
 jobs:
   Experiment:
