@@ -12,6 +12,7 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/solr"
   TASKS: "check integrationTests -Ptests.seed=3466BEBDD5AA01A0 -Pvalidation.git.failOnModified=false -Ptests.haltonfailure=false -Ptests.neverUpToDate=false"
+  ARGS: "-x validateJarChecksums"
 
 jobs:
   Experiment:
@@ -33,7 +34,6 @@ jobs:
         run: |
           mkdir ~/git-hooks
           echo -e 'echo "\nallprojects { pluginManager.withPlugin(\"com.diffplug.spotless\") { tasks.withType(com.diffplug.gradle.spotless.SpotlessTaskImpl).configureEach { outputs.doNotCacheIf(\"SpotlessTaskImpl is not cacheable if custom formatter steps are used\") { true } } } }" >> build.gradle\n' >> ~/git-hooks/post-checkout
-          echo -e 'echo "\nallprojects { tasks.named { it == "validateJarChecksums" }.configureEach { enabled = false } }" >> build.gradle\n' >> ~/git-hooks/post-checkout
           chmod +x ~/git-hooks/post-checkout
           git config --global core.hooksPath ~/git-hooks
       - name: Download latest version of the validation scripts
@@ -50,6 +50,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
@@ -59,6 +60,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
@@ -69,6 +71,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 3
