@@ -40,7 +40,7 @@ jobs:
           downloadDevelopmentRelease: true
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
-        uses: ./.github/actions/configure-validation-scripts-network-settings
+        uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:

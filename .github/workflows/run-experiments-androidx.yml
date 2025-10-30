@@ -48,7 +48,7 @@ jobs:
           downloadDevelopmentRelease: true
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
-        uses: ./.github/actions/configure-validation-scripts-network-settings
+        uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
       # MergeResources and DataBindingGenBaseClassesTask are not cache relocatable when resourceDirsOutsideRootProjectDir is not empty
       # https://cs.android.com/android-studio/platform/tools/base/+/mirror-goog-studio-main:build-system/gradle-core/src/main/java/com/android/build/gradle/tasks/MergeResources.kt;l=164?q=MergeResources
       # This is the case here as androidx/biometric project has its root dir set to androidx/playground-projects/biometric-playground
