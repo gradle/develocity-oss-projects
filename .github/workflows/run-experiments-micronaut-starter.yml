@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-java@v5
         with:
           java-version: 21
-          distribution: "temurin"
+          distribution: "graalvm"
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
