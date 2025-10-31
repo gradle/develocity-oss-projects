@@ -14,7 +14,8 @@ env:
   TASKS: "build"
 
 jobs:
-  Experiment:
+  experiments:
+    name: Experiment ${{ matrix.experimentId }}
     strategy:
       fail-fast: false
       matrix:
@@ -22,6 +23,10 @@ jobs:
           - experimentId: 1
           - experimentId: 2
           - experimentId: 3
+    outputs:
+      buildScanExperiment1: ${{ steps.run-exp1.outputs.buildScanSecondBuild }}
+      buildScanExperiment2: ${{ steps.run-exp2.outputs.buildScanSecondBuild }}
+      buildScanExperiment3: ${{ steps.run-exp3.outputs.buildScanSecondBuild }}
     runs-on: ubuntu-latest
     steps:
       - name: Set up JDK 21 EA
@@ -42,6 +47,7 @@ jobs:
       - name: Configure validation scripts network settings
         uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
       - name: Run experiment 1
+        id: run-exp1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
@@ -51,6 +57,7 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
+        id: run-exp2
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
@@ -61,6 +68,7 @@ jobs:
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
       - name: Run experiment 3
+        id: run-exp3
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
@@ -70,3 +78,18 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 3
+
+  analyze:
+    name: Analyze results
+    runs-on: ubuntu-latest
+    needs: experiments
+    if: always()
+    steps:
+      - name: Analyze experiment results
+        uses: gradle/develocity-oss-projects/.github/actions/analyze-gradle-experiment-results@erichaagdev/analyze-spring-results-using-gemini
+        with:
+          develocityApiKey: ${{ secrets.DEVELOCITY_API_KEY }}
+          geminiApiKey: ${{ secrets.GEMINI_API_KEY }}
+          buildScanExperiment1: ${{ needs.experiments.outputs.buildScanExperiment1 }}
+          buildScanExperiment2: ${{ needs.experiments.outputs.buildScanExperiment2 }}
+          buildScanExperiment3: ${{ needs.experiments.outputs.buildScanExperiment3 }}
