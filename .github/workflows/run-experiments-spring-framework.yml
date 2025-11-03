@@ -81,15 +81,13 @@ jobs:
 
   analyze:
     name: Analyze results
-    runs-on: ubuntu-latest
+    uses: gradle/develocity-oss-projects/.github/workflows/_experimental-analyze-gradle-experiment-results.yml@erichaagdev/analyze-spring-results-using-gemini
     needs: experiments
+    with:
+      buildScanExperiment1: ${{ needs.experiments.outputs.buildScanExperiment1 }}
+      buildScanExperiment2: ${{ needs.experiments.outputs.buildScanExperiment2 }}
+      buildScanExperiment3: ${{ needs.experiments.outputs.buildScanExperiment3 }}
+    secrets:
+      develocityApiKey: ${{ secrets.DV_SOLUTIONS_API_KEY }}
+      geminiApiKey: ${{ secrets.GEMINI_API_KEY }}
     if: always()
-    steps:
-      - name: Analyze experiment results
-        uses: gradle/develocity-oss-projects/.github/actions/analyze-gradle-experiment-results@erichaagdev/analyze-spring-results-using-gemini
-        with:
-          develocityApiKey: ${{ secrets.DEVELOCITY_API_KEY }}
-          geminiApiKey: ${{ secrets.GEMINI_API_KEY }}
-          buildScanExperiment1: ${{ needs.experiments.outputs.buildScanExperiment1 }}
-          buildScanExperiment2: ${{ needs.experiments.outputs.buildScanExperiment2 }}
-          buildScanExperiment3: ${{ needs.experiments.outputs.buildScanExperiment3 }}
