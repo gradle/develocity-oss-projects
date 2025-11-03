@@ -30,6 +30,8 @@ runs:
         BUILD_SCAN_EXP3: ${{ inputs.buildScanExperiment3 }}
         DEVELOCITY_API_KEY: ${{ inputs.develocityApiKey }}
       run: |
+        echo "::warning title=Experimental action usage::The action `gradle/develocity-oss-projects/.github/actions/analyze-gradle-experiment-results` is experimental and not intended for use outside of [gradle/develocity-oss-projects](https://github.com/gradle/develocity-oss-projects)."
+        
         capture_results() {
           local experiment build_scan_url develocity_server build_scan_id results previous_results executed_tasks executed_cacheable_tasks
           experiment="$1"
