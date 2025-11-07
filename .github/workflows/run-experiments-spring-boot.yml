@@ -84,7 +84,7 @@ jobs:
 
   analyze:
     name: Analyze results
-    uses: gradle/develocity-oss-projects/.github/workflows/_experimental-analyze-gradle-experiment-results.yml@erichaagdev/analyze-spring-results-using-gemini
+    uses: gradle/develocity-oss-projects/.github/workflows/_experimental-analyze-gradle-experiment-results.yml@main
     needs: experiments
     with:
       buildScanExperiment1: ${{ needs.experiments.outputs.buildScanExperiment1 }}
