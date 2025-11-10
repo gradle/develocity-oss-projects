@@ -92,7 +92,7 @@ jobs:
       - name: Summarize experiment 1 results
         id: summarize-exp1
         if: steps.fetch-results.outputs.exp1-executed-tasks != '0' && inputs.buildScanExperiment1 != null
-        uses: google-github-actions/run-gemini-cli@v0.1.13
+        uses: google-github-actions/run-gemini-cli@v0.1.14
         with:
           gemini_api_key: ${{ secrets.geminiApiKey }}
           prompt: |
@@ -212,7 +212,7 @@ jobs:
       - name: Summarize experiment 2 results
         id: summarize-exp2
         if: steps.fetch-results.outputs.exp2-executed-cacheable-tasks != '0' && inputs.buildScanExperiment2 != null
-        uses: google-github-actions/run-gemini-cli@v0.1.13
+        uses: google-github-actions/run-gemini-cli@v0.1.14
         with:
           gemini_api_key: ${{ secrets.geminiApiKey }}
           prompt: |
@@ -357,7 +357,7 @@ jobs:
             ```
       - name: Summarize experiment 3 results
         id: summarize-exp3
-        uses: google-github-actions/run-gemini-cli@v0.1.13
+        uses: google-github-actions/run-gemini-cli@v0.1.14
         if: steps.fetch-results.outputs.exp3-executed-cacheable-tasks != '0' && inputs.buildScanExperiment3 != null
         with:
           gemini_api_key: ${{ secrets.geminiApiKey }}
@@ -559,7 +559,7 @@ jobs:
           process_summary exp3 "$EXP3_SUMMARY" "$EXP3_EXECUTED_TASKS"
       - name: Summarize all findings
         id: summarize-all
-        uses: google-github-actions/run-gemini-cli@v0.1.13
+        uses: google-github-actions/run-gemini-cli@v0.1.14
         if: |
           (steps.fetch-results.outputs.exp1-executed-tasks != '0' && inputs.buildScanExperiment1 != null) ||
           (steps.fetch-results.outputs.exp2-executed-cacheable-tasks != '0' && inputs.buildScanExperiment2 != null) ||
