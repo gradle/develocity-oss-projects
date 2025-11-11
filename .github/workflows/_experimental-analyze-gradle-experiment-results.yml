@@ -82,7 +82,7 @@ jobs:
           
             curl -s \
               -H "Authorization: Bearer $DEVELOCITY_API_KEY" \
-              "$develocity_server/api/builds/$build_scan_id?models=gradle-attributes&models=gradle-build-cache-performance"
+              "$develocity_server/api/builds/$build_scan_id?models=gradle-attributes&models=gradle-build-cache-performance&models=gradle-failures"
           }
           
           fetch_previous_results() {
@@ -96,7 +96,7 @@ jobs:
           
             curl -s \
               -H "Authorization: Bearer $DEVELOCITY_API_KEY" \
-              "$develocity_server/api/builds?reverse=true&maxBuilds=1&models=gradle-attributes&models=gradle-build-cache-performance&query=project%3A%22${project}%22%20tag%3A%22${experiment_id}%22%20-value%3A%22Experiment%20run%20id%3D${experiment_run_id}%22"
+              "$develocity_server/api/builds?reverse=true&maxBuilds=1&models=gradle-attributes&models=gradle-build-cache-performance&models=gradle-failures&query=project%3A%22${project}%22%20tag%3A%22${experiment_id}%22%20-value%3A%22Experiment%20run%20id%3D${experiment_run_id}%22"
           }
           
           capture_results exp1 "$BUILD_SCAN_EXP1"
@@ -139,8 +139,8 @@ jobs:
             
             Your report must:
             
-            1. Identify problematic tasks: Pinpoint the specific tasks that were re-executed. Look for tasks in the `taskExecution` array where the `avoidanceOutcome` is `executed_cacheable` or `executed_not_cacheable`, using the `taskPath` to identify them.
-            2. Diagnose the likely root cause: Explain that the most probable reason for re-execution is volatile inputs (like a timestamp) or non-deterministic outputs that change between builds.
+            1. Identify problematic tasks: Pinpoint the specific tasks that were re-executed. Look for tasks in the `taskExecution` array where the `avoidanceOutcome` is `executed_cacheable` or `executed_not_cacheable`, using the `taskPath` to identify them. If one of the tasks failed, write `(Failed)` after the task name. 
+            2. Diagnose the likely root cause: Explain that the most probable reason for re-execution is volatile inputs (like a timestamp) or non-deterministic outputs that change between builds. If a particular task failed, explain that it may have also failed in the first build, which would be the reason the task re-ran in the second build, not a build caching issue. 
             3. Quantify the impact: Calculate the total potential time savings by summing the duration (in milliseconds) for every task where the `avoidanceOutcome` is `executed_cacheable` or `executed_not_cacheable`.
             4. Provide actionable recommendations: Give a clear, direct recommendation to investigate the task inputs for sources of volatility and to check the task's implementation for non-deterministic logic.
             
@@ -287,8 +287,8 @@ jobs:
             
             Your report must:
             
-            1. Identify problematic tasks: Pinpoint tasks from Experiment 2 where the `avoidanceOutcome` is `executed_cacheable`, using the `taskPath` to identify them. Do not analyze tasks with other outcomes.
-            2. Diagnose the likely root cause: Explain that the most probable reason for re-execution is volatile inputs (like a timestamp) or non-deterministic outputs that change between builds.
+            1. Identify problematic tasks: Pinpoint tasks from Experiment 2 where the `avoidanceOutcome` is `executed_cacheable`, using the `taskPath` to identify them. Do not analyze tasks with other outcomes. If one of the tasks failed, write `(Failed)` after the task name. 
+            2. Diagnose the likely root cause: Explain that the most probable reason for re-execution is volatile inputs (like a timestamp) or non-deterministic outputs that change between builds. If a particular task failed, explain that it may have also failed in the first build, which would be the reason the task re-ran in the second build, not a build caching issue.
             3. Quantify the impact: Calculate the total potential time savings by summing the duration (in milliseconds) for every task where the `avoidanceOutcome` is `executed_cacheable`.
             4. Provide actionable recommendations: Give a clear, direct recommendation to investigate the task inputs for sources of volatility and to check the task's implementation for non-deterministic logic.
             
@@ -459,8 +459,8 @@ jobs:
   
             Your task is to analyze the provided JSON from the current Experiment 3, using the other results as context. Your report must:
   
-            - Identify problematic tasks: Pinpoint tasks from the current Experiment 3 where the `avoidanceOutcome` is `executed_cacheable`, using the `taskPath` to identify them. Do not analyze tasks with other outcomes.
-            - Diagnose the likely root cause: For each problematic task, use the full cross-experiment logic to determine the most probable cause. Differentiate between regressions, non-relocatable tasks, and those with ambiguous failures.
+            - Identify problematic tasks: Pinpoint tasks from the current Experiment 3 where the `avoidanceOutcome` is `executed_cacheable`, using the `taskPath` to identify them. Do not analyze tasks with other outcomes. If one of the tasks failed, write `(Failed)` after the task name. 
+            - Diagnose the likely root cause: For each problematic task, use the full cross-experiment logic to determine the most probable cause. Differentiate between regressions, non-relocatable tasks, and those with ambiguous failures. If a particular task failed, explain that it may have also failed in the first build, which would be the reason the task re-ran in the second build, not a build caching issue.
             - Quantify the impact: Calculate the total potential time savings by summing the `duration` (in milliseconds) for every task that was `executed_cacheable` in the current Experiment 3.
             - Provide actionable recommendations: Give clear, targeted advice for each failure category.
   
