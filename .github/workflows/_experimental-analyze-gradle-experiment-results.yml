@@ -28,6 +28,8 @@ jobs:
     name: Analyze results
     runs-on: ubuntu-latest
     steps:
+      - name: Install Gemini CLI
+        run: npm install --no-audit --prefer-offline --global @google/gemini-cli@latest
       - name: Fetch results
         id: fetch-results
         env:
@@ -35,55 +37,66 @@ jobs:
           BUILD_SCAN_EXP2: ${{ inputs.buildScanExperiment2 }}
           BUILD_SCAN_EXP3: ${{ inputs.buildScanExperiment3 }}
           DEVELOCITY_API_KEY: ${{ secrets.develocityApiKey }}
+          GEMINI_API_KEY: ${{ secrets.geminiApiKey }}
+          TEMP_DIR: ${{ runner.temp }}
         run: |
-          echo '::warning title=Experimental action usage::The reusable workflow .github/workflows/experimental/analyze-gradle-experiment-results.yml is experimental and not intended for use outside of https://github.com/gradle/develocity-oss-projects.'
+          if [[ "$GITHUB_REPOSITORY" != "gradle/develocity-oss-projects" ]]; then
+            echo '::warning title=Experimental action usage::The reusable workflow .github/workflows/experimental/analyze-gradle-experiment-results.yml is experimental and not intended for use outside of https://github.com/gradle/develocity-oss-projects'
+          fi
           
           capture_results() {
             local experiment="$1"
             local build_scan_url="$2"
           
             if [[ -z "$build_scan_url" ]]; then
-              echo "${experiment}-results=This experiment didn't yield any results. The job may have failed." >> "$GITHUB_OUTPUT"
               return
             fi
           
-            local develocity_server build_scan_id results previous_results executed_tasks executed_cacheable_tasks
+            local develocity_server build_scan_id results previous_results
             develocity_server="$(echo "$build_scan_url" | cut -d'/' -f1,2,3)"
             build_scan_id="$(echo "$build_scan_url" | rev | cut -d'/' -f1 | rev)"
             results="$(fetch_results "$develocity_server" "$build_scan_id")"
             previous_results="$(fetch_previous_results "$develocity_server" "$results")"
           
+            local executed_tasks executed_cacheable_tasks
             executed_tasks="$(echo "$results" | jq --raw-output '.models.gradleBuildCachePerformance.model.taskExecution | map(select(.avoidanceOutcome == "executed_cacheable" or .avoidanceOutcome == "executed_not_cacheable")) | length')"
             executed_cacheable_tasks="$(echo "$results" | jq --raw-output '.models.gradleBuildCachePerformance.model.taskExecution | map(select(.avoidanceOutcome == "executed_cacheable")) | length')"
         
-            echo "${experiment}-results=$results" >> "$GITHUB_OUTPUT"
-            echo "${experiment}-previous-results=$previous_results" >> "$GITHUB_OUTPUT"
+            local results_file previous_results_file
+            results_file="$TEMP_DIR/${experiment}-results.json"
+            previous_results_file="$TEMP_DIR/${experiment}-previous-results.json"
+          
+            echo "$results" > "$results_file"
+            echo "${experiment}-results=$results_file" >> "$GITHUB_OUTPUT"
+          
+            echo "$previous_results" > "$previous_results_file"
+            echo "${experiment}-previous-results=$previous_results_file" >> "$GITHUB_OUTPUT"
+
             echo "${experiment}-executed-tasks=$executed_tasks" >> "$GITHUB_OUTPUT"
             echo "${experiment}-executed-cacheable-tasks=$executed_cacheable_tasks" >> "$GITHUB_OUTPUT"
           }
           
           fetch_results() {
-            local develocity_server build_scan_id
-            develocity_server="$1"
-            build_scan_id="$2"
+            local develocity_server="$1"
+            local build_scan_id="$2"
           
             curl -s \
               -H "Authorization: Bearer $DEVELOCITY_API_KEY" \
-              "$develocity_server/api/builds/$build_scan_id?models=gradle-attributes&models=gradle-build-cache-performance"
+              "$develocity_server/api/builds/$build_scan_id?models=gradle-attributes&models=gradle-build-cache-performance&models=gradle-failures"
           }
           
           fetch_previous_results() {
-            local develocity_server results project experiment_id experiment_run_id
-            develocity_server="$1"
-            results="$2"
+            local develocity_server="$1"
+            local results="$2"
           
+            local project experiment_id experiment_run_id
             project="$(echo "$results" | jq --raw-output '.models.gradleAttributes.model.rootProjectName')"
             experiment_id="$(echo "$results" | jq --raw-output '.models.gradleAttributes.model.values[] | select(.name == "Experiment id").value')"
             experiment_run_id="$(echo "$results" | jq --raw-output '.models.gradleAttributes.model.values[] | select(.name == "Experiment run id").value')"
           
             curl -s \
               -H "Authorization: Bearer $DEVELOCITY_API_KEY" \
-              "$develocity_server/api/builds?reverse=true&maxBuilds=1&models=gradle-attributes&models=gradle-build-cache-performance&query=project%3A%22${project}%22%20tag%3A%22${experiment_id}%22%20-value%3A%22Experiment%20run%20id%3D${experiment_run_id}%22"
+              "$develocity_server/api/builds?reverse=true&maxBuilds=1&models=gradle-attributes&models=gradle-build-cache-performance&models=gradle-failures&query=project%3A%22${project}%22%20tag%3A%22${experiment_id}%22%20-value%3A%22Experiment%20run%20id%3D${experiment_run_id}%22"
           }
           
           capture_results exp1 "$BUILD_SCAN_EXP1"
@@ -91,11 +104,12 @@ jobs:
           capture_results exp3 "$BUILD_SCAN_EXP3"
       - name: Summarize experiment 1 results
         id: summarize-exp1
-        if: steps.fetch-results.outputs.exp1-executed-tasks != '0' && inputs.buildScanExperiment1 != null
-        uses: google-github-actions/run-gemini-cli@v0.1.13
-        with:
-          gemini_api_key: ${{ secrets.geminiApiKey }}
-          prompt: |
+        env:
+          EXP1_RESULTS: ${{ steps.fetch-results.outputs.exp1-results }}
+          EXP1_EXECUTED_TASKS: ${{ steps.fetch-results.outputs.exp1-executed-tasks }}
+          GEMINI_API_KEY: ${{ secrets.geminiApiKey }}
+          TEMP_DIR: ${{ runner.temp }}
+          PROMPT: |
             ### Persona
             
             You are a Develocity Solutions Engineer, an expert specializing in build performance optimization for Gradle and Maven.
@@ -125,8 +139,8 @@ jobs:
             
             Your report must:
             
-            1. Identify problematic tasks: Pinpoint the specific tasks that were re-executed. Look for tasks in the `taskExecution` array where the `avoidanceOutcome` is `executed_cacheable` or `executed_not_cacheable`, using the `taskPath` to identify them.
-            2. Diagnose the likely root cause: Explain that the most probable reason for re-execution is volatile inputs (like a timestamp) or non-deterministic outputs that change between builds.
+            1. Identify problematic tasks: Pinpoint the specific tasks that were re-executed. Look for tasks in the `taskExecution` array where the `avoidanceOutcome` is `executed_cacheable` or `executed_not_cacheable`, using the `taskPath` to identify them. If one of the tasks failed, write `(Failed)` after the task name. 
+            2. Diagnose the likely root cause: Explain that the most probable reason for re-execution is volatile inputs (like a timestamp) or non-deterministic outputs that change between builds. If a particular task failed, explain that it may have also failed in the first build, which would be the reason the task re-ran in the second build, not a build caching issue. 
             3. Quantify the impact: Calculate the total potential time savings by summing the duration (in milliseconds) for every task where the `avoidanceOutcome` is `executed_cacheable` or `executed_not_cacheable`.
             4. Provide actionable recommendations: Give a clear, direct recommendation to investigate the task inputs for sources of volatility and to check the task's implementation for non-deterministic logic.
             
@@ -201,21 +215,46 @@ jobs:
             
             You should investigate the inputs for the listed tasks to identify any sources of volatility, such as timestamps or dynamically generated content that is not stable. Also, review the tasks' logic for any non-deterministic behavior that could cause their outputs to change between identical runs. Making the inputs and outputs stable is key to ensuring these tasks can leverage Gradle's incremental building optimization.
             ```
-            
-            ---
-            
-            Now, analyze the following build data and generate the report as instructed:
-            
-            ```
-            ${{ steps.fetch-results.outputs.exp1-results }}
-            ```
+        run: |
+          build_prompt() {
+            cat << EOF
+          $PROMPT
+          ---
+          
+          Now, analyze the following build data and generate the report as instructed:
+
+          \`\`\`
+          $(cat "$EXP1_RESULTS")
+          \`\`\`
+          EOF
+          }
+          
+          if [[ -z "$EXP1_RESULTS" ]]; then
+            summary="This experiment didn't yield any results. The job may have failed."
+            outcome="failed"
+          elif [[ "$EXP1_EXECUTED_TASKS" == "0" ]]; then
+            summary="This experiment completed successfully, so no summary was generated."
+            outcome="successful_no_findings"
+          else
+            echo "$(build_prompt)"
+            summary="$(build_prompt | gemini)"
+            outcome="successful_with_findings"
+          fi
+          
+          summary_file="$TEMP_DIR/exp1-summary.md"
+          echo "$summary"
+          echo "$summary" > "$summary_file"
+          echo "summary=$summary_file" >> "$GITHUB_OUTPUT"
+          echo "outcome=$outcome" >> "$GITHUB_OUTPUT"
       - name: Summarize experiment 2 results
         id: summarize-exp2
-        if: steps.fetch-results.outputs.exp2-executed-cacheable-tasks != '0' && inputs.buildScanExperiment2 != null
-        uses: google-github-actions/run-gemini-cli@v0.1.13
-        with:
-          gemini_api_key: ${{ secrets.geminiApiKey }}
-          prompt: |
+        env:
+          EXP2_EXECUTED_CACHEABLE_TASKS: ${{ steps.fetch-results.outputs.exp2-executed-cacheable-tasks }}
+          EXP2_RESULTS: ${{ steps.fetch-results.outputs.exp2-results }}
+          EXP3_RESULTS: ${{ steps.fetch-results.outputs.exp3-results }}
+          GEMINI_API_KEY: ${{ secrets.geminiApiKey }}
+          TEMP_DIR: ${{ runner.temp }}
+          PROMPT: |
             ### Persona
             
             You are a Develocity Solutions Engineer, an expert specializing in build performance optimization for Gradle and Maven.
@@ -248,8 +287,8 @@ jobs:
             
             Your report must:
             
-            1. Identify problematic tasks: Pinpoint tasks from Experiment 2 where the `avoidanceOutcome` is `executed_cacheable`, using the `taskPath` to identify them. Do not analyze tasks with other outcomes.
-            2. Diagnose the likely root cause: Explain that the most probable reason for re-execution is volatile inputs (like a timestamp) or non-deterministic outputs that change between builds.
+            1. Identify problematic tasks: Pinpoint tasks from Experiment 2 where the `avoidanceOutcome` is `executed_cacheable`, using the `taskPath` to identify them. Do not analyze tasks with other outcomes. If one of the tasks failed, write `(Failed)` after the task name. 
+            2. Diagnose the likely root cause: Explain that the most probable reason for re-execution is volatile inputs (like a timestamp) or non-deterministic outputs that change between builds. If a particular task failed, explain that it may have also failed in the first build, which would be the reason the task re-ran in the second build, not a build caching issue.
             3. Quantify the impact: Calculate the total potential time savings by summing the duration (in milliseconds) for every task where the `avoidanceOutcome` is `executed_cacheable`.
             4. Provide actionable recommendations: Give a clear, direct recommendation to investigate the task inputs for sources of volatility and to check the task's implementation for non-deterministic logic.
             
@@ -338,30 +377,55 @@ jobs:
             
             #### Recommendation
             
-            You should investigate the inputs for the listed tasks. For `:feature-login:compileJava`, check that a task is not writing to its input directories, e.g., `src/main/java`. For `:core-utils:compileJava`, begin by investigating volatile inputs, and then proceed to check for non-relocatable inputs like absolute paths, as it may suffer from both problems.          ```
-  
-            ---
-            
-            Now, analyze the following build data and generate the report as instructed:
-            
-            Experiment 2 results:
-            
+            You should investigate the inputs for the listed tasks. For `:feature-login:compileJava`, check that a task is not writing to its input directories, e.g., `src/main/java`. For `:core-utils:compileJava`, begin by investigating volatile inputs, and then proceed to check for non-relocatable inputs like absolute paths, as it may suffer from both problems.
             ```
-            ${{ steps.fetch-results.outputs.exp2-results }}
-            ```
+        run: |
+          build_prompt() {
+            cat << EOF
+          $PROMPT
+          ---
+          
+          Now, analyze the following build data and generate the report as instructed:
+          
+          Experiment 2 results:
+          \`\`\`
+          $(cat "$EXP2_RESULTS")
+          \`\`\`
+          
+          Experiment 3 results (for additional context):
+          \`\`\`
+          $(cat "$EXP3_RESULTS")
+          \`\`\`
+          EOF
+          }
             
-            Experiment 3 results (for additional context):
-            
-            ```
-            ${{ steps.fetch-results.outputs.exp3-results }}
-            ```
+          if [[ -z "$EXP2_RESULTS" ]]; then
+            summary="This experiment didn't yield any results. The job may have failed."
+            outcome="failed"
+          elif [[ "$EXP2_EXECUTED_CACHEABLE_TASKS" == "0" ]]; then
+            summary="This experiment completed successfully, so no summary was generated."
+            outcome="successful_no_findings"
+          else
+            echo "$(build_prompt)"
+            summary="$(build_prompt | gemini)"
+            outcome="successful_with_findings"
+          fi
+          
+          summary_file="$TEMP_DIR/exp2-summary.md"
+          echo "$summary"
+          echo "$summary" > "$summary_file"
+          echo "summary=$summary_file" >> "$GITHUB_OUTPUT"
+          echo "outcome=$outcome" >> "$GITHUB_OUTPUT"
       - name: Summarize experiment 3 results
         id: summarize-exp3
-        uses: google-github-actions/run-gemini-cli@v0.1.13
-        if: steps.fetch-results.outputs.exp3-executed-cacheable-tasks != '0' && inputs.buildScanExperiment3 != null
-        with:
-          gemini_api_key: ${{ secrets.geminiApiKey }}
-          prompt: |
+        env:
+          EXP2_RESULTS: ${{ steps.fetch-results.outputs.exp2-results }}
+          EXP3_EXECUTED_CACHEABLE_TASKS: ${{ steps.fetch-results.outputs.exp3-executed-cacheable-tasks }}
+          EXP3_PREVIOUS_RESULTS: ${{ steps.fetch-results.outputs.exp3-previous-results }}
+          EXP3_RESULTS: ${{ steps.fetch-results.outputs.exp3-results }}
+          GEMINI_API_KEY: ${{ secrets.geminiApiKey }}
+          TEMP_DIR: ${{ runner.temp }}
+          PROMPT: |
             ### Persona
             
             You are a Develocity Solutions Engineer, an expert specializing in build performance optimization for Gradle.
@@ -395,8 +459,8 @@ jobs:
   
             Your task is to analyze the provided JSON from the current Experiment 3, using the other results as context. Your report must:
   
-            - Identify problematic tasks: Pinpoint tasks from the current Experiment 3 where the `avoidanceOutcome` is `executed_cacheable`, using the `taskPath` to identify them. Do not analyze tasks with other outcomes.
-            - Diagnose the likely root cause: For each problematic task, use the full cross-experiment logic to determine the most probable cause. Differentiate between regressions, non-relocatable tasks, and those with ambiguous failures.
+            - Identify problematic tasks: Pinpoint tasks from the current Experiment 3 where the `avoidanceOutcome` is `executed_cacheable`, using the `taskPath` to identify them. Do not analyze tasks with other outcomes. If one of the tasks failed, write `(Failed)` after the task name. 
+            - Diagnose the likely root cause: For each problematic task, use the full cross-experiment logic to determine the most probable cause. Differentiate between regressions, non-relocatable tasks, and those with ambiguous failures. If a particular task failed, explain that it may have also failed in the first build, which would be the reason the task re-ran in the second build, not a build caching issue.
             - Quantify the impact: Calculate the total potential time savings by summing the `duration` (in milliseconds) for every task that was `executed_cacheable` in the current Experiment 3.
             - Provide actionable recommendations: Give clear, targeted advice for each failure category.
   
@@ -508,65 +572,63 @@ jobs:
             
             You should investigate the inputs for all three tasks. For the regression in `:shared-ui:compileJava`, focus on recent code changes to identify the cause. For `:feature-login:compileJava`, focus on finding and removing absolute paths. For `:core-utils:compileJava`, the investigation is broader; you should check for both non-relocatable inputs and sources of volatility.
             ```
-            
-            ---
-            
-            Now, analyze the following build data and generate the report as instructed:
-            
-            Experiment 3 results:
-            
-            ```
-            ${{ steps.fetch-results.outputs.exp3-results }}
-            ```
-            
-            Previous Experiment 3 results (for additional context):
-            
-            ```
-            ${{ steps.fetch-results.outputs.exp3-previous-results }}
-            ```
-            
-            Experiment 2 results (for additional context):
-            
-            ```
-            ${{ steps.fetch-results.outputs.exp2-results }}
-            ```
-      - name: Process summaries
-        id: process-summaries
-        env:
-          EXP1_SUMMARY: ${{ steps.summarize-exp1.outputs.summary }}
-          EXP1_EXECUTED_TASKS: ${{ steps.fetch-results.outputs.exp1-executed-tasks }}
-          EXP2_SUMMARY: ${{ steps.summarize-exp2.outputs.summary }}
-          EXP2_EXECUTED_TASKS: ${{ steps.fetch-results.outputs.exp2-executed-cacheable-tasks }}
-          EXP3_SUMMARY: ${{ steps.summarize-exp3.outputs.summary }}
-          EXP3_EXECUTED_TASKS: ${{ steps.fetch-results.outputs.exp3-executed-cacheable-tasks }}
         run: |
-          process_summary() {
-            local experiment="$1"
-            local summary="$2"
-            local executed_tasks="$3"
+          build_prompt() {
+            cat << EOF
+          $PROMPT
+          ---
           
-            if [[ -n "$summary" ]]; then
-              echo "${experiment}-summary=$summary" >> "$GITHUB_OUTPUT"
-            elif [[ "$executed_tasks" == "0" ]]; then
-              echo "${experiment}-summary=This experiment completed successfully, so no summary was generated." >> "$GITHUB_OUTPUT"
-            else
-              echo "${experiment}-summary=This experiment didn't yield any results. The job may have failed." >> "$GITHUB_OUTPUT"
-            fi
+          Now, analyze the following build data and generate the report as instructed:
+          
+          Experiment 3 results:
+          
+          \`\`\`
+          $(cat "$EXP3_RESULTS")
+          \`\`\`
+          
+          Previous Experiment 3 results (for additional context):
+          
+          \`\`\`
+          $(cat "$EXP3_PREVIOUS_RESULTS")
+          \`\`\`
+          
+          Experiment 2 results (for additional context):
+          
+          \`\`\`
+          $(cat "$EXP2_RESULTS")
+          \`\`\`
+          EOF
           }
           
-          process_summary exp1 "$EXP1_SUMMARY" "$EXP1_EXECUTED_TASKS"
-          process_summary exp2 "$EXP2_SUMMARY" "$EXP2_EXECUTED_TASKS"
-          process_summary exp3 "$EXP3_SUMMARY" "$EXP3_EXECUTED_TASKS"
-      - name: Summarize all findings
-        id: summarize-all
-        uses: google-github-actions/run-gemini-cli@v0.1.13
-        if: |
-          (steps.fetch-results.outputs.exp1-executed-tasks != '0' && inputs.buildScanExperiment1 != null) ||
-          (steps.fetch-results.outputs.exp2-executed-cacheable-tasks != '0' && inputs.buildScanExperiment2 != null) ||
-          (steps.fetch-results.outputs.exp3-executed-cacheable-tasks != '0' && inputs.buildScanExperiment3 != null)
-        with:
-          gemini_api_key: ${{ secrets.geminiApiKey }}
-          prompt: |
+          if [[ -z "$EXP3_RESULTS" ]]; then
+            summary="This experiment didn't yield any results. The job may have failed."
+            outcome="failed"
+          elif [[ "$EXP3_EXECUTED_CACHEABLE_TASKS" == "0" ]]; then
+            summary="This experiment completed successfully, so no summary was generated."
+            outcome="successful_no_findings"
+          else
+            echo "$(build_prompt)"
+            summary="$(build_prompt | gemini)"
+            outcome="successful_with_findings"
+          fi
+          
+          echo "$summary"
+          summary_file="$TEMP_DIR/exp3-summary.md"
+          echo "$summary" > "$summary_file"
+          echo "summary=$summary_file" >> "$GITHUB_OUTPUT"
+          echo "outcome=$outcome" >> "$GITHUB_OUTPUT"
+      - name: Summarize all experiment findings
+        id: summarize-exps
+        env:
+          EXP1_OUTCOME: ${{ steps.summarize-exp1.outputs.outcome }}
+          EXP1_SUMMARY: ${{ steps.summarize-exp1.outputs.summary }}
+          EXP2_OUTCOME: ${{ steps.summarize-exp2.outputs.outcome }}
+          EXP2_SUMMARY: ${{ steps.summarize-exp2.outputs.summary }}
+          EXP3_OUTCOME: ${{ steps.summarize-exp3.outputs.outcome }}
+          EXP3_SUMMARY: ${{ steps.summarize-exp3.outputs.summary }}
+          GEMINI_API_KEY: ${{ secrets.geminiApiKey }}
+          TEMP_DIR: ${{ runner.temp }}
+          PROMPT: |
             ### Persona
             
             You are a Develocity Solutions Engineer, an expert specializing in build performance optimization.
@@ -671,60 +733,75 @@ jobs:
             
             The top priority should be a thorough investigation of the `:core-utils:compileJava` and `:feature-login:compileJava` tasks. Begin by addressing the volatile inputs identified in Experiment 1 and 2, as these issues often require more in-depth code changes. Afterward, address the non-relocatable inputs identified by Experiment 3 ensuring all file paths are relative. Fixing these core tasks will have the most significant impact on build performance and reliability.
             ```
-            
-            ---
-            
-            Now, analyze the following summaries and generate the report as instructed:
-            
-            Experiment 1 analysis:
-            
-            ```
-            ${{ steps.summarize-exp1.outputs.summary }}
-            
-            Experiment 2 analysis:
-            
-            ```
-            ${{ steps.summarize-exp2.outputs.summary }}
-            ```
-            
-            Experiment 3 analysis:
-            
-            ```
-            ${{ steps.summarize-exp3.outputs.summary }}
-            ```
-      - name: Write summary
-        env:
-          WORKFLOW_NAME: ${{ github.workflow }}
-          SUMMARY_FILE: ${{ runner.temp }}/experiments-summary.md
-          EXP1_SUMMARY: ${{ steps.process-summaries.outputs.exp1-summary }}
-          EXP2_SUMMARY: ${{ steps.process-summaries.outputs.exp2-summary }}
-          EXP3_SUMMARY: ${{ steps.process-summaries.outputs.exp3-summary }}
-          FINDINGS_SUMMARY: ${{ steps.summarize-all.outputs.summary }}
         run: |
-          echo "# $WORKFLOW_NAME Experiments Summary" >> $SUMMARY_FILE
+          build_prompt() {
+            cat << EOF
+          $PROMPT
+          ---
           
-          echo "## Experiment 1" >> $SUMMARY_FILE
-          echo "$EXP1_SUMMARY" >> $SUMMARY_FILE
+          Now, analyze the following summaries and generate the report as instructed:
           
-          echo "## Experiment 2" >> $SUMMARY_FILE
-          echo "$EXP2_SUMMARY" >> $SUMMARY_FILE
+          Experiment 1 summary:
           
-          echo "## Experiment 3" >> $SUMMARY_FILE
-          echo "$EXP3_SUMMARY" >> $SUMMARY_FILE
+          \`\`\`
+          $(cat "$EXP1_SUMMARY")
+          \`\`\`
           
-          echo "## Conclusion" >> $SUMMARY_FILE
+          Experiment 2 summary:
           
-          if [[ -n "$FINDINGS_SUMMARY" ]]; then
-            echo "$FINDINGS_SUMMARY" >> $SUMMARY_FILE
+          \`\`\`
+          $(cat "$EXP2_SUMMARY")
+          \`\`\`
+          
+          Experiment 3 summary:
+          
+          \`\`\`
+          $(cat "$EXP3_SUMMARY")
+          \`\`\`
+          EOF
+          }
+            
+          if [[ "$EXP1_OUTCOME" == "successful_with_findings" ||
+                "$EXP2_OUTCOME" == "successful_with_findings" ||
+                "$EXP3_OUTCOME" == "successful_with_findings" ]]; then
+            echo "$(build_prompt)"
+            summary="$(build_prompt | gemini)"
           else
-            echo "All experiments completed successfully, so no conclusion was generated." >> $SUMMARY_FILE
+            summary="There were no findings, so no conclusion was generated."
           fi
           
-          echo "$FINDINGS_SUMMARY" >> $SUMMARY_FILE
+          summary_file="$TEMP_DIR/exps-summary.md"
+          echo "$summary"
+          echo "$summary" > "$summary_file"
+          echo "summary=$summary_file" >> "$GITHUB_OUTPUT"
+      - name: Write final summary
+        env:
+          EXP1_SUMMARY: ${{ steps.summarize-exp1.outputs.summary }}
+          EXP2_SUMMARY: ${{ steps.summarize-exp2.outputs.summary }}
+          EXP3_SUMMARY: ${{ steps.summarize-exp3.outputs.summary }}
+          EXPS_SUMMARY: ${{ steps.summarize-exps.outputs.summary }}
+          TEMP_DIR: ${{ runner.temp }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+        run: |
+          summary_file="$TEMP_DIR/summary.md"
           
-          cat $SUMMARY_FILE >> $GITHUB_STEP_SUMMARY
+          echo "# Experiments Summary for $WORKFLOW_NAME" >> "$summary_file"
+          
+          echo "## Experiment 1" >> "$summary_file"
+          cat "$EXP1_SUMMARY" >> "$summary_file"
+          
+          echo "## Experiment 2" >> "$summary_file"
+          cat "$EXP2_SUMMARY" >> "$summary_file"
+          
+          echo "## Experiment 3" >> "$summary_file"
+          cat "$EXP3_SUMMARY" >> "$summary_file"
+          
+          echo "## Conclusion" >> "$summary_file"
+          cat "$EXPS_SUMMARY" >> "$summary_file"
+          
+          cat "$summary_file" >> $GITHUB_STEP_SUMMARY
       - name: Archive summary
         uses: actions/upload-artifact@v4
         with:
           name: experiments-summary
-          path: ${{ runner.temp }}/experiments-summary.md
+          path: ${{ runner.temp }}/summary.md

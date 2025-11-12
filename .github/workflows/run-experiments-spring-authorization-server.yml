@@ -85,4 +85,4 @@ jobs:
     secrets:
       develocityApiKey: ${{ secrets.DV_SOLUTIONS_API_KEY }}
       geminiApiKey: ${{ secrets.GEMINI_API_KEY }}
-    if: always()
+    if: ${{ !cancelled() }}
