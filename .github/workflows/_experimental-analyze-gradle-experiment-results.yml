@@ -801,7 +801,7 @@ jobs:
           
           cat "$summary_file" >> $GITHUB_STEP_SUMMARY
       - name: Archive summary
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: experiments-summary
           path: ${{ runner.temp }}/summary.md
