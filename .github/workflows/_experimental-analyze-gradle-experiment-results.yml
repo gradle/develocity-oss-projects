@@ -52,11 +52,16 @@ jobs:
               return
             fi
           
-            local develocity_server build_scan_id results previous_results
+            local develocity_server build_scan_id results failures previous_results previous_failures
             develocity_server="$(echo "$build_scan_url" | cut -d'/' -f1,2,3)"
+          
             build_scan_id="$(echo "$build_scan_url" | rev | cut -d'/' -f1 | rev)"
             results="$(fetch_results "$develocity_server" "$build_scan_id")"
-            previous_results="$(fetch_previous_results "$develocity_server" "$results")"
+            failures="$(fetch_failures "$develocity_server" "$build_scan_id")"
+          
+            previous_results="$(fetch_previous_results "$develocity_server" "$results" | jq --raw-output '.[0]')"
+            previous_build_scan_id="$(echo "$previous_results" | jq --raw-output '.id')"
+            previous_failures="$(fetch_failures "$develocity_server" "$previous_build_scan_id")"
           
             local executed_tasks executed_cacheable_tasks
             executed_tasks="$(echo "$results" | jq --raw-output '.models.gradleBuildCachePerformance.model.taskExecution | map(select(.avoidanceOutcome == "executed_cacheable" or .avoidanceOutcome == "executed_not_cacheable")) | length')"
@@ -64,12 +69,16 @@ jobs:
         
             local results_file previous_results_file
             results_file="$TEMP_DIR/${experiment}-results.json"
+            failures_file="$TEMP_DIR/${experiment}-failures.json"
             previous_results_file="$TEMP_DIR/${experiment}-previous-results.json"
+            previous_failures_file="$TEMP_DIR/${experiment}-previous-failures.json"
           
             echo "$results" > "$results_file"
+            echo "$failures" >> "$results_file"
             echo "${experiment}-results=$results_file" >> "$GITHUB_OUTPUT"
           
             echo "$previous_results" > "$previous_results_file"
+            echo "$previous_failures" >> "$previous_results_file"
             echo "${experiment}-previous-results=$previous_results_file" >> "$GITHUB_OUTPUT"
 
             echo "${experiment}-executed-tasks=$executed_tasks" >> "$GITHUB_OUTPUT"
@@ -82,7 +91,7 @@ jobs:
           
             curl -s \
               -H "Authorization: Bearer $DEVELOCITY_API_KEY" \
-              "$develocity_server/api/builds/$build_scan_id?models=gradle-attributes&models=gradle-build-cache-performance&models=gradle-failures"
+              "$develocity_server/api/builds/$build_scan_id?models=gradle-attributes&models=gradle-build-cache-performance"
           }
           
           fetch_previous_results() {
@@ -96,7 +105,16 @@ jobs:
           
             curl -s \
               -H "Authorization: Bearer $DEVELOCITY_API_KEY" \
-              "$develocity_server/api/builds?reverse=true&maxBuilds=1&models=gradle-attributes&models=gradle-build-cache-performance&models=gradle-failures&query=project%3A%22${project}%22%20tag%3A%22${experiment_id}%22%20-value%3A%22Experiment%20run%20id%3D${experiment_run_id}%22"
+              "$develocity_server/api/builds?reverse=true&maxBuilds=1&models=gradle-attributes&models=gradle-build-cache-performance&query=project%3A%22${project}%22%20tag%3A%22${experiment_id}%22%20-value%3A%22Experiment%20run%20id%3D${experiment_run_id}%22"
+          }
+          
+          fetch_failures() {
+            local develocity_server="$1"
+            local build_scan_id="$2"
+          
+            curl -s \
+              -H "Authorization: Bearer $DEVELOCITY_API_KEY" \
+              "$develocity_server/api/failures/builds/$build_scan_id"
           }
           
           capture_results exp1 "$BUILD_SCAN_EXP1"
@@ -237,7 +255,7 @@ jobs:
             outcome="successful_no_findings"
           else
             echo "$(build_prompt)"
-            summary="$(build_prompt | gemini)"
+            summary="$(build_prompt | gemini --model gemini-2.5-flash)"
             outcome="successful_with_findings"
           fi
           
@@ -407,7 +425,7 @@ jobs:
             outcome="successful_no_findings"
           else
             echo "$(build_prompt)"
-            summary="$(build_prompt | gemini)"
+            summary="$(build_prompt | gemini --model gemini-2.5-flash)"
             outcome="successful_with_findings"
           fi
           
@@ -608,7 +626,7 @@ jobs:
             outcome="successful_no_findings"
           else
             echo "$(build_prompt)"
-            summary="$(build_prompt | gemini)"
+            summary="$(build_prompt | gemini --model gemini-2.5-flash)"
             outcome="successful_with_findings"
           fi
           
@@ -765,7 +783,7 @@ jobs:
                 "$EXP2_OUTCOME" == "successful_with_findings" ||
                 "$EXP3_OUTCOME" == "successful_with_findings" ]]; then
             echo "$(build_prompt)"
-            summary="$(build_prompt | gemini)"
+            summary="$(build_prompt | gemini --model gemini-2.5-flash)"
           else
             summary="There were no findings, so no conclusion was generated."
           fi
