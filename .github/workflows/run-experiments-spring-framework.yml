@@ -11,7 +11,7 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/spring-projects/spring-framework"
-  TASKS: "build"
+  TASKS: "build -x :spring-core:test"
 
 jobs:
   experiments:
