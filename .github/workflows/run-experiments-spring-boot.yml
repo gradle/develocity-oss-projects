@@ -47,6 +47,7 @@ jobs:
         run: |
           mkdir ~/git-hooks
           echo -e 'echo "\nallprojects { tasks.withType(Test).configureEach { ignoreFailures = true } }" >> build.gradle\n' >> ~/git-hooks/post-checkout
+          echo -e 'echo "\nsubprojects { tasks.withType(dev.detekt.gradle.Detekt).configureEach { outputs.doNotCacheIf(\"Detekt is not cache relocatable due to https://github.com/detekt/detekt/issues/7170\") { true } } }" >> build.gradle\n' > ~/git-hooks/post-checkout         
           chmod +x ~/git-hooks/post-checkout
           git config --global core.hooksPath ~/git-hooks
       - name: Run experiment 1
