@@ -32,19 +32,6 @@ jobs:
         with:
           java-version: 21
           distribution: "temurin"
-      - name: Resolve latest Micronaut Spring release tag
-        id: resolve-release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          tag="$(gh api repos/micronaut-projects/micronaut-spring/releases \
-            --jq '[.[] | select(.draft == false and .prerelease == false)] | sort_by(.published_at) | reverse | .[0].tag_name')"
-          if [[ "${tag:-null}" != "null" ]]; then
-            echo "tag=${tag}" >> "$GITHUB_OUTPUT"
-          else
-            echo "Unable to resolve latest released tag for micronaut-spring" >&2
-            exit 1
-          fi
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
@@ -57,7 +44,6 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ steps.resolve-release.outputs.tag }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
@@ -68,7 +54,6 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ steps.resolve-release.outputs.tag }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
@@ -80,7 +65,6 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ steps.resolve-release.outputs.tag }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
