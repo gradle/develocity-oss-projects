@@ -36,6 +36,12 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
         uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
+      - name: Ignore cache misses on known issues
+        run: |
+          mkdir ~/git-hooks
+          echo -e 'echo "\nbuildCache.registerMojoMetadataProvider(context -> { if(context.getProject().getArtifactId().equals(\"openapi-generator-mill-plugin\")) { context.withPlugin(\"maven-surefire-plugin\",() -> context.outputs(outputs -> outputs.notCacheableBecause(\"https://github.com/OpenAPITools/openapi-generator/issues/23110\")))}})" >> .mvn/develocity-custom-user-data.groovy\n' > ~/git-hooks/post-checkout         
+          chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/maven/experiment-1@actions-stable
         env:
