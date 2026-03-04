@@ -53,6 +53,10 @@ jobs:
           echo -e 'echo "\nallprojects { tasks.withType(Test::class).configureEach { ignoreFailures = true } }" >> build.gradle.kts\n' >> ~/git-hooks/post-checkout
           chmod +x ~/git-hooks/post-checkout
           git config --global core.hooksPath ~/git-hooks
+      - name: Add git hook to temporarily disable caching for AnalyzeDependenciesTask and CompileJavaccTask tasks
+        run: |
+          echo -e 'echo "\nallprojects { tasks.withType(ca.cutterslade.gradle.analyze.AnalyzeDependenciesTask::class).configureEach { outputs.doNotCacheIf(\"AnalyzeDependenciesTask is not cacheable\") { true } } }" >> build.gradle.kts\n' >> ~/git-hooks/post-checkout
+          echo -e 'echo "\nallprojects { tasks.withType(org.javacc.plugin.gradle.javacc.CompileJavaccTask::class).configureEach { outputs.doNotCacheIf(\"CompileJavaccTask is not cacheable\") { true } } }" >> build.gradle.kts\n' >> ~/git-hooks/post-checkout
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
