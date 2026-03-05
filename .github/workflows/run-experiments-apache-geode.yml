@@ -12,7 +12,7 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/ribafish/apache-geode"
   GIT_BRANCH: "gk/fix-cache-relocatability"
-  TASKS: "test integrationTest"
+  TASKS: "test integrationTest -x :geode-core:integrationTest -x :geode-assembly:integrationTest -x :geode-gfsh:integrationTest -x :geode-lucene:integrationTest"
 
 jobs:
   Experiment:
