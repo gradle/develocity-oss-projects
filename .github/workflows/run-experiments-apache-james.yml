@@ -21,7 +21,8 @@ jobs:
         experimentId: [1, 2]
         goals:
           - "install -DskipTests -Djib.skip -T1C"
-          - "test -P ci-test -Dassembly.skipAssembly=true"
+          # Run a subsection of all tests, as the full build is too big for the basic ubuntu runner.
+          - "test -pl server/data/data-memory,server/task/task-memory,server/protocols/jmap-rfc-8621/jmap-rfc-8621-memory -Dassembly.skipAssembly=true"
 
     runs-on: ubuntu-latest
     steps:
