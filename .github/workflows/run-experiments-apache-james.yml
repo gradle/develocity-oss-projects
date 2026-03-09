@@ -11,7 +11,6 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/james-project"
-  GOALS: "verify"
   ARGS: "-B -Dmaven.test.failure.ignore=true"
 
 jobs:
@@ -19,9 +18,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - experimentId: 1
-          - experimentId: 2
+        experimentId: [1, 2]
+        goals:
+          - "install -DskipTests -Djib.skip -T1C"
+          # Run a subsection of all tests, as the full build is too big for the basic ubuntu runner.
+          - "test -pl server/data/data-memory,server/task/task-memory -Dassembly.skipAssembly=true"
+
     runs-on: ubuntu-latest
     steps:
       - name: Free disk space
@@ -44,7 +46,7 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          goals: ${{ env.GOALS }}
+          goals: ${{ matrix.goals }}
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
@@ -55,7 +57,7 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          goals: ${{ env.GOALS }}
+          goals: ${{ matrix.goals }}
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
