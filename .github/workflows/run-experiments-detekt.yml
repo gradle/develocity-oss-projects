@@ -35,6 +35,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
         uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
+      - name: Disable caching for Detekt tasks (basePath is not cache relocatable)
+        # https://github.com/detekt/detekt/issues/7170
+        run: |
+          mkdir ~/git-hooks
+          echo -e 'echo "\nsubprojects { tasks.withType(dev.detekt.gradle.Detekt).configureEach { outputs.doNotCacheIf(\"Detekt is not cache relocatable due to https://github.com/detekt/detekt/issues/7170\") { true } } }" >> build.gradle\n' > ~/git-hooks/post-checkout
+          chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
