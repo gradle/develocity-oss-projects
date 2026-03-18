@@ -11,7 +11,7 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/micronaut-projects/micronaut-aws"
-  TASKS: "check"
+  TASKS: "check -x japiCmp"
 
 jobs:
   Experiment:
