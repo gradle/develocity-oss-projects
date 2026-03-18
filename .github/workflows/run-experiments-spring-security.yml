@@ -41,6 +41,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
         uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
+      - name: Disable caching for checkstyleNohttp (source set picks up build outputs)
+        # Upstream fix: https://github.com/spring-projects/spring-security/pull/18928
+        run: |
+          mkdir ~/git-hooks
+          echo -e 'echo "\ntasks.matching { it.name == \"checkstyleNohttp\" }.configureEach { outputs.doNotCacheIf(\"checkstyleNohttp source set includes build output directories\") { true } }" >> build.gradle\n' > ~/git-hooks/post-checkout
+          chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
       - name: Run experiment 1
         id: run-exp1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
