@@ -29,6 +29,28 @@ jobs:
         with:
           java-version: 21
           distribution: "temurin"
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v7
+      - name: Add git hook to exclude failing rewrite-kotlin test
+        run: |
+          mkdir ~/git-hooks
+          cat > ~/git-hooks/post-checkout << 'HOOK'
+          #!/bin/bash
+          # BinaryTest.deeplyNestedStringConcatenation hits StackOverflowError parsing 355+ line
+          # string concatenation — deterministic upstream Kotlin parser bug.
+          cat >> build.gradle << 'GRADLE'
+
+          project(':rewrite-kotlin') {
+              tasks.named('test') {
+                  filter {
+                      excludeTestsMatching 'org.openrewrite.kotlin.tree.BinaryTest.deeplyNestedStringConcatenation'
+                  }
+              }
+          }
+          GRADLE
+          HOOK
+          chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
