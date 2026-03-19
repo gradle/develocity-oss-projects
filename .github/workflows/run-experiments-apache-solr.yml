@@ -12,7 +12,8 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/solr"
   TASKS: "check integrationTests"
-  ARGS: "-x validateJarChecksums -Ptests.seed=3466BEBDD5AA01A0 -Pvalidation.git.failOnModified=false -Ptests.haltonfailure=false -Ptests.neverUpToDate=false"
+  # Exclude solr:ui Kotlin/WASM compilation (OOM on CI) and solr:packaging:integrationTests (BATS shell tests need Docker).
+  ARGS: "-x :solr:ui:compileDevelopmentExecutableKotlinWasmJs -x :solr:packaging:integrationTests -x validateJarChecksums -Ptests.seed=3466BEBDD5AA01A0 -Pvalidation.git.failOnModified=false -Ptests.haltonfailure=false -Ptests.neverUpToDate=false"
 
 jobs:
   Experiment:
