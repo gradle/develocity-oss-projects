@@ -35,6 +35,23 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
         uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
+      # Workaround: errorprone jar + code gen args use absolute paths, breaking cache relocatability
+      - name: Configure post-checkout hook
+        run: |
+          mkdir -p ~/git-hooks
+          cat > ~/git-hooks/post-checkout << 'HOOK'
+          echo '
+          allprojects {
+              tasks.withType<JavaCompile>().configureEach {
+                  outputs.doNotCacheIf("errorprone jar input has absolute path") { true }
+              }
+              tasks.withType<JavaExec>().configureEach {
+                  outputs.doNotCacheIf("code generation args use absolute paths") { true }
+              }
+          }
+          ' >> build.gradle.kts
+          HOOK
+          chmod +x ~/git-hooks/post-checkout
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
