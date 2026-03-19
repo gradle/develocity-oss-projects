@@ -38,10 +38,16 @@ jobs:
       - name: Disable caching for Detekt tasks (basePath is not cache relocatable)
         # https://github.com/detekt/detekt/issues/7170
         run: |
-          mkdir ~/git-hooks
-          echo -e 'echo "\nsubprojects { tasks.withType(dev.detekt.gradle.Detekt).configureEach { outputs.doNotCacheIf(\"Detekt is not cache relocatable due to https://github.com/detekt/detekt/issues/7170\") { true } } }" >> build.gradle\n' > ~/git-hooks/post-checkout
-          chmod +x ~/git-hooks/post-checkout
-          git config --global core.hooksPath ~/git-hooks
+          mkdir -p ~/.gradle/init.d
+          cat > ~/.gradle/init.d/disable-detekt-caching.gradle << 'GRADLE'
+          allprojects {
+              tasks.configureEach {
+                  if (it.class.name.contains("detekt") || it.class.name.contains("Detekt")) {
+                      outputs.doNotCacheIf("Detekt basePath is not cache relocatable (https://github.com/detekt/detekt/issues/7170)") { true }
+                  }
+              }
+          }
+          GRADLE
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
