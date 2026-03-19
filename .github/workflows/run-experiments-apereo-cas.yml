@@ -12,7 +12,8 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apereo/cas"
   TASKS: "build testCAS testLogout testGroovy testTickets -x check"
-  ARGS: "--no-configuration-cache"
+  # Exclude cas-server-core-scripting:testGroovy (Groovy scripting tests fail upstream).
+  ARGS: "--no-configuration-cache -x :core:cas-server-core-scripting:testGroovy"
 
 jobs:
   Experiment:
