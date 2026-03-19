@@ -1,6 +1,9 @@
 name: Micrometer
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-micrometer.yml'
   schedule:
     - cron: "0 22 * * 5"
   workflow_dispatch:

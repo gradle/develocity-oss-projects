@@ -1,6 +1,9 @@
 name: Apache OpenWhisk
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-apache-openwhisk.yml'
   schedule:
     - cron: "0 19 * * 5"
   workflow_dispatch:

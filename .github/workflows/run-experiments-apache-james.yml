@@ -1,6 +1,9 @@
 name: Apache James
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-apache-james.yml'
   schedule:
     - cron: "0 20 * * 4"
   workflow_dispatch:

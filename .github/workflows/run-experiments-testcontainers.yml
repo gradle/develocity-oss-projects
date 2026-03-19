@@ -1,6 +1,9 @@
 name: Testcontainers Java
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-testcontainers.yml'
   schedule:
     - cron: "0 5 * * 5"
   workflow_dispatch:

@@ -1,6 +1,9 @@
 name: Wrapper Upgrade Gradle Plugin
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-wrapper-upgrade-gradle-plugin.yml'
   schedule:
     - cron: "0 12 * * 5"
   workflow_dispatch:

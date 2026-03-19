@@ -1,6 +1,9 @@
 name: Hibernate ORM
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-hibernate-orm.yml'
   schedule:
     - cron: "0 13 * * 5"
   workflow_dispatch:

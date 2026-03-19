@@ -1,6 +1,9 @@
 name: Spring Security
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-spring-security.yml'
   schedule:
     - cron: "0 0 * * 6"
   workflow_dispatch:

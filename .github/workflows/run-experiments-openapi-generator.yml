@@ -1,6 +1,9 @@
 name: OpenAPI Generator
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-openapi-generator.yml'
   schedule:
     - cron: "0 7 * * 5"
   workflow_dispatch:

@@ -1,6 +1,9 @@
 name: Spring AMQP
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-spring-amqp.yml'
   schedule:
     - cron: "0 4 * * 4"
   workflow_dispatch:

@@ -1,6 +1,9 @@
 name: Detekt
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-detekt.yml'
   schedule:
     - cron: "0 1 * * 4"
   workflow_dispatch:

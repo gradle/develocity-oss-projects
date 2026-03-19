@@ -1,6 +1,9 @@
 name: AndroidX Biometric
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-androidx.yml'
   schedule:
     - cron: "0 8 * * 4"
   workflow_dispatch:

@@ -1,6 +1,9 @@
 name: Micronaut Starter
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-micronaut-starter.yml'
   schedule:
     - cron: "0 6 * * 5"
   workflow_dispatch:
