@@ -31,20 +31,38 @@ jobs:
           distribution: "temurin"
       - name: Set up uv
         uses: astral-sh/setup-uv@v7
-      - name: Add git hook to exclude failing rewrite-kotlin test
+      - name: Add git hook to exclude failing tests
         run: |
           mkdir ~/git-hooks
           cat > ~/git-hooks/post-checkout << 'HOOK'
           #!/bin/bash
-          # BinaryTest.deeplyNestedStringConcatenation hits StackOverflowError parsing 355+ line
-          # string concatenation — deterministic upstream Kotlin parser bug.
           # NOTE: must append to build.gradle.kts (not build.gradle) — creating build.gradle would shadow the Kotlin DSL file.
           cat >> build.gradle.kts << 'GRADLE'
 
           project(":rewrite-kotlin") {
               tasks.withType<Test>().configureEach {
                   filter {
+                      // StackOverflowError parsing 355+ line string concatenation — upstream Kotlin parser bug
                       excludeTestsMatching("org.openrewrite.kotlin.tree.BinaryTest.deeplyNestedStringConcatenation")
+                  }
+              }
+          }
+
+          project(":rewrite-gradle") {
+              tasks.withType<Test>().configureEach {
+                  filter {
+                      // NPE in GradleWrapperScriptLoader — this.resolved is null — upstream bug
+                      excludeTestsMatching("org.openrewrite.gradle.UpdateGradleWrapperTest.defaultsToLatestRelease")
+                      excludeTestsMatching("org.openrewrite.gradle.internal.GradleWrapperTest.listGradleWrappers")
+                  }
+              }
+          }
+
+          project(":rewrite-csharp") {
+              tasks.withType<Test>().configureEach {
+                  filter {
+                      // RPC timeout after 60s — upstream C# parser issue
+                      excludeTestsMatching("org.openrewrite.csharp.CSharpRecipeTest.changeMethodName")
                   }
               }
           }
