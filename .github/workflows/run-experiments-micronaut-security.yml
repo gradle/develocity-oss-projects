@@ -15,7 +15,8 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/micronaut-projects/micronaut-security"
   TASKS: "check"
-  ARGS: "-x japiCmp"
+  # Exclude japiCmp (binary compat 5.x vs 4.x) and test-suite-geb (Groovy compiler NPE in Geb implicit assertions transform).
+  ARGS: "-x japiCmp -x :test-suite-geb:compileTestGroovy"
 
 jobs:
   Experiment:
