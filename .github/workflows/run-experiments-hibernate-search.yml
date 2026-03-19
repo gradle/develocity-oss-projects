@@ -1,6 +1,9 @@
 name: Hibernate Search
 
 on:
+  push:
+    branches:
+      - gk/test-hibernate-search-upstream-fix
   schedule:
     - cron: "0 3 * * 4"
   workflow_dispatch:
@@ -10,7 +13,8 @@ permissions:
 
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/hibernate/hibernate-search"
+  GIT_REPO: "https://github.com/ribafish/hibernate-search"
+  GIT_BRANCH: "fix/build-cache-checkstyle-relocatability"
   GOALS: "install"
   ARGS: "-B -Pjqassistant -Pci-build -DskipITs"
 
@@ -41,6 +45,7 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           goals: ${{ env.GOALS }}
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
@@ -52,6 +57,7 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           goals: ${{ env.GOALS }}
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
