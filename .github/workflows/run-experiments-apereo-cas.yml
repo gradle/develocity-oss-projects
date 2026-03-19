@@ -37,6 +37,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
         uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
+      # Workaround for createOpenRewriteRecipe overlapping outputs (https://github.com/apereo/cas/pull/8649)
+      - name: Configure post-checkout hook
+        run: |
+          echo -e 'echo "\nallprojects { tasks.matching { it.name == '\''createOpenRewriteRecipe'\'' }.configureEach { outputs.cacheIf { false } } }" >> build.gradle\n' > ~/git-hooks/post-checkout
+          chmod +x ~/git-hooks/post-checkout
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
