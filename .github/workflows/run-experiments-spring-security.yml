@@ -13,8 +13,7 @@ permissions:
 
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/ribafish/spring-security"
-  GIT_BRANCH: "gk/fix-checkstyleNohttp-caching"
+  GIT_REPO: "https://github.com/spring-projects/spring-security"
   TASKS: "build"
 
 jobs:
@@ -52,7 +51,6 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
@@ -63,7 +61,6 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
@@ -75,7 +72,6 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
