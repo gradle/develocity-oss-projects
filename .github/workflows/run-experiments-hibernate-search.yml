@@ -35,6 +35,27 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
         uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
+      - name: Mark checkstyle:check as not cacheable
+        # checkstyle:check is not cache-relocatable because project resources include ${rootProject.directory}
+        # which fingerprints the entire workspace root tree including target/ dirs from previous builds.
+        # Upstream PR: https://github.com/hibernate/hibernate-search/pull/5067
+        run: |
+          mkdir ~/git-hooks
+          cat > ~/git-hooks/post-checkout << 'HOOK'
+          #!/bin/bash
+          cat >> .mvn/develocity-custom-user-data.groovy << 'GROOVY'
+
+          buildCache.registerMojoMetadataProvider(context -> {
+              context.withPlugin("maven-checkstyle-plugin", () ->
+                  context.outputs(outputs ->
+                      outputs.notCacheableBecause("checkstyle:check is not cache-relocatable: project resources include the workspace root (https://github.com/hibernate/hibernate-search/pull/5067)")
+                  )
+              )
+          })
+          GROOVY
+          HOOK
+          chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/maven/experiment-1@actions-stable
         env:
