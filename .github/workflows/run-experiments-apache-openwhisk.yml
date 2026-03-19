@@ -11,7 +11,11 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/openwhisk"
-  TASKS: ":tests:testCoverageLean :tests:reportCoverage :tests:testSwaggerCodegen"
+  # testCoverageLean: 160/163 test suites fail at init (need Docker/CouchDB/Ansible infra) — excluded.
+  # reportCoverage: depends on Ansible-generated whisk.properties — excluded.
+  # testSwaggerCodegen: pure codegen + compile, no infra needed — kept.
+  # compileScala/compileTestScala: exercises dependency resolution and Scala compilation caching.
+  TASKS: "compileScala :tests:compileTestScala :tests:testSwaggerCodegen"
 
 jobs:
   Experiment:
@@ -36,6 +40,23 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
         uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
+      - name: Disable caching for generateProto (pekko-grpc logfile_enc option contains absolute path)
+        # https://github.com/apache/pekko-grpc/pull/661
+        run: |
+          mkdir ~/git-hooks
+          cat > ~/git-hooks/post-checkout << 'HOOK'
+          #!/bin/sh
+          cat >> build.gradle << 'GRADLE'
+
+          allprojects {
+              tasks.matching { it.name == 'generateProto' }.configureEach {
+                  outputs.doNotCacheIf('pekko-grpc logfile_enc option is not cache relocatable') { true }
+              }
+          }
+          GRADLE
+          HOOK
+          chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
