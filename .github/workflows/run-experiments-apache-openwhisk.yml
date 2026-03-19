@@ -11,7 +11,11 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/openwhisk"
-  TASKS: ":tests:testCoverageLean :tests:reportCoverage :tests:testSwaggerCodegen"
+  # testCoverageLean: 160/163 test suites fail at init (need Docker/CouchDB/Ansible infra) — excluded.
+  # reportCoverage: depends on Ansible-generated whisk.properties — excluded.
+  # testSwaggerCodegen: pure codegen + compile, no infra needed — kept.
+  # compileScala/compileTestScala: exercises dependency resolution and Scala compilation caching.
+  TASKS: "compileScala :tests:compileTestScala :tests:testSwaggerCodegen"
 
 jobs:
   Experiment:
@@ -29,25 +33,6 @@ jobs:
         with:
           java-version: 11
           distribution: "temurin"
-      - name: Add git hook to ignore test failures from infrastructure-dependent tests
-        run: |
-          mkdir ~/git-hooks
-          cat > ~/git-hooks/post-checkout << 'HOOK'
-          #!/bin/bash
-          # Most test suites require Docker/CouchDB/Ansible infrastructure that is not available.
-          # 216 tests pass (pure unit tests), 160 suites fail at initialization.
-          # Use ignoreFailures so passing tests still exercise caching.
-          cat >> build.gradle << 'GRADLE'
-
-          allprojects {
-              tasks.withType(Test).configureEach {
-                  ignoreFailures = true
-              }
-          }
-          GRADLE
-          HOOK
-          chmod +x ~/git-hooks/post-checkout
-          git config --global core.hooksPath ~/git-hooks
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
