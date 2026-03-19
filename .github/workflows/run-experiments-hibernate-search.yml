@@ -1,6 +1,9 @@
 name: Hibernate Search
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-hibernate-search.yml'
   schedule:
     - cron: "0 3 * * 4"
   workflow_dispatch:

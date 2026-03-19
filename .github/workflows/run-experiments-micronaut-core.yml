@@ -1,6 +1,9 @@
 name: Micronaut Core
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-micronaut-core.yml'
   schedule:
     - cron: "0 16 * * 4"
   workflow_dispatch:

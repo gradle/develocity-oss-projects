@@ -1,6 +1,9 @@
 name: Apache Geode
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-apache-geode.yml'
   schedule:
     - cron: "0 3 * * 6"
   workflow_dispatch:

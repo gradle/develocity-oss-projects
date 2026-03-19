@@ -1,6 +1,9 @@
 name: Apache Beam
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-apache-beam.yml'
   schedule:
     - cron: "0 4 * * 6"
   workflow_dispatch:

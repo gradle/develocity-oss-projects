@@ -1,6 +1,9 @@
 name: Micronaut Data
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-micronaut-data.yml'
   schedule:
     - cron: "0 2 * * 4"
   workflow_dispatch:

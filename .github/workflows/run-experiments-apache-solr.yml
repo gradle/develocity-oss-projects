@@ -1,6 +1,9 @@
 name: Apache Solr
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-apache-solr.yml'
   schedule:
     - cron: "0 14 * * 4"
   workflow_dispatch:

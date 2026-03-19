@@ -1,6 +1,9 @@
 name: Spring Authorization Server
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-spring-authorization-server.yml'
   schedule:
     - cron: "0 21 * * 5"
   workflow_dispatch:

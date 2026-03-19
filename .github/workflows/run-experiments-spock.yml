@@ -1,6 +1,9 @@
 name: Spock
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-spock.yml'
   schedule:
     - cron: "0 15 * * 5"
   workflow_dispatch:

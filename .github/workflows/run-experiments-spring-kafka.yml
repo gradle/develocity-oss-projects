@@ -1,6 +1,9 @@
 name: Spring Kafka
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-spring-kafka.yml'
   schedule:
     - cron: "0 3 * * 5"
   workflow_dispatch:

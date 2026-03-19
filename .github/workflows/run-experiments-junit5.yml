@@ -1,6 +1,9 @@
 name: JUnit5
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-junit5.yml'
   schedule:
     - cron: "0 10 * * 5"
   workflow_dispatch:

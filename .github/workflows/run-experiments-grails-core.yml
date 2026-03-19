@@ -1,6 +1,9 @@
 name: Grails Core
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-grails-core.yml'
   schedule:
     - cron: "0 17 * * 4"
   workflow_dispatch:

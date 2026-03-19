@@ -1,6 +1,9 @@
 name: Apache JMeter
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-apache-jmeter.yml'
   schedule:
     - cron: "0 10 * * 4"
   workflow_dispatch:
