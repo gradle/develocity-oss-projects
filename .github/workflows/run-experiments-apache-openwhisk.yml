@@ -11,11 +11,7 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/openwhisk"
-  # testCoverageLean: 160/163 test suites fail at init (need Docker/CouchDB/Ansible infra) — excluded.
-  # reportCoverage: depends on Ansible-generated whisk.properties — excluded.
-  # testSwaggerCodegen: pure codegen + compile, no infra needed — kept.
-  # compileScala/compileTestScala: exercises dependency resolution and Scala compilation caching.
-  TASKS: "compileScala :tests:compileTestScala :tests:testSwaggerCodegen"
+  TASKS: ":tests:testCoverageLean :tests:reportCoverage :tests:testSwaggerCodegen"
 
 jobs:
   Experiment:
