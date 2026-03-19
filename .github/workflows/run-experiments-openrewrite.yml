@@ -44,7 +44,7 @@ jobs:
           cat >> build.gradle << 'GRADLE'
 
           project(':rewrite-kotlin') {
-              tasks.named('test') {
+              tasks.withType(org.gradle.api.tasks.testing.Test).configureEach {
                   filter {
                       excludeTestsMatching 'org.openrewrite.kotlin.tree.BinaryTest.deeplyNestedStringConcatenation'
                   }
