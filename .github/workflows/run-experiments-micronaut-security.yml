@@ -12,6 +12,8 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/micronaut-projects/micronaut-security"
   TASKS: "check"
+  # Exclude japiCmp (binary compat 5.x vs 4.x) and test-suite-geb (Groovy compiler NPE in Geb implicit assertions transform).
+  ARGS: "-x japiCmp -x :test-suite-geb:compileTestGroovy"
 
 jobs:
   Experiment:
@@ -42,6 +44,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
@@ -51,6 +54,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: false
         if: matrix.experimentId == 2
@@ -61,6 +65,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: false
         if: matrix.experimentId == 3

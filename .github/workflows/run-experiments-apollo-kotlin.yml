@@ -11,7 +11,9 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apollographql/apollo-kotlin"
-  TASKS: "build -x :apollo-gradle-plugin:test"
+  # Exclude flaky WebSocketNetworkTransportTest on Android debug target.
+  # The same commonTest tests still run via jvmTest and other KMP targets.
+  TASKS: "build -x :apollo-gradle-plugin:test -x :apollo-runtime:testDebugUnitTest"
 
 jobs:
   Experiment:
@@ -42,7 +44,6 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
-          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
@@ -52,7 +53,6 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
-          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
@@ -63,7 +63,6 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
-          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 3
