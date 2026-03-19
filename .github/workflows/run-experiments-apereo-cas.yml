@@ -40,6 +40,7 @@ jobs:
       # Workaround for createOpenRewriteRecipe overlapping outputs (https://github.com/apereo/cas/pull/8649)
       - name: Configure post-checkout hook
         run: |
+          mkdir -p ~/git-hooks
           echo -e 'echo "\nallprojects { tasks.matching { it.name == '\''createOpenRewriteRecipe'\'' }.configureEach { outputs.cacheIf { false } } }" >> build.gradle\n' > ~/git-hooks/post-checkout
           chmod +x ~/git-hooks/post-checkout
       - name: Run experiment 1
