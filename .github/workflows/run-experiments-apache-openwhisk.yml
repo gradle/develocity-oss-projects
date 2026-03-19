@@ -44,15 +44,7 @@ jobs:
         # https://github.com/apache/pekko-grpc/pull/661
         run: |
           mkdir ~/git-hooks
-          cat > ~/git-hooks/post-checkout << 'HOOK'
-          echo '
-          allprojects {
-              tasks.withType(com.google.protobuf.gradle.GenerateProtoTask).configureEach {
-                  outputs.doNotCacheIf("pekko-grpc logfile_enc option is not cache relocatable") { true }
-              }
-          }
-          ' >> build.gradle
-          HOOK
+          echo -e 'echo "\nallprojects { pluginManager.withPlugin(\"com.google.protobuf\") { tasks.withType(com.google.protobuf.gradle.GenerateProtoTask).configureEach { outputs.doNotCacheIf(\"pekko-grpc logfile_enc option is not cache relocatable\") { true } } } }" >> build.gradle\n' >> ~/git-hooks/post-checkout
           chmod +x ~/git-hooks/post-checkout
           git config --global core.hooksPath ~/git-hooks
       - name: Run experiment 1
