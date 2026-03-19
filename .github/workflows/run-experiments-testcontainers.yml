@@ -45,8 +45,10 @@ jobs:
           // jarFileTest sets systemProperty("jarFile", absolutePath) — not cache-relocatable.
           // Upstream fix: https://github.com/testcontainers/testcontainers-java/pull/11574
           project(':testcontainers') {
-              tasks.named('jarFileTest') {
-                  outputs.doNotCacheIf('jarFile system property contains absolute path') { true }
+              afterEvaluate {
+                  tasks.named('jarFileTest') {
+                      outputs.doNotCacheIf('jarFile system property contains absolute path') { true }
+                  }
               }
           }
           GRADLE
