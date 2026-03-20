@@ -11,6 +11,7 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apereo/cas"
+  GIT_COMMIT_ID: "830f19008c"
   TASKS: "build testCAS testLogout testGroovy testTickets -x check"
   # Exclude cas-server-core-scripting:testGroovy (Groovy scripting tests fail upstream).
   ARGS: "--no-configuration-cache -x :core:cas-server-core-scripting:testGroovy"
@@ -56,6 +57,7 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitCommitId: ${{ env.GIT_COMMIT_ID }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
@@ -66,6 +68,7 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitCommitId: ${{ env.GIT_COMMIT_ID }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
@@ -77,6 +80,7 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitCommitId: ${{ env.GIT_COMMIT_ID }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
