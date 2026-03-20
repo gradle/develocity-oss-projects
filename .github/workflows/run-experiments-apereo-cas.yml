@@ -41,8 +41,15 @@ jobs:
       - name: Configure post-checkout hook
         run: |
           mkdir -p ~/git-hooks
-          echo -e 'echo "\nallprojects { tasks.matching { it.name == '\''createOpenRewriteRecipe'\'' }.configureEach { outputs.cacheIf { false } } }" >> build.gradle\n' > ~/git-hooks/post-checkout
+          cat > ~/git-hooks/post-checkout << 'HOOK'
+          #!/bin/bash
+          cat >> build.gradle << 'GRADLE'
+
+          allprojects { tasks.matching { it.name == 'createOpenRewriteRecipe' }.configureEach { outputs.cacheIf { false } } }
+          GRADLE
+          HOOK
           chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
