@@ -12,6 +12,8 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apereo/cas"
   TASKS: "build testCAS testLogout testGroovy testTickets -x check"
+  # Exclude cas-server-core-scripting:testGroovy (Groovy scripting tests fail upstream).
+  ARGS: "--no-configuration-cache -x :core:cas-server-core-scripting:testGroovy"
 
 jobs:
   Experiment:
@@ -24,10 +26,10 @@ jobs:
           - experimentId: 3
     runs-on: ubuntu-latest
     steps:
-      - name: Set up JDK 21
+      - name: Set up JDK 25
         uses: actions/setup-java@v5
         with:
-          java-version: 21
+          java-version: 25-ea
           distribution: "temurin"
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
@@ -35,6 +37,19 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
         uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
+      # Workaround for createOpenRewriteRecipe overlapping outputs (https://github.com/apereo/cas/pull/8649)
+      - name: Configure post-checkout hook
+        run: |
+          mkdir -p ~/git-hooks
+          cat > ~/git-hooks/post-checkout << 'HOOK'
+          #!/bin/bash
+          cat >> build.gradle << 'GRADLE'
+
+          allprojects { tasks.matching { it.name == 'createOpenRewriteRecipe' }.configureEach { outputs.cacheIf { false } } }
+          GRADLE
+          HOOK
+          chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
@@ -42,6 +57,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
@@ -51,6 +67,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
@@ -61,6 +78,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 3
