@@ -4,7 +4,8 @@ on:
   push:
     paths:
       - '.github/workflows/run-experiments-apache-samza.yml'
-  # Scheduled execution disabled while build is broken - see https://github.com/apache/samza/pull/1703
+  schedule:
+    - cron: "0 22 * * 4"
   workflow_dispatch:
 
 permissions:
