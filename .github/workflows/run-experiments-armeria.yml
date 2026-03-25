@@ -1,6 +1,9 @@
 name: Armeria
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-armeria.yml'
   schedule:
     - cron: "0 2 * * 5"
   workflow_dispatch:

@@ -1,6 +1,9 @@
 name: Micronaut Security
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-micronaut-security.yml'
   schedule:
     - cron: "0 5 * * 4"
   workflow_dispatch:

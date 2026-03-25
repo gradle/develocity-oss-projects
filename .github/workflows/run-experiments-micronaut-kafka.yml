@@ -1,6 +1,9 @@
 name: Micronaut Kafka
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-micronaut-kafka.yml'
   schedule:
     - cron: "0 1 * * 5"
   workflow_dispatch:

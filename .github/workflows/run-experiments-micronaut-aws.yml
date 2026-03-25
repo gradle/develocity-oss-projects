@@ -1,6 +1,9 @@
 name: Micronaut AWS
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-micronaut-aws.yml'
   schedule:
     - cron: "0 20 * * 5"
   workflow_dispatch:

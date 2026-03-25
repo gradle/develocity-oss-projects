@@ -1,6 +1,9 @@
 name: XWiki Commons
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-xwiki.yml'
   schedule:
     - cron: "0 17 * * 5"
   workflow_dispatch:

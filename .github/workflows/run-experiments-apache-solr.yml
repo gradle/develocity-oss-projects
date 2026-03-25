@@ -1,8 +1,11 @@
-name: Apache OpenWhisk
+name: Apache Solr
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-apache-solr.yml'
   schedule:
-    - cron: "0 19 * * 5"
+    - cron: "0 14 * * 4"
   workflow_dispatch:
 
 permissions:
@@ -10,12 +13,9 @@ permissions:
 
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/apache/openwhisk"
-  # testCoverageLean: 160/163 test suites fail at init (need Docker/CouchDB/Ansible infra) — excluded.
-  # reportCoverage: depends on Ansible-generated whisk.properties — excluded.
-  # testSwaggerCodegen: pure codegen + compile, no infra needed — kept.
-  # compileScala/compileTestScala: exercises dependency resolution and Scala compilation caching.
-  TASKS: "compileScala :tests:compileTestScala :tests:testSwaggerCodegen"
+  GIT_REPO: "https://github.com/apache/solr"
+  TASKS: "check integrationTests"
+  ARGS: "-x validateJarChecksums -Ptests.seed=3466BEBDD5AA01A0 -Pvalidation.git.failOnModified=false -Ptests.haltonfailure=false -Ptests.neverUpToDate=false"
 
 jobs:
   Experiment:
@@ -28,11 +28,17 @@ jobs:
           - experimentId: 3
     runs-on: ubuntu-latest
     steps:
-      - name: Set up JDK 11
+      - name: Set up JDK
         uses: actions/setup-java@v5
         with:
-          java-version: 11
+          java-version: 21
           distribution: "temurin"
+      - name: Add git hook to temporarily disable caching for SpotlessTaskImpl tasks
+        run: |
+          mkdir ~/git-hooks
+          echo -e 'echo "\nallprojects { pluginManager.withPlugin(\"com.diffplug.spotless\") { tasks.withType(com.diffplug.gradle.spotless.SpotlessTaskImpl).configureEach { outputs.doNotCacheIf(\"SpotlessTaskImpl is not cacheable if custom formatter steps are used\") { true } } } }" >> build.gradle\n' >> ~/git-hooks/post-checkout
+          chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
@@ -40,22 +46,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
         uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
-      - name: Disable caching for generateProto (pekko-grpc logfile_enc option contains absolute path)
-        run: |
-          mkdir ~/git-hooks
-          cat > ~/git-hooks/post-checkout << 'HOOK'
-          #!/bin/sh
-          cat >> build.gradle << 'GRADLE'
-
-          allprojects {
-              tasks.matching { it.name == 'generateProto' }.configureEach {
-                  outputs.doNotCacheIf('pekko-grpc logfile_enc option is not cache relocatable. See https://github.com/apache/pekko-grpc/pull/661') { true }
-              }
-          }
-          GRADLE
-          HOOK
-          chmod +x ~/git-hooks/post-checkout
-          git config --global core.hooksPath ~/git-hooks
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
@@ -63,6 +53,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
@@ -72,6 +63,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
@@ -82,6 +74,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 3

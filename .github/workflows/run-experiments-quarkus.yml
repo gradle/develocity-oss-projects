@@ -1,6 +1,9 @@
 name: Quarkus
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-quarkus.yml'
   schedule:
     # Every Sunday at 6.00pm
     - cron: "0 18 * * 0"

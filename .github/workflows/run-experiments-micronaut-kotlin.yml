@@ -1,6 +1,9 @@
 name: Micronaut Kotlin
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-micronaut-kotlin.yml'
   schedule:
     - cron: "0 0 * * 5"
   workflow_dispatch:

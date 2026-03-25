@@ -1,6 +1,9 @@
 name: Apollo Kotlin
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-apollo-kotlin.yml'
   schedule:
     - cron: "0 13 * * 4"
   workflow_dispatch:

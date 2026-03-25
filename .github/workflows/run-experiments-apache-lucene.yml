@@ -1,6 +1,9 @@
 name: Apache Lucene
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-apache-lucene.yml'
   schedule:
     - cron: "0 22 * * 4"
   workflow_dispatch:

@@ -1,6 +1,9 @@
 name: Caffeine
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-caffeine.yml'
   schedule:
     - cron: "0 9 * * 5"
   workflow_dispatch:

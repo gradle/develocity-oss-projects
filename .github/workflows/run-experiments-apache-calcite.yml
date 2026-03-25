@@ -1,6 +1,9 @@
 name: Apache Calcite
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-apache-calcite.yml'
   schedule:
     - cron: "0 19 * * 4"
   workflow_dispatch:

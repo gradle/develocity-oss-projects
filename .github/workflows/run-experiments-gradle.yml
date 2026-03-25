@@ -1,6 +1,9 @@
 name: Gradle
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-gradle.yml'
   schedule:
     - cron: "0 18 * * 4"
   workflow_dispatch:

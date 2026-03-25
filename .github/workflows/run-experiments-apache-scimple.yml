@@ -1,6 +1,9 @@
 name: Apache SCIMple
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-apache-scimple.yml'
   schedule:
     - cron: "0 19 * * 6"
   workflow_dispatch:

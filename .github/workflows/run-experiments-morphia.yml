@@ -1,6 +1,9 @@
 name: Morphia
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-morphia.yml'
   workflow_dispatch:
 
 permissions:

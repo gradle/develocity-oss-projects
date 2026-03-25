@@ -1,6 +1,9 @@
 name: Kotlin
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-kotlin.yml'
   schedule:
     - cron: "0 9 * * 4"
   workflow_dispatch:

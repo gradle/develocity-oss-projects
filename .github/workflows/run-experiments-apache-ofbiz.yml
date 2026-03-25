@@ -1,6 +1,9 @@
 name: Apache OFBiz
 
 on:
+  push:
+    paths:
+      - '.github/workflows/run-experiments-apache-ofbiz.yml'
   schedule:
     - cron: "0 15 * * 4"
   workflow_dispatch:
