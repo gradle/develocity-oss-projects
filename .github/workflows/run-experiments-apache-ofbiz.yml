@@ -41,8 +41,8 @@ jobs:
           mkdir -p ~/git-hooks
           cat > ~/git-hooks/post-checkout << 'HOOK'
           #!/bin/bash
-          # Remove test dependency on generateSecretKeys
-          sed -i "s/dependsOn 'generateSecretKeys'//" build.gradle
+          # Remove test dependency on generateSecretKeys (only the standalone line, not loadAll's multi-value dependsOn)
+          sed -i "/^    dependsOn 'generateSecretKeys'$/d" build.gradle
           # Provide fixed test keys in security.properties so ModelFormTest can use JWTManager
           sed -i "s/^login\.secret_key_string=$/login.secret_key_string=ACixT13j2ZBYC6d4GTsivE9ls6edoQQk4+MdAvFWIQzHMnYdrUZBUA0R5GtNGgQU/" framework/security/config/security.properties
           sed -i "s/^security\.token\.key=$/security.token.key=1bdy6YVULXL5N56o4iFGrNavvxwdywS2X6a1B\/tDFPeU1A5MD85fjttJOdU\/CApZ/" framework/security/config/security.properties
