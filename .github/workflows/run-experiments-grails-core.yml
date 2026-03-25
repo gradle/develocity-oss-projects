@@ -14,7 +14,8 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/grails-core"
-  TASKS: "build"
+  # Exclude flaky Ersatz mock tests (different tests fail on each run).
+  TASKS: "build -x :grails-test-examples-micronaut:integrationTest"
 
 jobs:
   Experiment:
