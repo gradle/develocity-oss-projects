@@ -14,7 +14,7 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/micronaut-projects/micronaut-kotlin"
-  TASKS: "check"
+  TASKS: "check -x japiCmp"
 
 jobs:
   Experiment:
@@ -55,7 +55,7 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
-          failIfNotFullyCacheable: false
+          failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
       - name: Run experiment 3
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
@@ -65,5 +65,5 @@ jobs:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
-          failIfNotFullyCacheable: false
+          failIfNotFullyCacheable: true
         if: matrix.experimentId == 3
