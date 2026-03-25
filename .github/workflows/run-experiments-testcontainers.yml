@@ -41,17 +41,7 @@ jobs:
 
           allprojects {
               tasks.withType(Test).configureEach {
-                  exclude '**/ComposeContainerVolumeRemovalTest*'
-                  exclude '**/DockerComposeContainerVolumeRemovalTest*'
-              }
-          }
-          // jarFileTest sets systemProperty("jarFile", absolutePath) — not cache-relocatable.
-          // Upstream fix: https://github.com/testcontainers/testcontainers-java/pull/11574
-          project(':testcontainers') {
-              afterEvaluate {
-                  tasks.named('jarFileTest') {
-                      outputs.doNotCacheIf('jarFile system property contains absolute path') { true }
-                  }
+                  exclude '**/*ContainerVolumeRemovalTest*'
               }
           }
           GRADLE
