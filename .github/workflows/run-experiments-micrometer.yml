@@ -14,7 +14,7 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/micrometer-metrics/micrometer"
-  TASKS: "assemble"
+  TASKS: "assemble -x :micrometer-registry-statsd:shadowJar"
 
 jobs:
   Experiment:
@@ -38,20 +38,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
         uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
-      - name: Disable caching for shadowJar (Shadow 9.x caching regression)
-        run: |
-          mkdir ~/git-hooks
-          cat > ~/git-hooks/post-checkout << 'HOOK'
-          #!/bin/sh
-          cat >> implementations/micrometer-registry-statsd/build.gradle << 'GRADLE'
-
-          shadowJar {
-              outputs.doNotCacheIf('ShadowJar has a caching regression in Shadow 9.x. See https://github.com/GradleUp/shadow/issues/1991') { true }
-          }
-          GRADLE
-          HOOK
-          chmod +x ~/git-hooks/post-checkout
-          git config --global core.hooksPath ~/git-hooks
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
