@@ -14,7 +14,7 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/micrometer-metrics/micrometer"
-  TASKS: "assemble -x :micrometer-registry-statsd:shadowJar"
+  TASKS: "assemble"
 
 jobs:
   Experiment:
