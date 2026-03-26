@@ -32,18 +32,14 @@ jobs:
         with:
           java-version: 17
           distribution: "temurin"
-      - name: Fix generateSecretKeys writing random values to security.properties on every build
-        # generateSecretKeys unconditionally writes new random keys to security.properties,
-        # causing cascading cache misses for compileTestGroovy, checkstyleMain, checkstyleTest, and test.
-        # Remove the test dependency on generateSecretKeys and provide fixed test keys instead.
-        # Upstream fix: https://github.com/apache/ofbiz-framework/pull/1028
+      - name: Pin secret keys to prevent cache misses from generateSecretKeys
+        # generateSecretKeys writes random keys to security.properties (main resource),
+        # causing cascading cache misses. Upstream fix (PR #1029) makes the task skip
+        # already-set keys, so we just need to pre-populate them with fixed values.
         run: |
           mkdir -p ~/git-hooks
           cat > ~/git-hooks/post-checkout << 'HOOK'
           #!/bin/bash
-          # Remove test dependency on generateSecretKeys (only the standalone line, not loadAll's multi-value dependsOn)
-          sed -i "/^    dependsOn 'generateSecretKeys'$/d" build.gradle
-          # Provide fixed test keys in security.properties so ModelFormTest can use JWTManager
           sed -i "s/^login\.secret_key_string=$/login.secret_key_string=ACixT13j2ZBYC6d4GTsivE9ls6edoQQk4+MdAvFWIQzHMnYdrUZBUA0R5GtNGgQU/" framework/security/config/security.properties
           sed -i "s/^security\.token\.key=$/security.token.key=1bdy6YVULXL5N56o4iFGrNavvxwdywS2X6a1B\/tDFPeU1A5MD85fjttJOdU\/CApZ/" framework/security/config/security.properties
           HOOK
