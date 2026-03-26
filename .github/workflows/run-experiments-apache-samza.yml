@@ -4,8 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/run-experiments-apache-samza.yml'
-  schedule:
-    - cron: "0 22 * * 4"
+  # Schedule execution disabled while their setup is not updated and pushing scans. See https://github.com/apache/samza/pull/1718
   workflow_dispatch:
 
 permissions:
@@ -43,7 +42,6 @@ jobs:
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
-          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
@@ -53,7 +51,6 @@ jobs:
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
-          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
@@ -64,7 +61,6 @@ jobs:
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
-          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
