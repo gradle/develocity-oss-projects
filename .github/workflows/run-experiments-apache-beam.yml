@@ -75,6 +75,20 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
+      - name: Disable caching for tasks with non-relocatable inputs
+        # These tasks use absolute paths in inputs, making them non-relocatable across machines.
+        # Caused by external plugins (dependency-analysis, javacc) that can't be fixed upstream.
+        if: matrix.experimentId == 3
+        run: |
+          mkdir -p ~/.gradle/init.d
+          cat > ~/.gradle/init.d/disable-non-relocatable-caching.gradle << 'GRADLE'
+          allprojects {
+              tasks.matching { it.name in ['analyzeDependencies', 'analyzeClassesDependencies', 'analyzeTestClassesDependencies', 'compileJavacc'] }
+                  .configureEach {
+                      outputs.doNotCacheIf("Non-relocatable absolute path inputs") { true }
+                  }
+          }
+          GRADLE
       - name: Run experiment 3
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
         env:
