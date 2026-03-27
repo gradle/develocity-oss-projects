@@ -13,7 +13,8 @@ permissions:
 
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/JetBrains/kotlin"
+  GIT_REPO: "https://github.com/ribafish/kotlin"
+  GIT_BRANCH: "gk/fixAbsolutePaths"
   TASKS: "install"
   ARGS: "-Pkotlin.test.maxParallelForks=4 -Dorg.gradle.dependency.verification=off"
 
@@ -72,6 +73,7 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
@@ -82,6 +84,7 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
@@ -93,6 +96,7 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
