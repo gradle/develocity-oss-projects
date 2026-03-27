@@ -38,6 +38,19 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
         uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
+      - name: Disable caching for jmhJar (JMH plugin uses absolute paths in inputs)
+        # https://github.com/melix/jmh-gradle-plugin/issues/283 <- When this is fixed and released, caffeine will also need to update.
+        run: |
+          mkdir -p ~/.gradle/init.d
+          cat > ~/.gradle/init.d/disable-jmhjar-caching.gradle << 'GRADLE'
+          allprojects {
+              tasks.configureEach {
+                  if (name == 'jmhJar') {
+                      outputs.doNotCacheIf("JMH plugin inputs use absolute path sensitivity (https://github.com/melix/jmh-gradle-plugin/issues/283)") { true }
+                  }
+              }
+          }
+          GRADLE
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
