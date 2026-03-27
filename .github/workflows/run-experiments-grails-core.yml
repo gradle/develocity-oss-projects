@@ -14,7 +14,7 @@ permissions:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/ribafish/grails-core"
-  GIT_BRANCH: "fix-overlapping-task-outputs"
+  GIT_BRANCH: "fix-findmainclass-cache-hits"
   # Exclude flaky Ersatz mock tests (different tests fail on each run).
   TASKS: "build -x :grails-test-examples-micronaut:integrationTest"
 
