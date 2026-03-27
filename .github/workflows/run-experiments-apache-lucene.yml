@@ -13,9 +13,7 @@ permissions:
 
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
-  # TODO: revert to https://github.com/apache/lucene once upstream PR is merged: https://github.com/apache/lucene/pull/15875
-  GIT_REPO: "https://github.com/ribafish/apache-lucene"
-  GIT_BRANCH: "fix-test-caching-inputs"
+  GIT_REPO: "https://github.com/apache/lucene"
   TASKS: "check -x :lucene:demo:test -Ptests.seed=3466BEBDD5AA01A0 -Pvalidation.git.failOnModified=false -Ptests.haltonfailure=false -Ptests.rerun=false"
 
 jobs:
@@ -47,7 +45,6 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           enableDevelocity: true
@@ -58,7 +55,6 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           enableDevelocity: true
@@ -70,7 +66,6 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           enableDevelocity: true
