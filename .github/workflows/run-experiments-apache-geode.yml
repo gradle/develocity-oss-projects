@@ -15,7 +15,8 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/ribafish/apache-geode"
   GIT_BRANCH: "gk/fix-cache-relocatability"
-  TASKS: "test integrationTest -x :geode-core:integrationTest -x :geode-assembly:integrationTest -x :geode-gfsh:integrationTest -x :geode-lucene:integrationTest"
+  # test is the only of "test" tasks that can be cached, the others have outputs.upToDateWhen { false }
+  TASKS: "build install javadoc spotlessCheck rat checkPom resolveDependencies pmdMain"
 
 jobs:
   Experiment:
