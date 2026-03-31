@@ -60,6 +60,15 @@ jobs:
           echo -e 'echo "\ntasks.withType<org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile>().configureEach { outputs.doNotCacheIf(\"https://youtrack.jetbrains.com/issue/KT-56690\") { true } }" >> libraries/kotlin-dom-api-compat/build.gradle.kts\n' > ~/git-hooks/post-checkout
           chmod +x ~/git-hooks/post-checkout
           git config --global core.hooksPath ~/git-hooks
+      - name: Add git hook to temporarily disable caching for kotlin-power-assert-runtime (KT-50876)
+        if: matrix.experimentId == 3
+        run: |
+          cat >> ~/git-hooks/post-checkout << 'HOOK'
+          echo "\ntasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile>().configureEach { outputs.doNotCacheIf(\"https://youtrack.jetbrains.com/issue/KT-50876\") { true } }" >> plugins/power-assert/power-assert-runtime/build.gradle.kts
+          echo "\ntasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon>().configureEach { outputs.doNotCacheIf(\"https://youtrack.jetbrains.com/issue/KT-50876\") { true } }" >> plugins/power-assert/power-assert-runtime/build.gradle.kts
+          echo "\ntasks.withType<org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile>().configureEach { outputs.doNotCacheIf(\"https://youtrack.jetbrains.com/issue/KT-50876\") { true } }" >> plugins/power-assert/power-assert-runtime/build.gradle.kts
+          echo "\ntasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach { outputs.doNotCacheIf(\"https://youtrack.jetbrains.com/issue/KT-50876\") { true } }" >> plugins/power-assert/power-assert-runtime/build.gradle.kts
+          HOOK
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
