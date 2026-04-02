@@ -13,7 +13,8 @@ permissions:
 
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/apache/ofbiz-framework"
+  GIT_REPO: "https://github.com/ribafish/ofbiz-framework"
+  GIT_COMMIT_ID: "fix/generate-secret-keys-caching"
   TASKS: "build"
 
 jobs:
@@ -32,19 +33,6 @@ jobs:
         with:
           java-version: 17
           distribution: "temurin"
-      - name: Pin secret keys to prevent cache misses from generateSecretKeys
-        # generateSecretKeys writes random keys to security.properties (main resource),
-        # causing cascading cache misses. Upstream fix (PR #1029) makes the task skip
-        # already-set keys, so we just need to pre-populate them with fixed values.
-        run: |
-          mkdir -p ~/git-hooks
-          cat > ~/git-hooks/post-checkout << 'HOOK'
-          #!/bin/bash
-          sed -i "s/^login\.secret_key_string=$/login.secret_key_string=ACixT13j2ZBYC6d4GTsivE9ls6edoQQk4+MdAvFWIQzHMnYdrUZBUA0R5GtNGgQU/" framework/security/config/security.properties
-          sed -i "s/^security\.token\.key=$/security.token.key=1bdy6YVULXL5N56o4iFGrNavvxwdywS2X6a1B\/tDFPeU1A5MD85fjttJOdU\/CApZ/" framework/security/config/security.properties
-          HOOK
-          chmod +x ~/git-hooks/post-checkout
-          git config --global core.hooksPath ~/git-hooks
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
@@ -58,6 +46,7 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitCommitId: ${{ env.GIT_COMMIT_ID }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
@@ -67,6 +56,7 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitCommitId: ${{ env.GIT_COMMIT_ID }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
@@ -77,6 +67,7 @@ jobs:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitCommitId: ${{ env.GIT_COMMIT_ID }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
