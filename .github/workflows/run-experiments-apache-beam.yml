@@ -86,7 +86,7 @@ jobs:
           mkdir -p ~/.gradle/init.d
           cat > ~/.gradle/init.d/disable-non-relocatable-caching.gradle << 'GRADLE'
           allprojects {
-              tasks.matching { it.class.name == 'ca.cutterslade.gradle.analyze.AnalyzeDependenciesTask' || it.class.name == 'org.javacc.plugin.gradle.javacc.CompileJavaccTask' }
+              tasks.matching { (it.name.startsWith('analyze') && it.name.endsWith('Dependencies')) || it.name == 'compileJavacc' }
                   .configureEach {
                       outputs.doNotCacheIf("Non-relocatable absolute path inputs") { true }
                   }
