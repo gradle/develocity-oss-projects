@@ -28,12 +28,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up JDK 21
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5
         with:
           java-version: 21
           distribution: "temurin"
       - name: Set up uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7
       - name: Add git hook to exclude failing tests
         run: |
           mkdir ~/git-hooks
@@ -74,14 +74,14 @@ jobs:
           chmod +x ~/git-hooks/post-checkout
           git config --global core.hooksPath ~/git-hooks
       - name: Download latest version of the validation scripts
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@94c54bdb1e6a57347930c62e9254d2c3e55fd5a5 # actions-stable
         with:
           downloadDevelopmentRelease: true
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
-        uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
+        uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@0bab5beea90a90c73dca0ce5a8fa75660860c84e # main
       - name: Run experiment 1
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@94c54bdb1e6a57347930c62e9254d2c3e55fd5a5 # actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
@@ -90,7 +90,7 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@94c54bdb1e6a57347930c62e9254d2c3e55fd5a5 # actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
@@ -100,7 +100,7 @@ jobs:
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
       - name: Run experiment 3
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@94c54bdb1e6a57347930c62e9254d2c3e55fd5a5 # actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:

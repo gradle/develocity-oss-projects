@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Maven Action
-        uses: s4u/setup-maven-action@v1.19.0
+        uses: s4u/setup-maven-action@ba34de01b7f4ba2ab8e2860df8993a29f4477056 # v1.20.0
         with:
           checkout-fetch-depth: 0
           java-version: 21
@@ -81,13 +81,13 @@ jobs:
               </activeProfiles>
             </settings>' > ~/.m2/settings.xml
       - name: Download latest version of the validation scripts
-        uses: gradle/develocity-build-validation-scripts/.github/actions/maven/download@actions-stable
+        uses: gradle/develocity-build-validation-scripts/.github/actions/maven/download@94c54bdb1e6a57347930c62e9254d2c3e55fd5a5 # actions-stable
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
-        uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
+        uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@0bab5beea90a90c73dca0ce5a8fa75660860c84e # main
       - name: Run experiment 1
-        uses: gradle/develocity-build-validation-scripts/.github/actions/maven/experiment-1@actions-stable
+        uses: gradle/develocity-build-validation-scripts/.github/actions/maven/experiment-1@94c54bdb1e6a57347930c62e9254d2c3e55fd5a5 # actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
@@ -98,7 +98,7 @@ jobs:
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 1
       - name: Run experiment 2
-        uses: gradle/develocity-build-validation-scripts/.github/actions/maven/experiment-2@actions-stable
+        uses: gradle/develocity-build-validation-scripts/.github/actions/maven/experiment-2@94c54bdb1e6a57347930c62e9254d2c3e55fd5a5 # actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
