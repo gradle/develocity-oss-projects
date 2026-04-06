@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up JDK 8
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5
         with:
           java-version: "8"
           distribution: "temurin"
@@ -40,18 +40,18 @@ jobs:
           echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
           echo "JAVA_TOOLS_JAR=$JAVA_HOME/lib/tools.jar" >> $GITHUB_ENV
       - name: Set up JDK 21
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5
         with:
           java-version: "21"
           distribution: "temurin"
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v4
+        uses: android-actions/setup-android@40fd30fb8d7440372e1316f5d1809ec01dcd3699 # v4
       - name: Download latest version of the validation scripts
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@94c54bdb1e6a57347930c62e9254d2c3e55fd5a5 # actions-stable
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
-        uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
+        uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@0bab5beea90a90c73dca0ce5a8fa75660860c84e # main
       # MergeResources and DataBindingGenBaseClassesTask are not cache relocatable when resourceDirsOutsideRootProjectDir is not empty
       # https://cs.android.com/android-studio/platform/tools/base/+/mirror-goog-studio-main:build-system/gradle-core/src/main/java/com/android/build/gradle/tasks/MergeResources.kt;l=164?q=MergeResources
       # This is the case here as androidx/biometric project has its root dir set to androidx/playground-projects/biometric-playground
@@ -64,7 +64,7 @@ jobs:
           git config --global core.hooksPath ~/git-hooks
         if: matrix.experimentId == 3
       - name: Run experiment 1
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@94c54bdb1e6a57347930c62e9254d2c3e55fd5a5 # actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
@@ -75,7 +75,7 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@94c54bdb1e6a57347930c62e9254d2c3e55fd5a5 # actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
@@ -87,7 +87,7 @@ jobs:
           failIfNotFullyCacheable: false
         if: matrix.experimentId == 2
       - name: Run experiment 3
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@94c54bdb1e6a57347930c62e9254d2c3e55fd5a5 # actions-stable
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
