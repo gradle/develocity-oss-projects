@@ -9,6 +9,13 @@
     {
       "matchManagers": ["github-actions"],
       "groupName": "GitHub Actions"
+    },
+    {
+      "matchPackageNames": [
+        "gradle/develocity-oss-projects",
+        "gradle/develocity-build-validation-scripts"
+      ],
+      "enabled": false
     }
   ]
 }
