@@ -39,7 +39,7 @@ jobs:
           downloadDevelopmentRelease: true
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
-        uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@0bab5beea90a90c73dca0ce5a8fa75660860c84e # main
+        uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@196a6944aeea4294f0999037025ed653413d6e70 # main
       - name: Disable caching for generateProto (pekko-grpc logfile_enc option contains absolute path)
         run: |
           mkdir ~/git-hooks
