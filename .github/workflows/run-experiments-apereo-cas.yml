@@ -16,7 +16,6 @@ env:
   GIT_REPO: "https://github.com/apereo/cas"
   # Exclude cas-server-core-scripting:testGroovy (Groovy scripting tests fail upstream).
   TASKS: "build testCAS testLogout testGroovy testTickets -x check -x :core:cas-server-core-scripting:testGroovy"
-  ARGS: "--no-configuration-cache"
 
 jobs:
   Experiment:
@@ -47,7 +46,6 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
-          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
@@ -57,7 +55,6 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
-          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
@@ -68,7 +65,6 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
-          args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 3
