@@ -16,7 +16,7 @@ Gradle is sponsoring free licenses and hosting of Develocity, build optimization
 
 The following OSS projects currently benefit from enhanced developer productivity by Develocity:
 
-- [AndroidX](https://ge.androidx.dev)
+- [AndroidX](https://androidx.develocity.cloud)
 - [The Apache Software Foundation](https://develocity.apache.org)
 - [Apereo](https://develocity.apereo.org)
 - [Apollo Kotlin](https://ge.apollographql.com)
