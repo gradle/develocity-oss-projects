@@ -1,9 +1,6 @@
 name: OpenRewrite
 
 on:
-  push:
-    paths:
-      - '.github/workflows/run-experiments-openrewrite.yml'
   schedule:
     - cron: "0 4 * * 5"
   workflow_dispatch:
