@@ -31,13 +31,13 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Micrometer](https://ge.micrometer.io)
 - [Micronaut](https://ge.micronaut.io)
 - [Nokee](https://ge.nokee.dev)
-- [OpenAPI Generator](https://community.develocity.cloud/scans?search.rootProjectNames=OpenAPITools)
+- [OpenAPI Generator](https://community.develocity.cloud/scans?search.rootProjectNames=openapi-generator-project)
 - [OpenRewrite](https://ge.openrewrite.org)
 - [OpenTelemetry](https://develocity.opentelemetry.io)
 - [Quarkus](https://ge.quarkus.io)
 - [Spock](https://ge.spockframework.org)
 - [Spring](https://ge.spring.io)
-- [Testcontainers](https://community.develocity.cloud/scans?search.rootProjectNames=testcontainers)
+- [Testcontainers](https://community.develocity.cloud/scans?search.rootProjectNames=testcontainers-java)
 - [XWiki](https://ge.xwiki.org)
 
 ## Learn more
