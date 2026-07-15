@@ -35,7 +35,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [OpenRewrite](https://ge.openrewrite.org)
 - [OpenTelemetry](https://develocity.opentelemetry.io)
 - [Quarkus](https://ge.quarkus.io)
-- [Spock](https://ge.spockframework.org)
+- [Spock](https://community.develocity.cloud/scans?search.rootProjectNames=*spock*)
 - [Spring](https://ge.spring.io)
 - [Testcontainers](https://community.develocity.cloud/scans?search.rootProjectNames=testcontainers-java)
 - [XWiki](https://ge.xwiki.org)
