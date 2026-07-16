@@ -25,7 +25,6 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Commonhaus Foundation](https://develocity.commonhaus.dev)
 - [Detekt](https://ge.detekt.dev)
 - [Gradle](https://ge.gradle.org)
-- [Grails](https://ge.grails.org)
 - [JUnit](https://ge.junit.org)
 - [Kotlin](https://ge.jetbrains.com)
 - [Micrometer](https://ge.micrometer.io)
