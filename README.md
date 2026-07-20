@@ -41,7 +41,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 
 ## Learn more
 
-Visit our website to learn more about [Develocity][develocity] and how [OSS projects leverage Develocity](https://gradle.com/enterprise-customers/oss-projects/).
+Visit our website to learn more about [Develocity][develocity] and how [OSS projects leverage Develocity](https://develocity.ai/oss-sponsored-by-develocity/).
 
 ## License
 
@@ -55,5 +55,5 @@ All content stored in this repository is open-source software released under the
 [develocity-build-validation-scripts]: https://github.com/gradle/develocity-build-validation-scripts
 [develocity-oss-projects]: https://github.com/gradle/develocity-oss-projects
 [quarkus-build-caching-extension]: https://github.com/gradle/quarkus-build-caching-extension
-[develocity]: https://gradle.com/develocity
+[develocity]: https://develocity.ai/
 [apache-license]: https://www.apache.org/licenses/LICENSE-2.0.html
