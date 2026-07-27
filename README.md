@@ -23,7 +23,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Armeria](https://ge.armeria.dev)
 - [Caffeine](https://caffeine.gradle-enterprise.cloud)
 - [Commonhaus Foundation](https://develocity.commonhaus.dev)
-- [Detekt](https://ge.detekt.dev)
+- [Detekt](https://community.develocity.cloud/scans?search.rootProjectNames=detekt)
 - [Gradle](https://ge.gradle.org)
 - [JUnit](https://ge.junit.org)
 - [Kotlin](https://ge.jetbrains.com)
