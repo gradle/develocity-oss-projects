@@ -29,7 +29,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Kotlin](https://ge.jetbrains.com)
 - [Micrometer](https://ge.micrometer.io)
 - [Micronaut](https://ge.micronaut.io)
-- [Nokee](https://ge.nokee.dev)
+- [Nokee]([https://ge.nokee.dev](https://community.develocity.cloud/scans?search.rootProjectNames=nokee*))
 - [OpenAPI Generator](https://community.develocity.cloud/scans?search.rootProjectNames=openapi-generator-project)
 - [OpenRewrite](https://community.develocity.cloud/scans?search.rootProjectNames=*rewrite*)
 - [OpenTelemetry](https://develocity.opentelemetry.io)
