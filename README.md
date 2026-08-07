@@ -37,7 +37,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Spock](https://community.develocity.cloud/scans?search.rootProjectNames=*spock*)
 - [Spring](https://ge.spring.io)
 - [Testcontainers](https://community.develocity.cloud/scans?search.rootProjectNames=testcontainers-java)
-- [XWiki](https://ge.xwiki.org)
+- [XWiki](https://community.develocity.cloud/scans?search.rootProjectNames=*xwiki*)
 
 ## Learn more
 
