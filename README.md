@@ -18,9 +18,9 @@ The following OSS projects currently benefit from enhanced developer productivit
 
 - [AndroidX](https://androidx.develocity.cloud)
 - [The Apache Software Foundation](https://develocity.apache.org)
-- [Apereo](https://develocity.apereo.org)
+- [Apereo](https://community.develocity.cloud/scans?search.rootProjectNames=cas-server)
 - [Apollo Kotlin](https://community.develocity.cloud/scans?search.rootProjectNames=*apollo*)
-- [Armeria](https://ge.armeria.dev)
+- [Armeria](https://community.develocity.cloud/scans?search.rootProjectNames=armeria)
 - [Caffeine](https://caffeine.gradle-enterprise.cloud)
 - [Commonhaus Foundation](https://develocity.commonhaus.dev)
 - [Detekt](https://community.develocity.cloud/scans?search.rootProjectNames=detekt)
