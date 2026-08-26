@@ -27,7 +27,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Gradle](https://ge.gradle.org)
 - [JUnit](https://ge.junit.org)
 - [Kotlin](https://ge.jetbrains.com)
-- [Micrometer](https://ge.micrometer.io)
+- [Micrometer](https://ge.spring.io/scans?search.rootProjectNames=micrometer*,tracing,context-propagation)
 - [Micronaut](https://ge.micronaut.io)
 - [Nokee]([https://ge.nokee.dev](https://community.develocity.cloud/scans?search.rootProjectNames=nokee*))
 - [OpenAPI Generator](https://community.develocity.cloud/scans?search.rootProjectNames=openapi-generator-project)
