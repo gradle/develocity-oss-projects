@@ -32,7 +32,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Nokee](https://community.develocity.cloud/scans?search.rootProjectNames=nokee*)
 - [OpenAPI Generator](https://community.develocity.cloud/scans?search.rootProjectNames=openapi-generator-project)
 - [OpenRewrite](https://community.develocity.cloud/scans?search.rootProjectNames=*rewrite*)
-- [OpenTelemetry](https://develocity.opentelemetry.io)
+- [OpenTelemetry](https://community.develocity.cloud/scans?search.rootProjectNames=*opentelemetry*)
 - [Quarkus](https://ge.quarkus.io)
 - [Spock](https://community.develocity.cloud/scans?search.rootProjectNames=*spock*)
 - [Spring](https://ge.spring.io)
