@@ -25,13 +25,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Free disk space
-        uses: jlumbroso/free-disk-space@3f13feab2962a87273d379ebc36ea159527e6cc9 # v1.3.2
+        uses: jlumbroso/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
         with:
           docker-images: false
       - name: Set up JDK 11
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6
         with:
-          java-version: 11.0.32+101
+          java-version: 25.0.4+101.0.LTS
           distribution: "temurin"
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
