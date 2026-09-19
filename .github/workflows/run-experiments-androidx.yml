@@ -42,7 +42,7 @@ jobs:
           java-version: "21.0.12+101.0.LTS"
           distribution: "temurin"
       - name: Set up Android SDK
-        uses: android-actions/setup-android@40fd30fb8d7440372e1316f5d1809ec01dcd3699 # v4
+        uses: android-actions/setup-android@be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd # v4
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
