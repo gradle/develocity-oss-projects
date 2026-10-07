@@ -33,7 +33,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [OpenAPI Generator](https://community.develocity.cloud/scans?search.rootProjectNames=openapi-generator-project)
 - [OpenRewrite](https://community.develocity.cloud/scans?search.rootProjectNames=*rewrite*)
 - [OpenTelemetry](https://community.develocity.cloud/scans?search.rootProjectNames=*opentelemetry*)
-- [Quarkus](https://ge.quarkus.io)
+- [Quarkus](https://develocity.quarkus.io)
 - [Spock](https://community.develocity.cloud/scans?search.rootProjectNames=*spock*)
 - [Spring](https://ge.spring.io)
 - [Testcontainers](https://community.develocity.cloud/scans?search.rootProjectNames=testcontainers-java)
