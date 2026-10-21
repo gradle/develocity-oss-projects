@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
@@ -36,10 +37,25 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure validation scripts network settings
         uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
+      - name: Get Develocity access token with workload identity
+        id: develocity-oidc
+        run: |
+          if [ -z "$ACTIONS_ID_TOKEN_REQUEST_URL" ]; then
+            echo "::warning::No GitHub OIDC token available (e.g. PR from a fork), Develocity will not be authenticated"
+            exit 0
+          fi
+          oidc=$(curl -sSfG -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            --data-urlencode "audience=https://ge.solutions-team.gradle.com" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq -r .value)
+          echo "::add-mask::$oidc"
+          token=$(curl -sSf -X POST -H "Authorization: Bearer $oidc" \
+            "https://ge.solutions-team.gradle.com/api/auth/token?expiresInHours=6")
+          echo "::add-mask::$token"
+          echo "access-key=ge.solutions-team.gradle.com=$token" >> "$GITHUB_OUTPUT"
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
-          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          DEVELOCITY_ACCESS_KEY: ${{ steps.develocity-oidc.outputs.access-key }}
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
@@ -49,7 +65,7 @@ jobs:
       - name: Run experiment 2
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
         env:
-          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          DEVELOCITY_ACCESS_KEY: ${{ steps.develocity-oidc.outputs.access-key }}
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
@@ -60,7 +76,7 @@ jobs:
       - name: Run experiment 3
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
         env:
-          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          DEVELOCITY_ACCESS_KEY: ${{ steps.develocity-oidc.outputs.access-key }}
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
