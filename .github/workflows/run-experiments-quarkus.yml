@@ -42,7 +42,7 @@ jobs:
         uses: gradle/develocity-oss-projects/.github/actions/configure-validation-scripts-network-settings@main
       - name: Get Develocity access token
         id: develocity-oidc
-        uses: gradle/develocity-oss-projects/.github/actions/get-develocity-access-token@cdsap/workload-identity
+        uses: gradle/develocity-oss-projects/.github/actions/get-develocity-access-token@main
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/maven/experiment-1@actions-stable
         env:
