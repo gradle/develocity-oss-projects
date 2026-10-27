@@ -10,7 +10,7 @@ permissions:
   id-token: write
 
 env:
-  DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
+  DEVELOCITY_URL: "https://solutions.develocity.cloud"
   GIT_REPO: "https://github.com/apollographql/apollo-kotlin"
   # Exclude flaky WebSocketNetworkTransportTest on Android debug target.
   # The same commonTest tests still run via jvmTest and other KMP targets.
