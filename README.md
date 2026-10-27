@@ -26,7 +26,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Detekt](https://community.develocity.cloud/scans?search.rootProjectNames=detekt)
 - [Gradle](https://ge.gradle.org)
 - [JUnit](https://ge.junit.org)
-- [Kotlin](https://ge.jetbrains.com)
+- [Kotlin](https://develocity.jetbrains.com)
 - [Micrometer](https://ge.spring.io/scans?search.rootProjectNames=micrometer*,tracing,context-propagation)
 - [Micronaut](https://ge.micronaut.io)
 - [Nokee](https://community.develocity.cloud/scans?search.rootProjectNames=nokee*)
