@@ -10,7 +10,7 @@
 
 # Develocity OSS Projects
 
-[![Revved up by Develocity](https://img.shields.io/badge/Revved%20up%20by-Develocity-06A0CE?logo=Gradle&labelColor=02303A)](https://solutions.develocity.cloud/scans)
+[![Revved up by Develocity](https://img.shields.io/badge/Revved%20up%20by-Develocity-06A0CE?logo=Gradle&labelColor=02303A)](https://ge.solutions-team.gradle.com/scans)
 
 Gradle is sponsoring free licenses and hosting of Develocity, build optimization assistance, and developer productivity consulting for various impactful OSS projects.
 

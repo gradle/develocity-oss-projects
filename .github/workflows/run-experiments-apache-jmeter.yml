@@ -10,7 +10,7 @@ permissions:
   id-token: write
 
 env:
-  DEVELOCITY_URL: "https://solutions.develocity.cloud"
+  DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/apache/jmeter"
   TASKS: "build -x distTar -x distTarSource -x distTarSha512 -x distTarSourceSha512"
 

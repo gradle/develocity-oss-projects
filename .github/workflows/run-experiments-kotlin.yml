@@ -10,7 +10,7 @@ permissions:
   id-token: write
 
 env:
-  DEVELOCITY_URL: "https://solutions.develocity.cloud"
+  DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/JetBrains/kotlin"
   TASKS: "install"
   ARGS: "-Pkotlin.test.maxParallelForks=4 -Dorg.gradle.dependency.verification=off"

@@ -10,7 +10,7 @@ permissions:
   id-token: write
 
 env:
-  DEVELOCITY_URL: "https://solutions.develocity.cloud"
+  DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/OpenAPITools/openapi-generator"
   GOALS: "package"
   ARGS: "-B"
