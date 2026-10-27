@@ -6,6 +6,10 @@ inputs:
     description: "The Develocity server host to get the access token for"
     default: "ge.solutions-team.gradle.com"
     required: false
+  oidcAudience:
+    description: "The audience of the GitHub OIDC token, matching a workload identity rule on the server"
+    default: "https://solutions.develocity.cloud"
+    required: false
   expiresInHours:
     description: "The lifetime of the access token in hours"
     default: "6"
@@ -23,6 +27,7 @@ runs:
       id: get-token
       env:
         DEVELOCITY_HOST: ${{ inputs.develocityHost }}
+        OIDC_AUDIENCE: ${{ inputs.oidcAudience }}
         EXPIRES_IN_HOURS: ${{ inputs.expiresInHours }}
       run: |
         if [ -z "$ACTIONS_ID_TOKEN_REQUEST_URL" ]; then
@@ -30,7 +35,7 @@ runs:
           exit 0
         fi
         oidc=$(curl -sSfG -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
-          --data-urlencode "audience=https://${DEVELOCITY_HOST}" \
+          --data-urlencode "audience=${OIDC_AUDIENCE}" \
           "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq -r .value)
         echo "::add-mask::$oidc"
         token=$(curl -sSf -X POST -H "Authorization: Bearer $oidc" \
