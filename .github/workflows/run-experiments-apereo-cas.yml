@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
+  DEVELOCITY_URL: "https://solutions.develocity.cloud"
   GIT_REPO: "https://github.com/apereo/cas"
   # Exclude cas-server-core-scripting:testGroovy (Groovy scripting tests fail upstream).
   TASKS: "build testCAS testLogout testGroovy testTickets -x check -x :core:cas-server-core-scripting:testGroovy"
