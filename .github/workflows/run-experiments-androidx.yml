@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 env:
   DEVELOCITY_URL: "https://solutions.develocity.cloud"
@@ -60,10 +61,13 @@ jobs:
           chmod +x ~/git-hooks/post-checkout
           git config --global core.hooksPath ~/git-hooks
         if: matrix.experimentId == 3
+      - name: Get Develocity access token
+        id: develocity-oidc
+        uses: gradle/develocity-oss-projects/.github/actions/get-develocity-access-token@main
       - name: Run experiment 1
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
-          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          DEVELOCITY_ACCESS_KEY: ${{ steps.develocity-oidc.outputs.access-key }}
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
@@ -74,7 +78,7 @@ jobs:
       - name: Run experiment 2
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
         env:
-          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          DEVELOCITY_ACCESS_KEY: ${{ steps.develocity-oidc.outputs.access-key }}
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
@@ -86,7 +90,7 @@ jobs:
       - name: Run experiment 3
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
         env:
-          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
+          DEVELOCITY_ACCESS_KEY: ${{ steps.develocity-oidc.outputs.access-key }}
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
