@@ -10,7 +10,7 @@ permissions:
   id-token: write
 
 env:
-  DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
+  DEVELOCITY_URL: "https://solutions.develocity.cloud"
   GIT_REPO: "https://github.com/apache/lucene"
   TASKS: "check -x :lucene:demo:test -Ptests.seed=3466BEBDD5AA01A0 -Pvalidation.git.failOnModified=false -Ptests.haltonfailure=false -Ptests.rerun=false"
 

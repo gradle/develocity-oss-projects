@@ -10,7 +10,7 @@ permissions:
   id-token: write
 
 env:
-  DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
+  DEVELOCITY_URL: "https://solutions.develocity.cloud"
   GIT_REPO: "https://github.com/apache/openwhisk"
   # testCoverageLean: 160/163 test suites fail at init (need Docker/CouchDB/Ansible infra) — excluded.
   # reportCoverage: depends on Ansible-generated whisk.properties — excluded.
