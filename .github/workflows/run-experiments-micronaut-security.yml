@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
+  DEVELOCITY_URL: "https://solutions.develocity.cloud"
   GIT_REPO: "https://github.com/micronaut-projects/micronaut-security"
   # Exclude japiCmp (binary compat 5.x vs 4.x) and test-suite-geb (Groovy compiler NPE in Geb implicit assertions transform).
   TASKS: "check -x japiCmp -x :test-suite-geb:check"

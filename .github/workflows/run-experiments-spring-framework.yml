@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
+  DEVELOCITY_URL: "https://solutions.develocity.cloud"
   GIT_REPO: "https://github.com/spring-projects/spring-framework"
   TASKS: "build -x :spring-core:test"
 
