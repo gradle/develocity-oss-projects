@@ -24,7 +24,7 @@ The following OSS projects currently benefit from enhanced developer productivit
 - [Caffeine](https://caffeine.gradle-enterprise.cloud)
 - [Commonhaus Foundation](https://develocity.commonhaus.dev)
 - [Detekt](https://community.develocity.cloud/scans?search.rootProjectNames=detekt)
-- [Gradle](https://ge.gradle.org)
+- [Gradle](https://develocity.gradle.org)
 - [JUnit](https://ge.junit.org)
 - [Kotlin](https://develocity.jetbrains.com)
 - [Micrometer](https://ge.spring.io/scans?search.rootProjectNames=micrometer*,tracing,context-propagation)
